@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\GameTest.cpp" />
+    <ClCompile Include="include\stdafx.cpp" />
+    <ClCompile Include="external\App\app.cpp">
+      <Filter>NextAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="external\App\main.cpp">
+      <Filter>NextAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="external\App\SimpleController.cpp">
+      <Filter>NextAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="external\App\SimpleSound.cpp">
+      <Filter>NextAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="external\App\SimpleSprite.cpp">
+      <Filter>NextAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image\stb_image.cpp">
+      <Filter>stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component\BoxCollider.cpp" />
+    <ClCompile Include="src\System\UI.cpp" />
+    <ClCompile Include="src\Component\Circle.cpp" />
+    <ClCompile Include="src\Math\Vector2.cpp" />
+    <ClCompile Include="src\System\CollisionManager.cpp" />
+    <ClCompile Include="src\GameObject\GameObject.cpp" />
+    <ClCompile Include="src\System\Scene.cpp" />
+    <ClCompile Include="src\Component\Health.cpp" />
+    <ClCompile Include="src\Component\Transform.cpp" />
+    <ClCompile Include="src\Component\SpriteRenderer.cpp" />
+    <ClCompile Include="src\GameObject\GameObjectManager.cpp" />
+    <ClCompile Include="src\Component\MovementInput.cpp" />
+    <ClCompile Include="src\GameObject\GameObjectFactory.cpp" />
+    <ClCompile Include="src\Component\BulletMovement.cpp" />
+    <ClCompile Include="src\Component\Shooter.cpp" />
+    <ClCompile Include="src\GameObject\BulletPool.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\stdafx.h" />
+    <ClInclude Include="external\App\app.h">
+      <Filter>NextAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="external\App\AppSettings.h">
+      <Filter>NextAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="external\App\main.h">
+      <Filter>NextAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="external\App\SimpleController.h">
+      <Filter>NextAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="external\App\SimpleSound.h">
+      <Filter>NextAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="external\App\SimpleSprite.h">
+      <Filter>NextAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\targetver.h">
+      <Filter>NextAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image\stb_image.h">
+      <Filter>stb_image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Component\BoxCollider.h" />
+    <ClInclude Include="src\System\UI.h" />
+    <ClInclude Include="src\Component\Circle.h" />
+    <ClInclude Include="src\Math\Vector2.h" />
+    <ClInclude Include="src\System\CollisionManager.h" />
+    <ClInclude Include="src\GameObject\GameObject.h" />
+    <ClInclude Include="src\System\Scene.h" />
+    <ClInclude Include="src\Component\Health.h" />
+    <ClInclude Include="src\Component\Transform.h" />
+    <ClInclude Include="src\Component\Component.h" />
+    <ClInclude Include="src\Component\SpriteRenderer.h" />
+    <ClInclude Include="src\GameObject\GameObjectManager.h" />
+    <ClInclude Include="src\Component\MovementInput.h" />
+    <ClInclude Include="src\GameObject\GameObjectFactory.h" />
+    <ClInclude Include="src\System\Event.h" />
+    <ClInclude Include="src\Component\BulletMovement.h" />
+    <ClInclude Include="src\Component\Shooter.h" />
+    <ClInclude Include="src\GameObject\BulletPool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="NextAPI">
+      <UniqueIdentifier>{f318918d-bb9f-4402-ae1c-4f72186d16f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stb_image">
+      <UniqueIdentifier>{61cfc19b-c57e-4021-b530-bac172fcba86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="include\ReadMe.txt">
+      <Filter>NextAPI</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
