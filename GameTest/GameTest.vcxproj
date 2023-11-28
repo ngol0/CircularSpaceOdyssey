@@ -79,6 +79,8 @@
     <IncludePath>$(ProjectDir)\external;$(ProjectDir)\include;$(ProjectDir)\src;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\external\glut\lib\x64;$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
