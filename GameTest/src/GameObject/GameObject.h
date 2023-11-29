@@ -34,6 +34,7 @@ public:
 	void Deactivate();
 	void Activate();
 
+	//set object's transform values
 	void SetPosition(const Vector2& position);
 	void SetRotationAngle(float rotation);
 	void SetScale(const float& scale);
@@ -55,6 +56,7 @@ public:
 		//add to component list
 		T* component = new T(std::forward<TArgs>(m_args)...);
 		
+		//use unique pointer so that it manages the obj's lifetime
 		component->object = this;
 		std::unique_ptr<Component> comp_uPtr{ component };
 		m_component_list.emplace_back(std::move(comp_uPtr));
@@ -79,11 +81,6 @@ public:
 	}
 };
 
-/*The `lastID` value is actually incremented when `getComponentTypeId<T>` is instantiated, not called, 
-as it is stored statically inside the function. 
-When instantiating `getComponentTypeId<T>`, the value is incremented and stored inside it. 
-When calling it again with the same `T` template parameter, 
-the value is already stored inside the previously instantiated template function, so it is just returned. */
 inline ComponentID GetUniqueComponentID()
 {
 	static ComponentID lastID{ 0u };

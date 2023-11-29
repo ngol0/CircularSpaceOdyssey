@@ -38,6 +38,15 @@ void GameObject::Activate()
 	b_alive = true;
 }
 
+void GameObject::Restart()
+{
+	Activate();
+	for (auto& component : m_component_list)
+	{
+		component->Restart();
+	}
+}
+
 void GameObject::SetPosition(const Vector2& position)
 {
 	GetComponent<Transform>().position = position;
@@ -56,13 +65,4 @@ void GameObject::SetScale(const float& scale)
 void GameObject::SetForwardVector(const Vector2& forward_vector)
 {
 	GetComponent<Transform>().forward = forward_vector;
-}
-
-void GameObject::Restart()
-{
-	Activate();
-	for (auto& component : m_component_list)
-	{
-		component->Restart();
-	}
 }

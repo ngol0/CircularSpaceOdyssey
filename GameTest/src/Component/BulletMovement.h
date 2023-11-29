@@ -16,5 +16,5 @@ struct BulletMovement : public Component
 	Transform* transform;
 
 private:
-	int frame_left;
+	int m_frame_left;
 };

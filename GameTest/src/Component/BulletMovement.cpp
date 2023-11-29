@@ -5,14 +5,14 @@
 #include "GameObject/GameObject.h"
 
 
-BulletMovement::BulletMovement() : move_direction(Vector2{0.f}), transform(nullptr), frame_left(0.f)
+BulletMovement::BulletMovement() : move_direction(Vector2{0.f}), transform(nullptr), m_frame_left(0.f)
 {
 }
 
 void BulletMovement::Init()
 {
 	transform = &Component::object->GetComponent<Transform>();
-	frame_left = 75;
+	m_frame_left = 75;
 }
 
 void BulletMovement::SetDirection(const Vector2& direction)
@@ -22,10 +22,10 @@ void BulletMovement::SetDirection(const Vector2& direction)
 
 void BulletMovement::Update(float deltaTime)
 {
-	frame_left--;
+	m_frame_left--;
 	transform->position = transform->position + move_direction * 0.2f * deltaTime;
 
-	if (frame_left <= 0)
+	if (m_frame_left <= 0)
 	{
 		Component::object->Deactivate();
 	}

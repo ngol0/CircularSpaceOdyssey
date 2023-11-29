@@ -22,14 +22,14 @@ void Scene::Init()
 	//coin
 	for (int i = 0; i < 5; i++)
 	{
-		Transform coin_transform = Transform{ Vector2{ 200.f + i * 100.f, 300.f }, 0.5f };
+		Transform coin_transform = Transform{ Vector2{ 200.f + i * 150.f, 300.f }, 0.5f };
 		GameObject* coin = &GameObjectFactory::CreateCoin(coin_transform, *this);
 	}
 
 	//spike
 	for (int i = 0; i < 5; i++)
 	{
-		Transform spike_transform = Transform{ Vector2{ 500.f + i * 90.f, 500.f }, 0.3f };
+		Transform spike_transform = Transform{ Vector2{ 300.f + i * 90.f, 400.f }, 0.3f };
 		GameObject* spike = &GameObjectFactory::CreateEnemy(spike_transform, *this);
 	}
 }

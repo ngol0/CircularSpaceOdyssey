@@ -2,14 +2,12 @@
 #include "MovementInput.h"
 #include "GameObject/GameObject.h"
 #include "Math/Vector2.h"
-#include "SpriteRenderer.h"
 
-MovementInput::MovementInput() : m_speed(0.f), transform(nullptr), sprite(nullptr), m_center(Vector2{ 0.f }), m_distance(0.f), m_rotation_angle(0.f) {}
+MovementInput::MovementInput() : m_speed(0.f), transform(nullptr), m_center(Vector2{ 0.f }), m_distance(0.f), m_rotation_angle(0.f) {}
 
 void MovementInput::Init()
 {
 	transform = &Component::object->GetComponent<Transform>();
-	sprite = &Component::object->GetComponent<SpriteRenderer>();
 
 	m_speed = 0.1f;
 }
