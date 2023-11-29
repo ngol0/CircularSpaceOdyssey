@@ -17,7 +17,7 @@ void Scene::Init()
 
 	//player
 	m_player = &GameObjectFactory::CreatePlayer(0.5f, *this);
-	m_player->GetComponent<MovementInput>().SetMovementValue(circle_center, circle_radius);
+	m_player->GetComponent<MovementInput>().SetUp(circle_center, circle_radius);
 
 	//coin
 	for (int i = 0; i < 5; i++)
