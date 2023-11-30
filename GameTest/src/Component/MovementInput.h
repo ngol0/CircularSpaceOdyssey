@@ -4,12 +4,11 @@
 
 struct MovementInput : public Component
 {
-	MovementInput();
+	MovementInput(const Vector2& center, float distance);
 
 	void Init() override;
 	void Update(float deltaTime) override;
-	void Restart();
-	void SetUp(const Vector2& center, float distance);
+	void SetUp();
 
 	void UpdateTransform();
 

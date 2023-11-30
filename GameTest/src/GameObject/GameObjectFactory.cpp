@@ -14,7 +14,7 @@
 #include "Component/Circle.h"
 
 
-Core::Ref GameObjectFactory::CreatePlayer(float scale, Scene& scene)
+Core::Ref GameObjectFactory::CreatePlayer(const Vector2& center, float distance, float scale, Scene& scene)
 {
 	auto player = scene.object_manager.AddToManager();
 	player->SetScale(scale);
@@ -26,7 +26,7 @@ Core::Ref GameObjectFactory::CreatePlayer(float scale, Scene& scene)
 	Vector2 collider_size{ player_sprite.width() * 0.9f, player_sprite.height() * 0.6f };
 	auto& player_collider = player->AddComponent<BoxCollider>("player", collider_size, scene.collision_manager);
 	//movement input, health & shooting input
-	player->AddComponent<MovementInput>();
+	player->AddComponent<MovementInput>(center, distance);
 	player->AddComponent<Health>(100);
 	player->AddComponent<Shooter>(50.f, scene);
 

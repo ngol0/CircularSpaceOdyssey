@@ -17,6 +17,8 @@ public:
 	void Render();
 	void Shutdown();
 
+	void SetUp();
+
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().amount; }
 	int GetScore() const { return m_score; }
 

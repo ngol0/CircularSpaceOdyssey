@@ -31,3 +31,8 @@ void Shooter::Shoot(float deltaTime)
 
     m_timer += deltaTime / 100.f;
 }
+
+void Shooter::SetBulletPool()
+{
+    bullet_pool.SetUp();
+}

@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Component/Transform.h"
 #include "Component/MovementInput.h"
+#include "Component/Shooter.h"
 
 Scene::Scene() : m_score(0), m_player(nullptr)
 {
@@ -16,8 +17,7 @@ void Scene::Init()
 	Core::Ref circle = GameObjectFactory::CreateCircle(circle_center, circle_radius, *this);
 
 	//player
-	m_player = GameObjectFactory::CreatePlayer(0.5f, *this);
-	m_player->GetComponent<MovementInput>().SetUp(circle_center, circle_radius);
+	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f, *this);
 
 	//coin
 	for (int i = 0; i < 5; i++)
@@ -32,6 +32,14 @@ void Scene::Init()
 		Transform spike_transform = Transform{ Vector2{ 300.f + i * 90.f, 400.f }, 0.3f };
 		Core::Ref spike = GameObjectFactory::CreateEnemy(spike_transform, *this);
 	}
+
+	SetUp();
+}
+
+void Scene::SetUp()
+{
+	m_player->SetPosition(Vector2(0.f, -1.f)); //starting position
+	m_player->GetComponent<MovementInput>().SetUp();
 }
 
 void Scene::OnPlayerCollisionEnter(BoxCollider& other)
@@ -61,6 +69,9 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 
 void Scene::Update(float deltaTime)
 {
+	//pause menu
+	if (App::IsKeyPressed('P')) return;
+
 	object_manager.Update(deltaTime);
 	collision_manager.Update(deltaTime);
 
@@ -68,6 +79,8 @@ void Scene::Update(float deltaTime)
 	if (App::IsKeyPressed('R'))
 	{
 		object_manager.Reactivate();
+		m_player->GetComponent<Shooter>().SetBulletPool();
+		SetUp();
 	}
 }
 

@@ -31,3 +31,11 @@ void BulletPool::Spawn(const Vector2& spawn_pos, const Vector2& direction, float
 		}
 	}
 }
+
+void BulletPool::SetUp()
+{
+	for (auto bullet : bullets)
+	{
+		bullet->Deactivate();
+	}
+}

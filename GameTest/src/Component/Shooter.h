@@ -13,6 +13,7 @@ struct Shooter : public Component
 	void Render() override {};
 
 	void Shoot(float deltaTime);
+	void SetBulletPool();
 
 private:
 	float m_timer;
