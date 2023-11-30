@@ -38,15 +38,6 @@ void GameObject::Activate()
 	b_alive = true;
 }
 
-void GameObject::Restart()
-{
-	Activate();
-	for (auto& component : m_component_list)
-	{
-		component->Restart();
-	}
-}
-
 void GameObject::SetPosition(const Vector2& position)
 {
 	GetComponent<Transform>().position = position;

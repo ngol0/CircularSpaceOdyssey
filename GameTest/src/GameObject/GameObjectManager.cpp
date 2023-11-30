@@ -3,27 +3,25 @@
 #include "Component/BoxCollider.h"
 
 
-GameObject& GameObjectManager::AddToManager()
+Core::Ref GameObjectManager::AddToManager(Transform& transform)
 {
-	GameObject* object = new GameObject();
-	std::unique_ptr<GameObject> obj_uPtr{ object };
-	object_list.emplace_back(std::move(obj_uPtr));
+	Core::Ref obj_ref = std::make_shared<GameObject>(transform);
+	object_container.emplace_back(std::move(obj_ref));
 
-	return *object;
+	return object_container.back();
 }
 
-GameObject& GameObjectManager::AddToManager(Transform& transform)
+Core::Ref GameObjectManager::AddToManager()
 {
-	GameObject* object = new GameObject(transform);
-	std::unique_ptr<GameObject> obj_uPtr{ object };
-	object_list.emplace_back(std::move(obj_uPtr));
+	Core::Ref obj_ref = std::make_shared<GameObject>();
+	object_container.emplace_back(std::move(obj_ref));
 
-	return *object;
+	return object_container.back();
 }
 
 void GameObjectManager::Update(float deltaTime)
 {
-	for (auto& object : object_list)
+	for (auto& object : object_container)
 	{
 		if (!object->IsAlive()) continue;
 		object->Update(deltaTime);
@@ -32,17 +30,17 @@ void GameObjectManager::Update(float deltaTime)
 
 void GameObjectManager::Render()
 {
-	for (auto& object : object_list)
+	for (auto& object : object_container)
 	{
 		if (!object->IsAlive()) continue;
 		object->Render();
 	}
 }
 
-void GameObjectManager::Restart()
+void GameObjectManager::Reactivate()
 {
-	for (auto& object : object_list)
+	for (auto& object : object_container)
 	{
-		object->Restart();
+		object->Activate();
 	}
 }

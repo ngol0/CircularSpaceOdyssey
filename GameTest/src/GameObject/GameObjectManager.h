@@ -1,12 +1,10 @@
 #pragma once
 #include "GameObject.h"
 
-using ObjectList = std::vector<std::unique_ptr<GameObject>>;
-
 class GameObjectManager
 {
 private:
-	ObjectList object_list;
+	Core::Ref_List object_container;
 
 public:
 	GameObjectManager() {};
@@ -16,8 +14,8 @@ public:
 	void Update(float deltaTime);
 	void Render();
 
-	void Restart();
+	void Reactivate();
 
-	GameObject& AddToManager();
-	GameObject& AddToManager(Transform& transform);
+	Core::Ref AddToManager(Transform& transform);
+	Core::Ref AddToManager();
 };

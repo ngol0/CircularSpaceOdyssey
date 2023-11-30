@@ -12,6 +12,6 @@ struct Component
 	virtual void Init() {};
 	virtual void Update(float deltaTime) {};
 	virtual void Render() {};
-	virtual void Restart() {};
+	//virtual void Restart() {};
 };
 

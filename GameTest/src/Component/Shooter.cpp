@@ -15,7 +15,6 @@ void Shooter::Init()
 void Shooter::Update(float deltaTime)
 {
     Shoot(deltaTime);
-    bullet_pool.Update(deltaTime);
 }
 
 void Shooter::Shoot(float deltaTime)
@@ -31,14 +30,4 @@ void Shooter::Shoot(float deltaTime)
     }
 
     m_timer += deltaTime / 100.f;
-}
-
-void Shooter::Render()
-{
-	bullet_pool.Render();
-}
-
-void Shooter::Restart()
-{
-    bullet_pool.Restart();
 }

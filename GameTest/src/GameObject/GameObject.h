@@ -28,7 +28,6 @@ public:
 	void Init() {};
 	void Update(float deltaTime);
 	void Render();
-	void Restart();
 
 	bool IsAlive() const { return b_alive; }
 	void Deactivate();
@@ -92,4 +91,10 @@ inline ComponentID GetComponentId()
 {
 	static ComponentID typeID = GetUniqueComponentID();
 	return typeID;
+}
+
+namespace Core
+{
+	using Ref_List = std::vector<std::shared_ptr<GameObject>>;
+	using Ref = std::shared_ptr<GameObject>;
 }

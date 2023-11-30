@@ -28,7 +28,7 @@ public:
 
 private:
 	int m_score;
-	GameObject* m_player;
+	Core::Ref m_player;
 
 	Vector2 circle_center;
 	float circle_radius;

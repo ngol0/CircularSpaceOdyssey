@@ -10,8 +10,7 @@ struct Shooter : public Component
 
 	void Init() override;
 	void Update(float deltaTime) override;
-	void Render() override;
-	void Restart();
+	void Render() override {};
 
 	void Shoot(float deltaTime);
 
