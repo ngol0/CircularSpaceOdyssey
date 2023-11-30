@@ -2,15 +2,17 @@
 #include "BulletPool.h"
 #include "Component/BulletMovement.h"
 #include "Component/Transform.h"
+//
 #include "System/Scene.h"
+#include "GameObjectFactory.h"
 
 BulletPool::BulletPool() {}
 
-void BulletPool::Init(Scene& scene)
+void BulletPool::Init()
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
-		bullets[i] = GameObjectFactory::CreateBullet(scene);
+		bullets[i] = GameObjectFactory::CreateBullet();
 		bullets[i]->Deactivate();
 	}
 }

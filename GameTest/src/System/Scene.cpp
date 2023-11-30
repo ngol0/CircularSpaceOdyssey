@@ -3,34 +3,41 @@
 #include "Component/Transform.h"
 #include "Component/MovementInput.h"
 #include "Component/Shooter.h"
+//
+#include "GameObject/GameObjectManager.h"
+#include "System/CollisionManager.h"
 
 Scene::Scene() : m_score(0), m_player(nullptr)
 {
 	circle_center = Vector2{ 500.f, 400.f };
 	circle_radius = 300.f;
+
+	m_scene_state = SceneState::START;
 }
 
 //init game objects
 void Scene::Init()
 {
 	//circle
-	Core::Ref circle = GameObjectFactory::CreateCircle(circle_center, circle_radius, *this);
+	Object::Ref planet = GameObjectFactory::CreateCircle(circle_center, circle_radius);
 
 	//player
-	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f, *this);
+	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
+	m_player->GetComponent<BoxCollider>().collision_enter.Register(this, &Scene::OnPlayerCollisionEnter);
 
 	//coin
-	for (int i = 0; i < 5; i++)
+	/*for (int i = 0; i < 5; i++)
 	{
 		Transform coin_transform = Transform{ Vector2{ 200.f + i * 150.f, 300.f }, 0.5f };
 		Core::Ref coin = GameObjectFactory::CreateCoin(coin_transform, *this);
-	}
+	}*/
 
-	//spike
+	//enemy
 	for (int i = 0; i < 5; i++)
 	{
 		Transform spike_transform = Transform{ Vector2{ 300.f + i * 90.f, 400.f }, 0.3f };
-		Core::Ref spike = GameObjectFactory::CreateEnemy(spike_transform, *this);
+		Object::Ref spike = GameObjectFactory::CreateEnemy(spike_transform);
+		spike->GetComponent<BoxCollider>().collisions_enter.Register(this, &Scene::OnEnemyCollisionEnter);
 	}
 
 	SetUp();
@@ -40,15 +47,17 @@ void Scene::SetUp()
 {
 	m_player->SetPosition(Vector2(0.f, -1.f)); //starting position
 	m_player->GetComponent<MovementInput>().SetUp();
+	m_player->GetComponent<Health>().ResetHealth();
+
+	m_score = 0; 
 }
 
 void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 {
-	std::cout << "Player is collided with " << other.tag << std::endl;
-
 	if (other.tag == "coin")
 	{
-		m_score++;
+		//todo: special power
+
 		other.object->Deactivate();
 	}
 	else if (other.tag == "spike")
@@ -61,7 +70,7 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 {
 	if (other.tag == "bullet")
 	{
-		std::cout << "Enemy is collided with bullet." << std::endl;
+		m_score++;
 		other.object->Deactivate();
 		enemy.object->GetComponent<Health>().TakeDamage(50);
 	}
@@ -69,28 +78,66 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 
 void Scene::Update(float deltaTime)
 {
-	//pause menu
-	if (App::IsKeyPressed('P')) return;
-
-	object_manager.Update(deltaTime);
-	collision_manager.Update(deltaTime);
-
-	//restart
-	if (App::IsKeyPressed('R'))
-	{
-		object_manager.Reactivate();
-		m_player->GetComponent<Shooter>().SetBulletPool();
-		SetUp();
-	}
+	GameObjectManager::GetInstance().Update(deltaTime);
+	CollisionManager::GetInstance().Update(deltaTime);
 }
 
 void Scene::Render()
 {
-	object_manager.Render();
+	GameObjectManager::GetInstance().Render();
 }
 
-void Scene::Shutdown()
+void Scene::Restart()
 {
+	GameObjectManager::GetInstance().Reactivate();
+	m_player->GetComponent<Shooter>().SetBulletPool();
+	SetUp();
+}
+
+void Scene::HandleInput(float deltaTime)
+{
+	switch (m_scene_state)
+	{
+	case SceneState::START:
+		if (App::IsKeyPressed(VK_SPACE)) //start
+		{
+			m_scene_state = SceneState::COMBAT;
+		}
+		break;
+
+	case SceneState::COMBAT:
+		if (App::IsKeyPressed('R')) //restart
+		{
+			Restart();
+		}
+		if (App::IsKeyPressed('P') && m_timer >= 2.f) //pause
+		{
+			m_scene_state = SceneState::PAUSED;
+			m_timer = 0.f;
+		}
+		break;
+
+	case SceneState::PAUSED:
+		if (App::IsKeyPressed('R')) //restart
+		{
+			Restart();
+		}
+		if (App::IsKeyPressed('P') && m_timer >= 2.f) //play
+		{
+			m_scene_state = SceneState::COMBAT;
+			m_timer = 0.f;
+		}
+		break;
+
+	case SceneState::GAME_OVER:
+		if (App::IsKeyPressed('R')) //restart
+		{
+			Restart();
+		}
+		break;
+	}
+
+	m_timer += deltaTime / 100.f;
 }
 
 

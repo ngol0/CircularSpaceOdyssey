@@ -18,4 +18,7 @@ public:
 
 	void Init() {};
 	void Update(float deltaTime);
+
+	//singleton
+	static CollisionManager& GetInstance();
 };

@@ -3,17 +3,17 @@
 #include "Component/BoxCollider.h"
 
 
-Core::Ref GameObjectManager::AddToManager(Transform& transform)
+Object::Ref GameObjectManager::AddToManager(Transform& transform)
 {
-	Core::Ref obj_ref = std::make_shared<GameObject>(transform);
+	Object::Ref obj_ref = std::make_shared<GameObject>(transform);
 	object_container.emplace_back(std::move(obj_ref));
 
 	return object_container.back();
 }
 
-Core::Ref GameObjectManager::AddToManager()
+Object::Ref GameObjectManager::AddToManager()
 {
-	Core::Ref obj_ref = std::make_shared<GameObject>();
+	Object::Ref obj_ref = std::make_shared<GameObject>();
 	object_container.emplace_back(std::move(obj_ref));
 
 	return object_container.back();
@@ -43,4 +43,10 @@ void GameObjectManager::Reactivate()
 	{
 		object->Activate();
 	}
+}
+
+GameObjectManager& GameObjectManager::GetInstance()
+{
+	static GameObjectManager object_manager;
+	return object_manager;
 }

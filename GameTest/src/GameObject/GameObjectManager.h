@@ -4,7 +4,7 @@
 class GameObjectManager
 {
 private:
-	Core::Ref_List object_container;
+	Object::Ref_List object_container;
 
 public:
 	GameObjectManager() {};
@@ -16,6 +16,9 @@ public:
 
 	void Reactivate();
 
-	Core::Ref AddToManager(Transform& transform);
-	Core::Ref AddToManager();
+	Object::Ref AddToManager(Transform& transform);
+	Object::Ref AddToManager();
+
+	//singleton
+	static GameObjectManager& GetInstance();
 };

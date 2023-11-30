@@ -35,7 +35,6 @@ void CollisionManager::Update(float deltaTime)
 				// If two are collided -> on collision enter
 				if (current_collision_status)
 				{
-					std::cout << "On collision enter" << std::endl;
 					colliders[i]->collision_enter.Notify(*colliders[j]);
 					colliders[j]->collision_enter.Notify(*colliders[i]);
 
@@ -45,7 +44,6 @@ void CollisionManager::Update(float deltaTime)
 				// If two are not collided -> on collision exit
 				else
 				{
-					std::cout << "On collision exit" << std::endl;
 					colliders[i]->collision_exit.Notify(*colliders[j]);
 					colliders[j]->collision_exit.Notify(*colliders[i]);
 				}
@@ -56,10 +54,15 @@ void CollisionManager::Update(float deltaTime)
 			// If status hasn't changed and they were collided on last frame, on collision stay 
 			else if (current_collision_status == collision_map[key] && current_collision_status)
 			{
-				std::cout << "On collision stay" << std::endl;
 				colliders[i]->collision_stay.Notify(*colliders[j]);
 				colliders[j]->collision_stay.Notify(*colliders[i]);
 			}
 		}
 	}
+}
+
+CollisionManager& CollisionManager::GetInstance()
+{
+	static CollisionManager object_manager;
+	return object_manager;
 }

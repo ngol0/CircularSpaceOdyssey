@@ -10,10 +10,10 @@ UI ui;
 
 void Init()
 {
-	AllocConsole();
+	/*AllocConsole();
 	freopen("conin$", "r", stdin);
 	freopen("conout$", "w", stdout);
-	freopen("conout$", "w", stderr);
+	freopen("conout$", "w", stderr);*/
 
 	scene.Init();
 	ui.Init(scene);
@@ -21,14 +21,21 @@ void Init()
 
 void Update(float deltaTime)
 {
-	scene.Update(deltaTime);
-	ui.Update(deltaTime);
+	scene.HandleInput(deltaTime);
+
+	if (scene.GetState() != SceneState::PAUSED)
+	{
+		scene.Update(deltaTime);
+		ui.Update(deltaTime);
+	}
 }
 
 void Render()
 {
-	scene.Render();
 	ui.Render();
+
+	if (scene.GetState() == SceneState::START) return;
+	scene.Render();
 }
 
 void Shutdown()

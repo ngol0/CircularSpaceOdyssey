@@ -6,7 +6,7 @@ struct Shooter : public Component
 {
 	BulletPool bullet_pool;
 
-	Shooter(float offset, Scene& scene);
+	Shooter(float offset);
 
 	void Init() override;
 	void Update(float deltaTime) override;

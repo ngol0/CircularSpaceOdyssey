@@ -34,8 +34,6 @@ public:
 		auto function_pointer = std::make_pair(m_instance, m_function);
 
 		m_observers.emplace_back(function_pointer);
-
-		std::cout << "Number of observers: " << m_observers.size() << std::endl;
 	}
 
 	inline void Unregister(T* instance, void (T::* function)(TArgs...))

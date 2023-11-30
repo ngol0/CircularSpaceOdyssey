@@ -2,9 +2,9 @@
 #include "Health.h"
 #include "GameObject/GameObject.h"
 
-Health::Health(int initial_amount) : amount(initial_amount)
+Health::Health(int health) : amount(health)
 {
-
+	initial_amount = amount;
 }
 
 void Health::TakeDamage(int damage_amount)
@@ -15,4 +15,9 @@ void Health::TakeDamage(int damage_amount)
 	{
 		Component::object->Deactivate();
 	}
+}
+
+void Health::ResetHealth()
+{
+	amount = initial_amount;
 }

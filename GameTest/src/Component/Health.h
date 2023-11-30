@@ -9,5 +9,8 @@ struct Health : public Component
 	void Init() {};
 	void Update(float deltaTime) {};
 
+	void ResetHealth();
+
 	int amount;
+	int initial_amount;
 };

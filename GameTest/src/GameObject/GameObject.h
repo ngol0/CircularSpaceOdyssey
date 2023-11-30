@@ -93,7 +93,7 @@ inline ComponentID GetComponentId()
 	return typeID;
 }
 
-namespace Core
+namespace Object
 {
 	using Ref_List = std::vector<std::shared_ptr<GameObject>>;
 	using Ref = std::shared_ptr<GameObject>;

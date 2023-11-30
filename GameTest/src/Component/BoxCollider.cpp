@@ -1,14 +1,16 @@
 #include "stdafx.h"
 #include "BoxCollider.h"
 #include "Transform.h"
+//
 #include "GameObject/GameObject.h"
 #include "System/Scene.h"
+#include "System/CollisionManager.h"
 
-BoxCollider::BoxCollider(std::string tag) : size(Vector2{0.f}), position(Vector2{0.f}), tag(tag), transform(nullptr), collision_manager(nullptr) {}
+BoxCollider::BoxCollider(std::string tag) : size(Vector2{0.f}), position(Vector2{0.f}), tag(tag), transform(nullptr) {}
 
-//BoxCollider::BoxCollider(std::string tag, Vector2& size) : size(size), position(Vector2{ 0.f }), tag(tag), transform(nullptr), collision_manager(nullptr) {}
+BoxCollider::BoxCollider(std::string tag, Vector2& size) : size(size), position(Vector2{ 0.f }), tag(tag), transform(nullptr) {}
 
-BoxCollider::BoxCollider(std::string tag, Vector2& size, CollisionManager& manager) : size(size), position(Vector2{ 0.f }), tag(tag), transform(nullptr), collision_manager(&manager) {}
+//BoxCollider::BoxCollider(std::string tag, Vector2& size, CollisionManager& manager) : size(size), position(Vector2{ 0.f }), tag(tag), transform(nullptr), collision_manager(&manager) {}
 
 void BoxCollider::Init()
 {
@@ -16,7 +18,7 @@ void BoxCollider::Init()
     SetPosition(transform->position.x, transform->position.y);
 
     //add itself to the collider vectors when one is created
-    collision_manager->AddToColliders(*this);
+    CollisionManager::GetInstance().AddToColliders(*this);
 }
 
 void BoxCollider::Update(float deltaTime)
