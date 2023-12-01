@@ -6,10 +6,10 @@ class GameObjectManager
 private:
 	Object::Ref_List object_container;
 
-public:
 	GameObjectManager() {};
 	~GameObjectManager() {};
 
+public:
 	void Init(){};
 	void Update(float deltaTime);
 	void Render();

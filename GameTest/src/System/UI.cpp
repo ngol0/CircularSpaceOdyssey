@@ -24,7 +24,7 @@ void UI::Render()
 	{
 	case SceneState::START:
 		App::Print(500.f, 500.f, "START");
-		App::Print(450.f, 550.f, "Hit Space to start");
+		App::Print(450.f, 450.f, "Hit Space to start");
 		break;
 
 	case SceneState::COMBAT:

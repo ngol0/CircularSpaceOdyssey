@@ -3,7 +3,6 @@
 #include "Component/BoxCollider.h"
 #include "GameObject/GameObject.h"
 
-CollisionManager::CollisionManager() {}
 
 bool CollisionManager::IsCollided(BoxCollider& main, BoxCollider& other)
 {
