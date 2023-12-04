@@ -1,6 +1,7 @@
 #pragma once
 #include "Component/Component.h"
 #include "Math/Vector2.h"
+#include "System/Event.h"
 #include <array>
 #include <cassert>
 #include <bitset>

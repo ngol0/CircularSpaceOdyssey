@@ -10,6 +10,8 @@
 #include "Component/Shooter.h"
 #include "Component/BulletMovement.h"
 #include "Component/Circle.h"
+#include "Component/EnemyMovement.h"
+#include "Component/EnemySpawner.h"
 
 namespace GameObjectFactory
 {
@@ -47,16 +49,19 @@ namespace GameObjectFactory
 	Object::Ref CreateEnemy(Transform& transform)
 	{
 		//auto& spike = scene.object_manager.AddToManager(transform);
-		Object::Ref spike = GameObjectManager::GetInstance().AddToManager(transform);
+		Object::Ref enemy = GameObjectManager::GetInstance().AddToManager(transform);
 		//sprite
-		auto& spike_sprite = spike->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\spike.png", 1, 1);
+		SpriteRenderer& enemy_sprite = enemy->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\enemies.png", 4, 5);
+		enemy_sprite.m_sprite->SetFrame(17); 
 		//collider
-		Vector2 collider_size{ spike_sprite.width(), spike_sprite.height() };
-		auto& spike_collision = spike->AddComponent<BoxCollider>("spike", collider_size);
+		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height() };
+		auto& enemy_collision = enemy->AddComponent<BoxCollider>("enemy", collider_size);
 		//health
-		spike->AddComponent<Health>(100);
+		enemy->AddComponent<Health>(100);
+		//movement
+		enemy->AddComponent<EnemyMovement>();
 
-		return spike;
+		return enemy;
 	}
 
 	Object::Ref CreateBullet()
@@ -74,12 +79,14 @@ namespace GameObjectFactory
 		return bullet;
 	}
 
-	Object::Ref CreateCircle(const Vector2& center_position, float radius)
+	Object::Ref CreateCombatPlanet(const Vector2& center_position, float radius)
 	{
 		Transform circle_transfrom{ center_position, radius };
 		Object::Ref circle = GameObjectManager::GetInstance().AddToManager(circle_transfrom);
 		//shape
 		circle->AddComponent<Circle>(center_position, radius);
+		//enemy spawner
+		circle->AddComponent<EnemySpawner>();
 
 		return circle;
 	}

@@ -25,8 +25,17 @@ Vector2 Vector2::operator/(float scalar) const
     return { x / scalar, y / scalar };
 }
 
+bool Vector2::operator==(const Vector2& other) const
+{
+    return (x == other.x && y == other.y);
+}
+
 Vector2 Vector2::normalize() const
 {
-    float magnitude = sqrt(this->x * this->x + this->y * this->y);
-    return *this / magnitude;
+    return *this / this->magnitude();
+}
+
+float Vector2::magnitude() const
+{
+    return sqrt(this->x * this->x + this->y * this->y);
 }

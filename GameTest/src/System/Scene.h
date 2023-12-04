@@ -1,6 +1,9 @@
 #pragma once
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
+#include "Component/EnemySpawner.h"
+//
+#include "GameObject/EnemyPool.h"
 #include "GameObject/GameObjectFactory.h"
 
 class UI;
@@ -22,10 +25,10 @@ public:
 	void Update(float deltaTime);
 	void Render();
 	void Shutdown() {};
-
 	void SetUp();
 	void Restart();
 
+	//getters
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().amount; }
 	int GetScore() const { return m_score; }
 	SceneState& GetState() { return m_scene_state; };
@@ -34,17 +37,23 @@ public:
 	void OnPlayerCollisionEnter(BoxCollider& other);
 	void OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& bullet);
 
+	//input handling
 	void HandleInput(float deltaTime);
 
 private:
 	Object::Ref m_player;
+	Object::Ref m_planet;
 
-	//circle
+	//planet
 	Vector2 circle_center;
 	float circle_radius;
 
+	//general datas
 	int m_score;
 	SceneState m_scene_state;
 	float m_timer{ 0.f };
+
+	//enemy pool
+	EnemyPool enemy_pool;
 };
 

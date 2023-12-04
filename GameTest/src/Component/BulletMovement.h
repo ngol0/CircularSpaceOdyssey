@@ -11,10 +11,11 @@ struct BulletMovement : public Component
 	void Init() override;
 	void SetDirection(const Vector2& direction);
 	void Update(float deltaTime) override;
-
-	Vector2 move_direction;
-	Transform* transform;
+	void ResetLife();
 
 private:
 	int m_frame_left;
+	float m_speed;
+	Vector2 m_move_direction;
+	Transform* m_transform;
 };

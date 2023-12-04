@@ -189,11 +189,14 @@
     <ClInclude Include="external\App\SimpleSprite.h" />
     <ClInclude Include="src\Component\Component.h" />
     <ClInclude Include="src\Component\BulletMovement.h" />
+    <ClInclude Include="src\Component\EnemyMovement.h" />
+    <ClInclude Include="src\Component\EnemySpawner.h" />
     <ClInclude Include="src\Component\MovementInput.h" />
     <ClInclude Include="src\Component\Shooter.h" />
     <ClInclude Include="src\Component\SpriteRenderer.h" />
     <ClInclude Include="src\Component\Transform.h" />
     <ClInclude Include="src\GameObject\BulletPool.h" />
+    <ClInclude Include="src\GameObject\EnemyPool.h" />
     <ClInclude Include="src\GameObject\GameObjectFactory.h" />
     <ClInclude Include="src\GameObject\GameObjectManager.h" />
     <ClInclude Include="src\Component\BoxCollider.h" />
@@ -205,6 +208,7 @@
     <ClInclude Include="src\System\Event.h" />
     <ClInclude Include="src\System\Scene.h" />
     <ClInclude Include="src\System\UI.h" />
+    <ClInclude Include="src\System\Utils.h" />
     <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\targetver.h" />
@@ -216,11 +220,14 @@
     <ClCompile Include="external\App\SimpleSound.cpp" />
     <ClCompile Include="external\App\SimpleSprite.cpp" />
     <ClCompile Include="src\Component\BulletMovement.cpp" />
+    <ClCompile Include="src\Component\EnemyMovement.cpp" />
+    <ClCompile Include="src\Component\EnemySpawner.cpp" />
     <ClCompile Include="src\Component\MovementInput.cpp" />
     <ClCompile Include="src\Component\Shooter.cpp" />
     <ClCompile Include="src\Component\SpriteRenderer.cpp" />
     <ClCompile Include="src\Component\Transform.cpp" />
     <ClCompile Include="src\GameObject\BulletPool.cpp" />
+    <ClCompile Include="src\GameObject\EnemyPool.cpp" />
     <ClCompile Include="src\GameObject\GameObjectFactory.cpp" />
     <ClCompile Include="src\GameObject\GameObjectManager.cpp" />
     <ClCompile Include="src\Component\BoxCollider.cpp" />
@@ -232,6 +239,7 @@
     <ClCompile Include="src\GameObject\GameObject.cpp" />
     <ClCompile Include="src\System\Scene.cpp" />
     <ClCompile Include="src\System\UI.cpp" />
+    <ClCompile Include="src\System\Utils.cpp" />
     <ClCompile Include="stb_image\stb_image.cpp" />
     <ClCompile Include="include\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

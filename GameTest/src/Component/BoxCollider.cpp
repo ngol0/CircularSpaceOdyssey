@@ -29,7 +29,7 @@ void BoxCollider::Update(float deltaTime)
 
 void BoxCollider::Render()
 {
-    Debug();
+    //Debug();
 }
 
 void BoxCollider::Debug()

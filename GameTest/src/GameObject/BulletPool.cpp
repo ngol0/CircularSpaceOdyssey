@@ -3,7 +3,6 @@
 #include "Component/BulletMovement.h"
 #include "Component/Transform.h"
 //
-#include "System/Scene.h"
 #include "GameObjectFactory.h"
 
 BulletPool::BulletPool() {}
@@ -26,7 +25,7 @@ void BulletPool::Spawn(const Vector2& spawn_pos, const Vector2& direction, float
 			bullets[i]->SetPosition(spawn_pos);
 			bullets[i]->SetRotationAngle(rotation_angle);
 			bullets[i]->GetComponent<BulletMovement>().SetDirection(direction);
-			bullets[i]->GetComponent<BulletMovement>().Init(); //reset position & lifetime
+			bullets[i]->GetComponent<BulletMovement>().ResetLife(); //reset lifetime
 			bullets[i]->Activate();
 
 			return;
@@ -36,7 +35,7 @@ void BulletPool::Spawn(const Vector2& spawn_pos, const Vector2& direction, float
 
 void BulletPool::SetUp()
 {
-	for (auto bullet : bullets)
+	for (const auto& bullet : bullets)
 	{
 		bullet->Deactivate();
 	}

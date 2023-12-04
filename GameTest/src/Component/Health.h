@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 
+
 struct Health : public Component
 {
 	Health(int initial_amount);

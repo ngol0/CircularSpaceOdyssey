@@ -18,8 +18,13 @@ Scene::Scene() : m_score(0), m_player(nullptr)
 //init game objects
 void Scene::Init()
 {
-	//circle
-	Object::Ref planet = GameObjectFactory::CreateCircle(circle_center, circle_radius);
+	//planet
+	m_planet = GameObjectFactory::CreateCombatPlanet(circle_center, circle_radius);
+	m_planet->GetComponent<EnemySpawner>().SetUp(enemy_pool);
+
+	//enemy
+	Transform enemy_transform = Transform{ circle_center, 1.2f };
+	enemy_pool.Init(enemy_transform, *this);
 
 	//player
 	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
@@ -31,14 +36,6 @@ void Scene::Init()
 		Transform coin_transform = Transform{ Vector2{ 200.f + i * 150.f, 300.f }, 0.5f };
 		Core::Ref coin = GameObjectFactory::CreateCoin(coin_transform, *this);
 	}*/
-
-	//enemy
-	for (int i = 0; i < 5; i++)
-	{
-		Transform spike_transform = Transform{ Vector2{ 300.f + i * 90.f, 400.f }, 0.3f };
-		Object::Ref spike = GameObjectFactory::CreateEnemy(spike_transform);
-		spike->GetComponent<BoxCollider>().collisions_enter.Register(this, &Scene::OnEnemyCollisionEnter);
-	}
 
 	SetUp();
 }
@@ -60,7 +57,7 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 
 		other.object->Deactivate();
 	}
-	else if (other.tag == "spike")
+	else if (other.tag == "enemy")
 	{
 		m_player->GetComponent<Health>().TakeDamage(1);
 	}
@@ -78,6 +75,9 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 
 void Scene::Update(float deltaTime)
 {
+	//spawn enemy
+	m_planet->GetComponent<EnemySpawner>().SpawnEnemy(circle_center, 0.f, deltaTime);
+
 	GameObjectManager::GetInstance().Update(deltaTime);
 	CollisionManager::GetInstance().Update(deltaTime);
 }

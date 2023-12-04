@@ -19,7 +19,7 @@ void Shooter::Update(float deltaTime)
 
 void Shooter::Shoot(float deltaTime)
 {
-	if (App::IsKeyPressed(VK_LBUTTON) && m_timer >= 2.f)
+	if (App::IsKeyPressed(VK_RBUTTON) && m_timer >= 2.f)
 	{
 		Vector2 spawn_pos = m_shooter_transform->position + m_shooter_transform->forward * m_spawn_offset;
 		bullet_pool.Spawn(spawn_pos, m_shooter_transform->forward, m_shooter_transform->rotation_angle);
