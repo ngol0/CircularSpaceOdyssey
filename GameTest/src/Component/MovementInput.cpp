@@ -3,7 +3,7 @@
 #include "GameObject/GameObject.h"
 #include "Math/Vector2.h"
 
-MovementInput::MovementInput(const Vector2& center, float distance) : m_speed(0.f), transform(nullptr), m_degree(0.f), m_center(center), m_distance(distance), m_rotation_angle(0.f) {}
+MovementInput::MovementInput(const Vector2& center, float distance) : m_speed(0.f), transform(nullptr), m_degree(0.f), m_center(&center), m_distance(distance), m_rotation_angle(0.f) {}
 
 void MovementInput::Init()
 {
@@ -38,11 +38,11 @@ void MovementInput::UpdateTransform()
 	//update position
 	float radian = m_degree * (PI / 180.f);
 
-	transform->position.x = m_center.x + cos(radian) * m_distance;
-	transform->position.y = m_center.y + sin(radian) * m_distance;
+	transform->position.x = m_center->x + cos(radian) * m_distance;
+	transform->position.y = m_center->y + sin(radian) * m_distance;
 
 	//update rotation
-	Vector2 direction_to_center = (m_center - transform->position).normalize();
+	Vector2 direction_to_center = (*m_center - transform->position).normalize();
 	m_rotation_angle = atan2(-direction_to_center.x, direction_to_center.y);
 
 	Component::object->SetRotationAngle(m_rotation_angle);

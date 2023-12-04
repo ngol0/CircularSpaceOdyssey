@@ -15,7 +15,7 @@
 
 namespace GameObjectFactory
 {
-	Object::Ref CreatePlayer(const Vector2& center, float distance, float scale)
+	Object::Ref CreatePlayer(const Vector2& center, const float& distance, const float& scale)
 	{
 		Object::Ref player = GameObjectManager::GetInstance().AddToManager();
 		player->SetScale(scale);
@@ -79,12 +79,12 @@ namespace GameObjectFactory
 		return bullet;
 	}
 
-	Object::Ref CreateCombatPlanet(const Vector2& center_position, float radius)
+	Object::Ref CreateCombatPlanet(const Vector2& center_position, const float& radius)
 	{
 		Transform circle_transfrom{ center_position, radius };
 		Object::Ref circle = GameObjectManager::GetInstance().AddToManager(circle_transfrom);
 		//shape
-		circle->AddComponent<Circle>(center_position, radius);
+		circle->AddComponent<Circle>(center_position, radius, 30);
 		//enemy spawner
 		circle->AddComponent<EnemySpawner>();
 

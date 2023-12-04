@@ -1,4 +1,5 @@
 #pragma once
+#include "Math/Vector2.h"
 
 class Scene;
 
@@ -9,6 +10,7 @@ private:
 	std::string m_health_string;
 
 	Scene* m_scene;
+	std::vector<Vector2> m_random_pos;
 
 public:
 	UI();
@@ -18,4 +20,6 @@ public:
 
 	void UpdateScoreText(int score);
 	void UpdateHealthText(int health);
+
+	void RenderBackground();
 };

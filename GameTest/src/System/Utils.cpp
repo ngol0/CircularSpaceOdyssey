@@ -19,6 +19,22 @@ namespace Utils
 		}
 	}
 
+	void DrawDot(const Vector2& position, int r, int g, int b)
+	{
+		App::DrawLine(position.x, position.y, position.x + 1, position.y + 1, r, g, b);
+	}
+
+	void GenerateRandomPositions(int max_pos, std::vector<Vector2>& output)
+	{
+		for (int i = 0; i < max_pos; i++)
+		{
+			float x = Utils::RandomFloat(0.f, 1000.f);
+			float y = Utils::RandomFloat(0.f, 1000.f);
+
+			output.push_back(Vector2{ x,y });
+		}
+	}
+
 	int RandomInt(int min, int max)
 	{
 		std::random_device rd;

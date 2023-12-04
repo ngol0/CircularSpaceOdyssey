@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "UI.h"
 #include "Scene.h"
+#include "Utils.h"
 
 UI::UI() : m_scene(nullptr) {}
 
@@ -10,6 +11,8 @@ void UI::Init(Scene& scene)
 
 	UpdateScoreText(m_scene->GetScore());
 	UpdateHealthText(m_scene->GetPlayerHealth());
+
+	Utils::GenerateRandomPositions(200, m_random_pos);
 }
 
 void UI::Update(float deltaTime)
@@ -18,8 +21,18 @@ void UI::Update(float deltaTime)
 	UpdateHealthText(m_scene->GetPlayerHealth());
 }
 
+void UI::RenderBackground()
+{
+	for (const auto& pos : m_random_pos)
+	{
+		Utils::DrawDot(pos, Utils::RandomFloat(0, 2.f), Utils::RandomFloat(0, 2.f), Utils::RandomFloat(0, 2.f));
+	}
+}
+
 void UI::Render()
 {
+	RenderBackground();
+
 	switch (m_scene->GetState())
 	{
 	case SceneState::START:

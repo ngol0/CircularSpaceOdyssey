@@ -16,5 +16,4 @@ public:
 private:
 	static const int POOL_SIZE = 10;
 	Object::Ref enemies[POOL_SIZE];
-	//Vector2 spawn_pos;
 };

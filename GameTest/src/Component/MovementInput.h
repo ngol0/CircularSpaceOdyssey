@@ -15,11 +15,10 @@ struct MovementInput : public Component
 private:
 	float m_speed;
 	Transform* transform;
+	const Vector2* m_center;
 
 	//movement values
 	float m_degree;
-	Vector2 m_center;
 	float m_distance;
-
 	float m_rotation_angle;
 };
