@@ -58,3 +58,13 @@ Waypoint* EnemySpawner::GetAvailableWaypoint()
 	}
 	return nullptr;
 }
+
+void EnemySpawner::Reset()
+{
+	m_timer = MAX_SPAWN_TIME;
+
+	for (auto& waypoint : m_waypoint_list)
+	{
+		waypoint.is_available = true;
+	}
+}

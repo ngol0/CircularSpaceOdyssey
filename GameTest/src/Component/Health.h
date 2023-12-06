@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
+#include "System/Event.h"
 
+class Scene;
 
 struct Health : public Component
 {
@@ -14,4 +16,6 @@ struct Health : public Component
 
 	int amount;
 	int initial_amount;
+
+	Event<Scene> on_die;
 };

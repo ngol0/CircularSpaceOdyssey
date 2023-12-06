@@ -27,6 +27,7 @@ public:
 	void Shutdown() {};
 	void SetUp();
 	void Restart();
+	void OnScore();
 
 	//getters
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().amount; }
@@ -54,6 +55,6 @@ private:
 	float m_timer{ 0.f };
 
 	//enemy pool
-	EnemyPool enemy_pool;
+	EnemyPool m_enemy_pool;
 };
 

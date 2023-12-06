@@ -7,7 +7,7 @@ Circle::Circle(const Vector2& center_position, float radius, int steps) : m_cent
 
 void Circle::Init()
 {
-	Utils::GenerateCircleVertices(m_radius, *m_center, 30, m_vertices);
+	Utils::GenerateCircleVertices(m_radius, *m_center, m_steps, m_vertices);
 	m_vertices_number = m_vertices.size();
 }
 

@@ -20,11 +20,11 @@ void Scene::Init()
 {
 	//planet
 	m_planet = GameObjectFactory::CreateCombatPlanet(circle_center, circle_radius);
-	m_planet->GetComponent<EnemySpawner>().SetUp(enemy_pool);
+	m_planet->GetComponent<EnemySpawner>().SetUp(m_enemy_pool);
 
 	//enemy
 	Transform enemy_transform = Transform{ circle_center, 1.2f };
-	enemy_pool.Init(enemy_transform, *this);
+	m_enemy_pool.Init(enemy_transform, *this);
 
 	//player
 	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
@@ -67,10 +67,14 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 {
 	if (other.tag == "bullet")
 	{
-		m_score++;
 		other.object->Deactivate();
-		enemy.object->GetComponent<Health>().TakeDamage(50);
+		enemy.object->GetComponent<Health>().TakeDamage(30);
 	}
+}
+
+void Scene::OnScore()
+{
+	m_score++;
 }
 
 void Scene::Update(float deltaTime)
@@ -89,9 +93,17 @@ void Scene::Render()
 
 void Scene::Restart()
 {
+	//reactivate game objects
 	GameObjectManager::GetInstance().Reactivate();
+
+	//deactivates pool objects
 	m_player->GetComponent<Shooter>().SetBulletPool();
-	SetUp();
+	m_enemy_pool.SetUp();
+
+	//reset waypoints and timer
+	m_planet->GetComponent<EnemySpawner>().Reset();
+	
+	SetUp(); //set up player pos & stats
 }
 
 void Scene::HandleInput(float deltaTime)

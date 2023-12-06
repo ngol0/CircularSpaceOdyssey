@@ -7,10 +7,10 @@ class Circle : public Component
 private:
 	const Vector2* m_center;
 	float m_radius;
+	int m_steps;
+
 	std::size_t m_vertices_number;
 	std::vector<Vector2> m_vertices;
-
-	int m_steps;
 
 public:
 	Circle(const Vector2& center_position, float radius, int steps);

@@ -5,12 +5,12 @@
 #include "GameObject/GameObject.h"
 #include "System/Scene.h"
 #include "System/CollisionManager.h"
+//
+#include "System/Utils.h"
 
 BoxCollider::BoxCollider(std::string tag) : size(Vector2{0.f}), position(Vector2{0.f}), tag(tag), transform(nullptr) {}
 
 BoxCollider::BoxCollider(std::string tag, Vector2& size) : size(size), position(Vector2{ 0.f }), tag(tag), transform(nullptr) {}
-
-//BoxCollider::BoxCollider(std::string tag, Vector2& size, CollisionManager& manager) : size(size), position(Vector2{ 0.f }), tag(tag), transform(nullptr), collision_manager(&manager) {}
 
 void BoxCollider::Init()
 {
@@ -24,22 +24,12 @@ void BoxCollider::Init()
 void BoxCollider::Update(float deltaTime)
 {
     SetPosition(transform->position.x, transform->position.y);
-
 }
 
+//debug
 void BoxCollider::Render()
 {
-    //Debug();
-}
-
-void BoxCollider::Debug()
-{
-    //draw a debug collider box
-    App::DrawLine(position.x, position.y, position.x + size.x, position.y, 1.f, 0.f, 0.f);
-    App::DrawLine(position.x, position.y, position.x, position.y + size.y, 1.f, 0.f, 0.f);
-
-    App::DrawLine(position.x, position.y + size.y, position.x + size.x, position.y + size.y, 1.f, 0.f, 0.f);
-    App::DrawLine(position.x + size.x, position.y, position.x + size.x, position.y + size.y, 1.f, 0.f, 0.f);
+    //Utils::DrawRectangle(position, 1.f, 0.f, 0.f, size);
 }
 
 void BoxCollider::SetPosition(float x, float y)

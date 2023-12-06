@@ -54,7 +54,7 @@ namespace GameObjectFactory
 		SpriteRenderer& enemy_sprite = enemy->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\enemies.png", 4, 5);
 		enemy_sprite.m_sprite->SetFrame(17); 
 		//collider
-		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height() };
+		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height()/2 };
 		auto& enemy_collision = enemy->AddComponent<BoxCollider>("enemy", collider_size);
 		//health
 		enemy->AddComponent<Health>(100);
@@ -67,9 +67,9 @@ namespace GameObjectFactory
 	Object::Ref CreateBullet()
 	{
 		Object::Ref bullet = GameObjectManager::GetInstance().AddToManager();
-		bullet->GetComponent<Transform>().scale = .5f;
+		bullet->GetComponent<Transform>().scale = 0.8f;
 		//sprite
-		auto& bullet_sprite = bullet->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\bullet.png", 1, 1);
+		auto& bullet_sprite = bullet->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\ball.png", 1, 1);
 		//collider
 		Vector2 collider_size{ bullet_sprite.width(), bullet_sprite.height() };
 		bullet->AddComponent<BoxCollider>("bullet", collider_size);

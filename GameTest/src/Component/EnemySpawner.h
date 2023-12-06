@@ -26,6 +26,7 @@ public:
 
 	void Init() override {};
 	void SetUp(EnemyPool& pool);
+	void Reset();
 
 	void SpawnEnemy(const Vector2& spawn_pos, float rotation_angle, float dt);
 	Waypoint* GetAvailableWaypoint();

@@ -24,15 +24,21 @@ namespace Utils
 		App::DrawLine(position.x, position.y, position.x + 1, position.y + 1, r, g, b);
 	}
 
-	void GenerateRandomPositions(int max_pos, std::vector<Vector2>& output)
+	void DrawRectangle(const Vector2& position, int r, int g, int b, const Vector2& size)
 	{
-		for (int i = 0; i < max_pos; i++)
-		{
-			float x = Utils::RandomFloat(0.f, 1000.f);
-			float y = Utils::RandomFloat(0.f, 1000.f);
+		App::DrawLine(position.x, position.y, position.x + size.x, position.y, r, g, b);
+		App::DrawLine(position.x, position.y, position.x, position.y + size.y, r, g, b);
 
-			output.push_back(Vector2{ x,y });
-		}
+		App::DrawLine(position.x, position.y + size.y, position.x + size.x, position.y + size.y, r, g, b);
+		App::DrawLine(position.x + size.x, position.y, position.x + size.x, position.y + size.y, r, g, b);
+	}
+
+	Vector2& RandomPosition()
+	{
+		float x = Utils::RandomFloat(0.f, 1000.f);
+		float y = Utils::RandomFloat(0.f, 1000.f);
+
+		return Vector2{ x,y };
 	}
 
 	int RandomInt(int min, int max)
@@ -49,5 +55,11 @@ namespace Utils
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<float> dis(min, max);
 		return dis(gen);
+	}
+
+	//todo: implement this?
+	float RandomColor()
+	{
+		return 0.f;
 	}
 }
