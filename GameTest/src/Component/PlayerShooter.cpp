@@ -1,23 +1,23 @@
 #include "stdafx.h"
-#include "Shooter.h"
+#include "PlayerShooter.h"
 #include "Component/Transform.h"
 
-Shooter::Shooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shooter_transform(nullptr)
+PlayerShooter::PlayerShooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shooter_transform(nullptr)
 {
 	bullet_pool.Init();
 }
 
-void Shooter::Init()
+void PlayerShooter::Init()
 {
 	m_shooter_transform = &Component::object->GetComponent<Transform>();
 }
 
-void Shooter::Update(float deltaTime)
+void PlayerShooter::Update(float deltaTime)
 {
 	Shoot(deltaTime);
 }
 
-void Shooter::Shoot(float deltaTime)
+void PlayerShooter::Shoot(float deltaTime)
 {
 	if (App::IsKeyPressed(VK_RBUTTON) && m_timer >= 2.f)
 	{
@@ -29,7 +29,7 @@ void Shooter::Shoot(float deltaTime)
 	m_timer += deltaTime / 100.f;
 }
 
-void Shooter::SetBulletPool()
+void PlayerShooter::SetBulletPool()
 {
 	bullet_pool.SetUp();
 }

@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "Component/Transform.h"
 #include "Component/MovementInput.h"
-#include "Component/Shooter.h"
+#include "Component/PlayerShooter.h"
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
@@ -57,15 +57,20 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 
 		other.object->Deactivate();
 	}
-	else if (other.tag == "enemy")
+	if (other.tag == "enemy")
 	{
 		m_player->GetComponent<Health>().TakeDamage(1);
+	}
+	if (other.tag == "enemy_bullet")
+	{
+		m_player->GetComponent<Health>().TakeDamage(1);
+		other.object->Deactivate();
 	}
 }
 
 void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 {
-	if (other.tag == "bullet")
+	if (other.tag == "player_bullet")
 	{
 		other.object->Deactivate();
 		enemy.object->GetComponent<Health>().TakeDamage(30);
@@ -80,7 +85,7 @@ void Scene::OnScore()
 void Scene::Update(float deltaTime)
 {
 	//spawn enemy
-	m_planet->GetComponent<EnemySpawner>().SpawnEnemy(circle_center, 0.f, deltaTime);
+	m_planet->GetComponent<EnemySpawner>().SpawnEnemy(0.f, deltaTime);
 
 	GameObjectManager::GetInstance().Update(deltaTime);
 	CollisionManager::GetInstance().Update(deltaTime);
@@ -97,7 +102,7 @@ void Scene::Restart()
 	GameObjectManager::GetInstance().Reactivate();
 
 	//deactivates pool objects
-	m_player->GetComponent<Shooter>().SetBulletPool();
+	m_player->GetComponent<PlayerShooter>().SetBulletPool();
 	m_enemy_pool.SetUp();
 
 	//reset waypoints and timer

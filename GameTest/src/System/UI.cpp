@@ -28,7 +28,7 @@ void UI::RenderBackground()
 {
 	for (const auto& pos : m_random_pos)
 	{
-		Utils::DrawDot(pos, Utils::RandomFloat(0, 2.f), Utils::RandomFloat(0, 2.f), Utils::RandomFloat(0, 2.f));
+		Utils::DrawDot(pos, Utils::RandomFloat(0, 3.f), Utils::RandomFloat(0, 3.f), Utils::RandomFloat(0, 3.f));
 	}
 }
 

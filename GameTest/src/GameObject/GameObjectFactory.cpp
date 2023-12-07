@@ -7,29 +7,32 @@
 #include "Component/Health.h"
 #include "Component/SpriteRenderer.h"
 #include "Component/MovementInput.h"
-#include "Component/Shooter.h"
+#include "Component/PlayerShooter.h"
 #include "Component/BulletMovement.h"
 #include "Component/Circle.h"
 #include "Component/EnemyMovement.h"
 #include "Component/EnemySpawner.h"
+#include "Component/EnemyShooter.h"
 
 namespace GameObjectFactory
 {
-	Object::Ref CreatePlayer(const Vector2& center, const float& distance, const float& scale)
+	Object::Ref CreatePlayer(const Vector2& center, float distance, float scale)
 	{
 		Object::Ref player = GameObjectManager::GetInstance().AddToManager();
 		player->SetScale(scale);
 
 		//---components
 		//sprite
-		auto& player_sprite = player->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\ship.png", 1, 1);
+		auto& player_sprite = player->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\player.png", 4, 1);
+		player_sprite.CreateAnimation(0, 0.05f, { 0,1,2,3 });
+		player_sprite.SetAnimation(0);
 		//collider
 		Vector2 collider_size{ player_sprite.width() * 0.9f, player_sprite.height() * 0.6f };
 		auto& player_collider = player->AddComponent<BoxCollider>("player", collider_size);
 		//movement input, health & shooting input
 		player->AddComponent<MovementInput>(center, distance);
 		player->AddComponent<Health>(100);
-		player->AddComponent<Shooter>(50.f);
+		player->AddComponent<PlayerShooter>(25.f);
 
 		return player;
 	}
@@ -46,13 +49,13 @@ namespace GameObjectFactory
 		return coin;
 	}
 
-	Object::Ref CreateEnemy(Transform& transform)
+	Object::Ref CreateEnemy(Transform& transform, EnemyType enemy_type)
 	{
 		//auto& spike = scene.object_manager.AddToManager(transform);
 		Object::Ref enemy = GameObjectManager::GetInstance().AddToManager(transform);
 		//sprite
 		SpriteRenderer& enemy_sprite = enemy->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\enemies.png", 4, 5);
-		enemy_sprite.m_sprite->SetFrame(17); 
+		enemy_sprite.SetFrame((int)enemy_type);
 		//collider
 		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height()/2 };
 		auto& enemy_collision = enemy->AddComponent<BoxCollider>("enemy", collider_size);
@@ -60,26 +63,29 @@ namespace GameObjectFactory
 		enemy->AddComponent<Health>(100);
 		//movement
 		enemy->AddComponent<EnemyMovement>();
+		//shooter
+		enemy->AddComponent<EnemyShooter>(20.f);
 
 		return enemy;
 	}
 
-	Object::Ref CreateBullet()
+	Object::Ref CreateBullet(float r, float b, float g, float size, std::string tag)
 	{
 		Object::Ref bullet = GameObjectManager::GetInstance().AddToManager();
-		bullet->GetComponent<Transform>().scale = 0.8f;
+		bullet->GetComponent<Transform>().scale = size;
 		//sprite
-		auto& bullet_sprite = bullet->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\ball.png", 1, 1);
+		auto& bullet_sprite = bullet->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\bullet.png", 1, 1);
+		bullet_sprite.SetColor(r,b,g);
 		//collider
 		Vector2 collider_size{ bullet_sprite.width(), bullet_sprite.height() };
-		bullet->AddComponent<BoxCollider>("bullet", collider_size);
+		bullet->AddComponent<BoxCollider>(tag, collider_size);
 		//bullet auto movement
 		bullet->AddComponent<BulletMovement>();
 
 		return bullet;
 	}
 
-	Object::Ref CreateCombatPlanet(const Vector2& center_position, const float& radius)
+	Object::Ref CreateCombatPlanet(const Vector2& center_position, float radius)
 	{
 		Transform circle_transfrom{ center_position, radius };
 		Object::Ref circle = GameObjectManager::GetInstance().AddToManager(circle_transfrom);

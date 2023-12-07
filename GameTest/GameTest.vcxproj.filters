@@ -35,12 +35,13 @@
     <ClCompile Include="src\Component\MovementInput.cpp" />
     <ClCompile Include="src\GameObject\GameObjectFactory.cpp" />
     <ClCompile Include="src\Component\BulletMovement.cpp" />
-    <ClCompile Include="src\Component\Shooter.cpp" />
+    <ClCompile Include="src\Component\PlayerShooter.cpp" />
     <ClCompile Include="src\GameObject\BulletPool.cpp" />
     <ClCompile Include="src\Component\EnemyMovement.cpp" />
     <ClCompile Include="src\GameObject\EnemyPool.cpp" />
     <ClCompile Include="src\Component\EnemySpawner.cpp" />
     <ClCompile Include="src\System\Utils.cpp" />
+    <ClCompile Include="src\Component\EnemyShooter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -84,12 +85,13 @@
     <ClInclude Include="src\GameObject\GameObjectFactory.h" />
     <ClInclude Include="src\System\Event.h" />
     <ClInclude Include="src\Component\BulletMovement.h" />
-    <ClInclude Include="src\Component\Shooter.h" />
+    <ClInclude Include="src\Component\PlayerShooter.h" />
     <ClInclude Include="src\GameObject\BulletPool.h" />
     <ClInclude Include="src\Component\EnemyMovement.h" />
     <ClInclude Include="src\GameObject\EnemyPool.h" />
     <ClInclude Include="src\Component\EnemySpawner.h" />
     <ClInclude Include="src\System\Utils.h" />
+    <ClInclude Include="src\Component\EnemyShooter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

@@ -14,10 +14,11 @@ void EnemySpawner::SetUp(EnemyPool& pool)
 {
 	m_timer = MAX_SPAWN_TIME;
 	m_pool = &pool;
+	m_transform = &Component::object->GetComponent<Transform>();
 
 	//init waypoints
 	std::vector<Vector2> m_vertices;
-	Utils::GenerateCircleVertices(distance_to_center, Component::object->GetComponent<Transform>().position, 10, m_vertices);
+	Utils::GenerateCircleVertices(distance_to_center, m_transform->position, 10, m_vertices);
 
 	for (auto& vertice : m_vertices)
 	{
@@ -25,7 +26,7 @@ void EnemySpawner::SetUp(EnemyPool& pool)
 	}
 }
 
-void EnemySpawner::SpawnEnemy(const Vector2& spawn_pos, float rotation_angle, float dt)
+void EnemySpawner::SpawnEnemy(float rotation_angle, float dt)
 {
 	//check if there's available waypoints
 	Waypoint* destination = GetAvailableWaypoint();
@@ -40,7 +41,7 @@ void EnemySpawner::SpawnEnemy(const Vector2& spawn_pos, float rotation_angle, fl
 	m_timer -= dt / 100.f;
 	if (m_timer <= 0.f)
 	{
-		Object::Ref enemy = m_pool->Spawn(spawn_pos, *destination, 0.f);
+		Object::Ref enemy = m_pool->Spawn(m_transform->position, *destination, 0.f);
 		destination->is_available = false;
 
 		m_timer = MAX_SPAWN_TIME;

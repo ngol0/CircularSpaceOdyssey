@@ -190,9 +190,10 @@
     <ClInclude Include="src\Component\Component.h" />
     <ClInclude Include="src\Component\BulletMovement.h" />
     <ClInclude Include="src\Component\EnemyMovement.h" />
+    <ClInclude Include="src\Component\EnemyShooter.h" />
     <ClInclude Include="src\Component\EnemySpawner.h" />
     <ClInclude Include="src\Component\MovementInput.h" />
-    <ClInclude Include="src\Component\Shooter.h" />
+    <ClInclude Include="src\Component\PlayerShooter.h" />
     <ClInclude Include="src\Component\SpriteRenderer.h" />
     <ClInclude Include="src\Component\Transform.h" />
     <ClInclude Include="src\GameObject\BulletPool.h" />
@@ -221,9 +222,10 @@
     <ClCompile Include="external\App\SimpleSprite.cpp" />
     <ClCompile Include="src\Component\BulletMovement.cpp" />
     <ClCompile Include="src\Component\EnemyMovement.cpp" />
+    <ClCompile Include="src\Component\EnemyShooter.cpp" />
     <ClCompile Include="src\Component\EnemySpawner.cpp" />
     <ClCompile Include="src\Component\MovementInput.cpp" />
-    <ClCompile Include="src\Component\Shooter.cpp" />
+    <ClCompile Include="src\Component\PlayerShooter.cpp" />
     <ClCompile Include="src\Component\SpriteRenderer.cpp" />
     <ClCompile Include="src\Component\Transform.cpp" />
     <ClCompile Include="src\GameObject\BulletPool.cpp" />

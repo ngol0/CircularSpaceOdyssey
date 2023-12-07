@@ -22,3 +22,12 @@ private:
 	Waypoint* m_destination;
 	Transform* m_transform;
 };
+
+enum class EnemyType
+{
+	Type_1 = 1,
+	Type_2 = 5,
+	Type_3 = 9,
+	Type_4 = 13,
+	Type_5 = 17
+};

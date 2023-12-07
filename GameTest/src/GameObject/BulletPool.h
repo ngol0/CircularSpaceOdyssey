@@ -5,7 +5,7 @@
 class BulletPool
 {
 public:
-	BulletPool();
+	BulletPool(float r, float b, float g, float size, std::string tag);
 
 	void Init();
 	void Spawn(const Vector2& spawn_pos, const Vector2& direction, float rotation_angle);
@@ -14,4 +14,11 @@ public:
 private:
 	static const int POOL_SIZE = 10;
 	Object::Ref bullets[POOL_SIZE];
+
+	//bullet color & size & tag
+	float m_r;
+	float m_b;
+	float m_g;
+	float m_size;
+	std::string m_tag;
 };

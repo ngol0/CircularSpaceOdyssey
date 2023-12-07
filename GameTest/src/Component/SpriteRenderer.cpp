@@ -5,8 +5,6 @@
 
 SpriteRenderer::SpriteRenderer(const char* spritename, int sprite_columns, int sprite_rows) : m_sprite(nullptr), transform(nullptr)
 {
-	name = "SpriteRenderer";
-
 	m_sprite =  App::CreateSprite(spritename, sprite_columns, sprite_rows);
 }
 
@@ -29,4 +27,24 @@ void SpriteRenderer::Update(float deltaTime)
 void SpriteRenderer::Render()
 {
 	m_sprite->Draw();
+}
+
+void SpriteRenderer::CreateAnimation(unsigned int id, float speed, const std::vector<int>& frames)
+{
+	m_sprite->CreateAnimation(id, speed, frames);
+}
+
+void SpriteRenderer::SetAnimation(int id)
+{
+	m_sprite->SetAnimation(id);
+}
+
+void SpriteRenderer::SetFrame(unsigned int id)
+{
+	m_sprite->SetFrame(id);
+}
+
+void SpriteRenderer::SetColor(float r, float g, float b)
+{
+	m_sprite->SetColor(r, g, b);
 }

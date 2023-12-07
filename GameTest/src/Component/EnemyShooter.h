@@ -1,12 +1,12 @@
 #pragma once
 #include "GameObject/BulletPool.h"
 
-
-struct Shooter : public Component
+class EnemyShooter : public Component
 {
-	BulletPool bullet_pool;
+public:
+	BulletPool bullet_pool{ 0.0f, 0.74, .78f, .15f, "enemy_bullet"};
 
-	Shooter(float offset);
+	EnemyShooter(float offset);
 
 	void Init() override;
 	void Update(float deltaTime) override;

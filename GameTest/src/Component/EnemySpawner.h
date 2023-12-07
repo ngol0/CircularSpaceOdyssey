@@ -4,6 +4,7 @@
 
 class Scene;
 class EnemyPool;
+struct Transform;
 
 struct Waypoint
 {
@@ -19,6 +20,7 @@ private:
 	float distance_to_center = 150.f;
 
 	EnemyPool* m_pool;
+	Transform* m_transform;
 
 public:
 	EnemySpawner();
@@ -28,7 +30,7 @@ public:
 	void SetUp(EnemyPool& pool);
 	void Reset();
 
-	void SpawnEnemy(const Vector2& spawn_pos, float rotation_angle, float dt);
+	void SpawnEnemy(float rotation_angle, float dt);
 	Waypoint* GetAvailableWaypoint();
 
 	static float MAX_SPAWN_TIME;
