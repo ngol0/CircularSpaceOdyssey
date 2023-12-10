@@ -4,7 +4,7 @@
 
 class Scene;
 class EnemyPool;
-struct Transform;
+class Transform;
 
 struct Waypoint
 {

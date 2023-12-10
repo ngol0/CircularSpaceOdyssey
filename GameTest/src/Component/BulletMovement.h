@@ -2,10 +2,11 @@
 #include "Component.h"
 #include "Math/Vector2.h"
 
-struct Transform;
+class Transform;
 
-struct BulletMovement : public Component
+class BulletMovement : public Component
 {
+public:
 	BulletMovement();
 
 	void Init() override;

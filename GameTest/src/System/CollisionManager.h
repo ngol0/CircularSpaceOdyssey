@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 
-struct BoxCollider;
+class BoxCollider;
 
 class CollisionManager
 {

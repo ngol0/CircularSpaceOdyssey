@@ -13,6 +13,7 @@
 #include "Component/EnemyMovement.h"
 #include "Component/EnemySpawner.h"
 #include "Component/EnemyShooter.h"
+#include "Component/HitEffect.h"
 
 namespace GameObjectFactory
 {
@@ -33,6 +34,7 @@ namespace GameObjectFactory
 		player->AddComponent<MovementInput>(center, distance);
 		player->AddComponent<Health>(100);
 		player->AddComponent<PlayerShooter>(25.f);
+		player->AddComponent<HitEffect>(0.1f);
 
 		return player;
 	}
@@ -65,6 +67,8 @@ namespace GameObjectFactory
 		enemy->AddComponent<EnemyMovement>();
 		//shooter
 		enemy->AddComponent<EnemyShooter>(20.f);
+		//hit effect, input the scale offset
+		enemy->AddComponent<HitEffect>(0.2f);
 
 		return enemy;
 	}

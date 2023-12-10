@@ -2,7 +2,7 @@
 #include "Component.h"
 #include "Math/Vector2.h"
 
-struct Transform;
+class Transform;
 struct Waypoint;
 
 class EnemyMovement : public Component

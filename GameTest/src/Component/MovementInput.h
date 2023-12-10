@@ -2,8 +2,9 @@
 #include "Component.h"
 #include "Transform.h"
 
-struct MovementInput : public Component
+class MovementInput : public Component
 {
+public:
 	MovementInput(const Vector2& center, float distance);
 
 	void Init() override;

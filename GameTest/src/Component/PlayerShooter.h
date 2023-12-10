@@ -2,8 +2,9 @@
 #include "GameObject/BulletPool.h"
 
 
-struct PlayerShooter : public Component
+class PlayerShooter : public Component
 {
+public:
 	BulletPool bullet_pool{1.f, 0.5, .2f, .2f, "player_bullet"};
 
 	PlayerShooter(float offset);

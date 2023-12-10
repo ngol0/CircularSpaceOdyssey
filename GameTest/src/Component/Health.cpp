@@ -15,6 +15,7 @@ void Health::TakeDamage(int damage_amount)
 	if (amount <= 0)
 	{
 		on_die.Notify();
+
 		if (Component::object->HasComponent<EnemyMovement>())
 		{
 			//reset health and waypoints for enemy when they die

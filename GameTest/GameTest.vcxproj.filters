@@ -42,6 +42,9 @@
     <ClCompile Include="src\Component\EnemySpawner.cpp" />
     <ClCompile Include="src\System\Utils.cpp" />
     <ClCompile Include="src\Component\EnemyShooter.cpp" />
+    <ClCompile Include="src\Component\HitEffect.cpp" />
+    <ClCompile Include="src\GameObject\ParticlePool.cpp" />
+    <ClCompile Include="src\Component\ParticleSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -92,6 +95,9 @@
     <ClInclude Include="src\Component\EnemySpawner.h" />
     <ClInclude Include="src\System\Utils.h" />
     <ClInclude Include="src\Component\EnemyShooter.h" />
+    <ClInclude Include="src\Component\HitEffect.h" />
+    <ClInclude Include="src\GameObject\ParticlePool.h" />
+    <ClInclude Include="src\Component\ParticleSpawner.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

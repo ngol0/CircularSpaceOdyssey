@@ -3,8 +3,9 @@
 
 struct Transform;
 
-struct SpriteRenderer : public Component
+class SpriteRenderer : public Component
 {
+public:
 	float width() { return m_sprite->GetHeight() * m_sprite->GetScale(); };
 	float height() { return m_sprite->GetWidth() * m_sprite->GetScale(); };
 
@@ -19,6 +20,9 @@ struct SpriteRenderer : public Component
 	void SetAnimation(int id);
 	void SetFrame(unsigned int id);
 	void SetColor(float r, float g, float b);
+	void SetScale(float s);
+
+	void ChangeSprite(const char* spritename, int sprite_columns, int sprite_rows);
 
 private:
 	CSimpleSprite* m_sprite;

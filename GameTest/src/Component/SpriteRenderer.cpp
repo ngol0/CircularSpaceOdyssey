@@ -5,10 +5,10 @@
 
 SpriteRenderer::SpriteRenderer(const char* spritename, int sprite_columns, int sprite_rows) : m_sprite(nullptr), transform(nullptr)
 {
-	m_sprite =  App::CreateSprite(spritename, sprite_columns, sprite_rows);
+	m_sprite = App::CreateSprite(spritename, sprite_columns, sprite_rows);
 }
 
-SpriteRenderer::~SpriteRenderer() { delete m_sprite; }
+SpriteRenderer::~SpriteRenderer() { delete m_sprite; m_sprite = nullptr; }
 
 void SpriteRenderer::Init()
 {
@@ -29,6 +29,15 @@ void SpriteRenderer::Render()
 	m_sprite->Draw();
 }
 
+void SpriteRenderer::ChangeSprite(const char* spritename, int sprite_columns, int sprite_rows)
+{
+	//delete the sprite that m_sprite is currently pointing at
+	delete m_sprite;
+
+	//have m_sprite points to anather sprite
+	m_sprite = App::CreateSprite(spritename, sprite_columns, sprite_rows);
+}
+
 void SpriteRenderer::CreateAnimation(unsigned int id, float speed, const std::vector<int>& frames)
 {
 	m_sprite->CreateAnimation(id, speed, frames);
@@ -47,4 +56,9 @@ void SpriteRenderer::SetFrame(unsigned int id)
 void SpriteRenderer::SetColor(float r, float g, float b)
 {
 	m_sprite->SetColor(r, g, b);
+}
+
+void SpriteRenderer::SetScale(float s)
+{
+	m_sprite->SetScale(s);
 }

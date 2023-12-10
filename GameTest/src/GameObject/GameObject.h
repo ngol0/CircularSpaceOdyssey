@@ -11,7 +11,7 @@ using ComponentID = std::size_t;
 using ComponetBitMask = std::bitset<MAX_COMPONENTS>;
 using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 
-struct Transform;
+class Transform;
 
 class GameObject
 {

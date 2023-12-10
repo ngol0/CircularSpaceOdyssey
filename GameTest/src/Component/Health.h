@@ -4,8 +4,9 @@
 
 class Scene;
 
-struct Health : public Component
+class Health : public Component
 {
+public:
 	Health(int initial_amount);
 	void TakeDamage(int damage_amount);
 

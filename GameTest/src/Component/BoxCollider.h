@@ -5,8 +5,9 @@
 
 class Scene;
 
-struct BoxCollider : public Component
+class BoxCollider : public Component
 {
+public:
 	BoxCollider(std::string tag);
 	BoxCollider(std::string tag, Vector2& size);
 
@@ -21,7 +22,7 @@ struct BoxCollider : public Component
 	Vector2 position;
 
 	std::string tag;
-	struct Transform* transform;
+	class Transform* transform;
 
 	bool is_debug{ false };
 
