@@ -61,15 +61,23 @@ namespace GameObjectFactory
 		//collider
 		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height()/2 };
 		auto& enemy_collision = enemy->AddComponent<BoxCollider>("enemy", collider_size);
-		//health
-		enemy->AddComponent<Health>(100);
-		//movement
-		enemy->AddComponent<EnemyMovement>();
-		//shooter
-		enemy->AddComponent<EnemyShooter>(20.f);
 		//hit effect, input the scale offset
 		enemy->AddComponent<HitEffect>(0.2f);
+		//movement
+		enemy->AddComponent<EnemyMovement>();
 
+		switch (enemy_type)
+		{
+		case EnemyType::MoveType:
+			//health
+			enemy->AddComponent<Health>(100);
+			break;
+		case EnemyType::ShootType:
+			enemy->AddComponent<Health>(200);
+			//shooter
+			enemy->AddComponent<EnemyShooter>(20.f);
+			break;
+		}
 		return enemy;
 	}
 
