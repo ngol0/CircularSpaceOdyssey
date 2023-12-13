@@ -15,6 +15,6 @@ public:
 	void SetUp();
 
 private:
-	static const int POOL_SIZE = 8;
+	static const int POOL_SIZE = 6;
 	Object::Ref enemies[POOL_SIZE];
 };

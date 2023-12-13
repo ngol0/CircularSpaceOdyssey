@@ -5,13 +5,11 @@
 //
 #include "GameObject/GameObject.h"
 
-EnemyMovement::EnemyMovement() : m_speed(0.f), m_destination(nullptr), m_transform(nullptr) {}
+EnemyMovement::EnemyMovement(float speed) : m_speed(speed), m_destination(nullptr), m_transform(nullptr) {}
 
 void EnemyMovement::Init()
 {
 	m_transform = &Component::object->GetComponent<Transform>();
-
-	m_speed = 0.2f;
 }
 
 void EnemyMovement::MoveTo(Waypoint& pos)

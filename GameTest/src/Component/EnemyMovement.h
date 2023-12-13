@@ -8,7 +8,7 @@ struct Waypoint;
 class EnemyMovement : public Component
 {
 public:
-	EnemyMovement();
+	EnemyMovement(float speed);
 	~EnemyMovement() {}
 
 	void Init();
@@ -25,7 +25,7 @@ private:
 
 enum class EnemyType
 {
-	MoveType = 1,
+	ChaseType = 1,
 	Type_2 = 5,
 	Type_3 = 9,
 	Type_4 = 13,

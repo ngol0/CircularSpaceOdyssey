@@ -63,19 +63,21 @@ namespace GameObjectFactory
 		auto& enemy_collision = enemy->AddComponent<BoxCollider>("enemy", collider_size);
 		//hit effect, input the scale offset
 		enemy->AddComponent<HitEffect>(0.2f);
-		//movement
-		enemy->AddComponent<EnemyMovement>();
 
 		switch (enemy_type)
 		{
-		case EnemyType::MoveType:
+		case EnemyType::ChaseType:
 			//health
 			enemy->AddComponent<Health>(100);
+			//movement
+			enemy->AddComponent<EnemyMovement>(0.02f);
 			break;
 		case EnemyType::ShootType:
 			enemy->AddComponent<Health>(200);
 			//shooter
 			enemy->AddComponent<EnemyShooter>(20.f);
+			//movement
+			enemy->AddComponent<EnemyMovement>(0.2f);
 			break;
 		}
 		return enemy;
@@ -103,9 +105,27 @@ namespace GameObjectFactory
 		Object::Ref circle = GameObjectManager::GetInstance().AddToManager(circle_transfrom);
 		//shape
 		circle->AddComponent<Circle>(center_position, radius, 30);
-		//enemy spawner
-		circle->AddComponent<EnemySpawner>();
 
 		return circle;
+	}
+
+	Object::Ref CreateShootEnemySpawner(const Vector2& spawn_pos)
+	{
+		Transform transform{ spawn_pos, 0.f };
+		Object::Ref spawner = GameObjectManager::GetInstance().AddToManager(transform);
+		//enemy spawner
+		spawner->AddComponent<EnemySpawner>();
+
+		return spawner;
+	}
+
+	Object::Ref CreateChaseEnemySpawner(const Vector2& spawn_pos)
+	{
+		Transform transform{ spawn_pos, 0.f };
+		Object::Ref spawner = GameObjectManager::GetInstance().AddToManager(transform);
+		//enemy spawner
+		spawner->AddComponent<EnemySpawner>();
+
+		return spawner;
 	}
 }

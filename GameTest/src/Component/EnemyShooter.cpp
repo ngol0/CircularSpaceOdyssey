@@ -19,8 +19,9 @@ void EnemyShooter::Update(float deltaTime)
 
 void EnemyShooter::Shoot(float deltaTime)
 {
-	if (m_timer >= 30.f)
+	if (m_timer >= 50.f)
 	{
+		//shoot towards the player 
 		Vector2 spawn_pos = m_shooter_transform->position - m_shooter_transform->forward * m_spawn_offset;
 		bullet_pool.Spawn(spawn_pos, m_shooter_transform->forward * (-1.f), m_shooter_transform->rotation_angle);
 		m_timer = 0.f;

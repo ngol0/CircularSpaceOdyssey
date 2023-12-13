@@ -10,4 +10,6 @@ namespace GameObjectFactory
 	Object::Ref CreateCoin(Transform& transform);
 	Object::Ref CreateBullet(float r, float b, float g, float size, std::string tag);
 	Object::Ref CreateCombatPlanet(const Vector2& center_position, float radius);
+	Object::Ref CreateShootEnemySpawner(const Vector2& spanw_pos);
+	Object::Ref CreateChaseEnemySpawner(const Vector2& spanw_pos);
 };
