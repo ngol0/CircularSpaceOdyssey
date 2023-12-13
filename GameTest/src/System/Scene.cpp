@@ -4,6 +4,7 @@
 #include "Component/MovementInput.h"
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
+#include "Component/EnemyMovement.h"
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
@@ -21,11 +22,11 @@ void Scene::Init()
 {
 	//planet
 	m_planet = GameObjectFactory::CreateCombatPlanet(circle_center, circle_radius);
-	m_planet->GetComponent<EnemySpawner>().SetUp(m_enemy_pool);
+	m_planet->GetComponent<EnemySpawner>().SetUp(m_shoot_enemy_pool);
 
 	//enemy
 	Transform enemy_transform = Transform{ circle_center, 1.2f };
-	m_enemy_pool.Init(enemy_transform, *this);
+	m_shoot_enemy_pool.Init(enemy_transform, EnemyType::ShootType, *this);
 
 	//player
 	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
@@ -106,7 +107,7 @@ void Scene::Restart()
 
 	//deactivates pool objects
 	m_player->GetComponent<PlayerShooter>().SetBulletPool();
-	m_enemy_pool.SetUp();
+	m_shoot_enemy_pool.SetUp();
 
 	//reset waypoints and timer
 	m_planet->GetComponent<EnemySpawner>().Reset();

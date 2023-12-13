@@ -55,6 +55,7 @@ private:
 	float m_timer{ 0.f };
 
 	//enemy pool
-	EnemyPool m_enemy_pool;
+	EnemyPool m_shoot_enemy_pool;
+	EnemyPool m_chase_enemy_pool;
 };
 
