@@ -23,7 +23,9 @@ void EnemyShooter::Shoot(float deltaTime)
 	{
 		//shoot towards the player 
 		Vector2 spawn_pos = m_shooter_transform->position - m_shooter_transform->forward * m_spawn_offset;
-		bullet_pool.Spawn(spawn_pos, m_shooter_transform->forward * (-1.f), m_shooter_transform->rotation_angle);
+		Vector2 shoot_direction = (*m_target_transform - m_shooter_transform->position).normalize();
+		bullet_pool.Spawn(spawn_pos, shoot_direction, m_shooter_transform->rotation_angle);
+
 		m_timer = 0.f;
 	}
 
@@ -33,4 +35,9 @@ void EnemyShooter::Shoot(float deltaTime)
 void EnemyShooter::SetBulletPool()
 {
 	bullet_pool.SetUp();
+}
+
+void EnemyShooter::SetTarget(const Vector2& target)
+{
+	m_target_transform = &target;
 }

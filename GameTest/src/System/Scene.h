@@ -2,6 +2,7 @@
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
 #include "Component/EnemySpawner.h"
+#include "Component/Transform.h"
 //
 #include "GameObject/EnemyPool.h"
 #include "GameObject/GameObjectFactory.h"
@@ -33,6 +34,7 @@ public:
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().amount; }
 	int GetScore() const { return m_score; }
 	SceneState& GetState() { return m_scene_state; };
+	const Vector2& GetPlayerPos() { return m_player->GetComponent<Transform>().position; }
 
 	//event callback
 	void OnPlayerCollisionEnter(BoxCollider& other);

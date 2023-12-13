@@ -14,9 +14,11 @@ public:
 
 	void Shoot(float deltaTime);
 	void SetBulletPool();
+	void SetTarget(const Vector2& target);
 
 private:
 	float m_timer;
 	float m_spawn_offset;
 	Transform* m_shooter_transform;
+	const Vector2* m_target_transform;
 };
