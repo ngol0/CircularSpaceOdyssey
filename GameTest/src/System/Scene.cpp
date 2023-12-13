@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Scene.h"
-#include "Component/Transform.h"
 #include "Component/MovementInput.h"
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
@@ -23,6 +22,10 @@ void Scene::Init()
 	//planet
 	m_planet = GameObjectFactory::CreateCombatPlanet(circle_center, circle_radius);
 
+	//player
+	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
+	m_player->GetComponent<BoxCollider>().collision_enter.Register(this, &Scene::OnPlayerCollisionEnter);
+
 	//spawners init
 	m_shoot_spawner_obj = GameObjectFactory::CreateShootEnemySpawner(circle_center);
 	m_shoot_spawner = &m_shoot_spawner_obj->GetComponent<EnemySpawner>();
@@ -37,10 +40,6 @@ void Scene::Init()
 	Transform enemy_transform = Transform{ circle_center, 1.2f };
 	m_shoot_enemy_pool.Init(enemy_transform, EnemyType::ShootType, *this);
 	m_chase_enemy_pool.Init(enemy_transform, EnemyType::ChaseType, *this);
-
-	//player
-	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
-	m_player->GetComponent<BoxCollider>().collision_enter.Register(this, &Scene::OnPlayerCollisionEnter);
 
 	//coin
 	/*for (int i = 0; i < 5; i++)

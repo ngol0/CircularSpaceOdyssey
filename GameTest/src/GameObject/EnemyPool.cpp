@@ -6,6 +6,7 @@
 //
 #include "GameObjectFactory.h"
 #include "System/Scene.h"
+#include "Component/EnemyShooter.h"
 
 EnemyPool::EnemyPool() {}
 
@@ -17,6 +18,11 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 		enemies[i]->Deactivate();
 		enemies[i]->GetComponent<BoxCollider>().collisions_enter.Register(&scene, &Scene::OnEnemyCollisionEnter);
 		enemies[i]->GetComponent<Health>().on_die.Register(&scene, &Scene::OnScore);
+
+		if (enemies[i]->HasComponent<EnemyShooter>())
+		{
+			enemies[i]->GetComponent<EnemyShooter>().SetTarget(scene.GetPlayer());
+		}	
 	}
 }
 
