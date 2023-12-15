@@ -23,6 +23,7 @@ void Scene::Init()
 	//player
 	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
 	m_player->GetComponent<BoxCollider>().collision_enter.Register(this, &Scene::OnPlayerCollisionEnter);
+	m_player->GetComponent<Health>().on_die.Register(this, &Scene::OnGameOver);
 
 	//spawners init
 	m_shoot_spawner_obj = GameObjectFactory::CreateShootEnemySpawner(circle_center);
@@ -90,11 +91,6 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 	}
 }
 
-void Scene::OnScore()
-{
-	m_score++;
-}
-
 void Scene::Update(float deltaTime)
 {
 	Vector2 player_pos = m_player->GetComponent<Transform>().position;
@@ -117,16 +113,34 @@ void Scene::Restart()
 	//reactivate game objects
 	GameObjectManager::GetInstance().Reactivate();
 
+	//reset waypoints and timer
+	m_shoot_spawner->Reset();
+	m_chase_spawner->Reset();
+
 	//deactivates pool objects
 	m_player->GetComponent<PlayerShooter>().SetBulletPool();
 	m_shoot_enemy_pool.SetUp();
 	m_chase_enemy_pool.SetUp();
-
-	//reset waypoints and timer
-	m_shoot_spawner->Reset();
-	m_chase_spawner->Reset();
 	
 	SetUp(); //set up player pos & stats
+}
+
+//enemy die -- check if win?
+void Scene::OnScore()
+{
+	m_score++;
+
+	if (m_score >= 100)
+	{
+		//win
+		check_game_over.Notify(true);
+	}
+}
+
+//player die -- lose
+void Scene::OnGameOver()
+{
+	check_game_over.Notify(false);
 }
 
 

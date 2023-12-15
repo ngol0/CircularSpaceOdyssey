@@ -49,6 +49,7 @@
     <ClCompile Include="src\UI\Window.cpp" />
     <ClCompile Include="src\UI\VitalsWindow.cpp" />
     <ClCompile Include="src\UI\PauseWindow.cpp" />
+    <ClCompile Include="src\UI\LoseWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -106,6 +107,7 @@
     <ClInclude Include="src\UI\Window.h" />
     <ClInclude Include="src\UI\VitalsWindow.h" />
     <ClInclude Include="src\UI\PauseWindow.h" />
+    <ClInclude Include="src\UI\LoseWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

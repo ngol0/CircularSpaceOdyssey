@@ -4,12 +4,7 @@
 #include "WindowManager.h"
 #include "System/Scene.h"
 
-PauseWindow::PauseWindow() : m_scene(nullptr) {}
-
-void PauseWindow::Init(Scene& scene)
-{
-	m_scene = &scene;
-}
+PauseWindow::PauseWindow(){}
 
 void PauseWindow::OnEnter()
 {
@@ -26,7 +21,7 @@ void PauseWindow::HandleInput(float deltaTime, WindowManager& manager)
 	if (App::IsKeyPressed('R'))
 	{
 		manager.SetWindow(WindowState::vitals);
-		m_scene->Restart();
+		manager.Restart();
 	}
 	m_timer += deltaTime / 100.f;
 }

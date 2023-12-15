@@ -32,7 +32,7 @@ namespace GameObjectFactory
 		auto& player_collider = player->AddComponent<BoxCollider>("player", collider_size);
 		//movement input, health & shooting input
 		player->AddComponent<MovementInput>(center, distance);
-		player->AddComponent<Health>(100);
+		player->AddComponent<Health>(10);
 		player->AddComponent<PlayerShooter>(25.f);
 		player->AddComponent<HitEffect>(0.1f);
 

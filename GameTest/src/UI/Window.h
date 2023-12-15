@@ -4,6 +4,7 @@
 class TitleWindow;
 class VitalsWindow;
 class PauseWindow;
+class LoseWindow;
 class WindowManager;
 class Scene;
 
@@ -29,5 +30,6 @@ public:
 	static TitleWindow title;
 	static VitalsWindow vitals;
 	static PauseWindow pause;
+	static LoseWindow lose;
 };
 

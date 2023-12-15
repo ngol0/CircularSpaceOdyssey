@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "WindowManager.h"
 #include "TitleWindow.h"
-#include "VitalsWindow.h"
-#include "PauseWindow.h"
+#include "LoseWindow.h"
+
 #include "System/Utils.h"
 
-WindowManager::WindowManager() : m_current_window(nullptr) {}
+WindowManager::WindowManager() : m_current_window(nullptr), m_scene(nullptr) {}
 
 void WindowManager::Init(Scene& scene)
 {
-	WindowState::vitals.Init(scene);
-	WindowState::pause.Init(scene);
+	m_scene = &scene;
+	m_scene->check_game_over.Register(this, &WindowManager::CheckGameOver);
 
 	SetWindow(WindowState::title);
 
@@ -47,4 +47,21 @@ void WindowManager::RenderBackground()
 	{
 		Utils::DrawDot(pos, Utils::RandomFloat(0, 3.f), Utils::RandomFloat(0, 3.f), Utils::RandomFloat(0, 3.f));
 	}
+}
+
+void WindowManager::CheckGameOver(bool is_win)
+{
+	if (is_win)
+	{
+		
+	}
+	else
+	{
+		SetWindow(WindowState::lose);
+	}
+}
+
+void WindowManager::Restart()
+{
+	m_scene->Restart();
 }

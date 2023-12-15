@@ -1,12 +1,11 @@
 #pragma once
 #include "Window.h"
 
-class PauseWindow : public Window
+class LoseWindow : public Window
 {
 public:
-	PauseWindow();
+	LoseWindow();
 
-	virtual void OnEnter() override;
 	virtual void HandleInput(float deltaTime, WindowManager& manager) override;
 	virtual void Render() override;
 };

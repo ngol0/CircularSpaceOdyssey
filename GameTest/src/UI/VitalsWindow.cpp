@@ -5,25 +5,17 @@
 #include "WindowManager.h"
 #include "System/Utils.h"
 
-VitalsWindow::VitalsWindow() : m_scene(nullptr) {}
+VitalsWindow::VitalsWindow() {}
 
 void VitalsWindow::OnEnter()
 {
 	m_timer = 0.f;
 }
 
-void VitalsWindow::Init(Scene& scene)
-{
-	m_score_string = scene.GetScore();
-	m_health_string = scene.GetPlayerHealth();
-
-	m_scene = &scene;
-}
-
 void VitalsWindow::HandleInput(float deltaTime, WindowManager& manager)
 {
-	UpdateScoreText(m_scene->GetScore());
-	UpdateHealthText(m_scene->GetPlayerHealth());
+	UpdateScoreText(manager.GetScore());
+	UpdateHealthText(manager.GetHealth());
 
 	if (App::IsKeyPressed('P') && m_timer > 2.f)
 	{
@@ -32,7 +24,7 @@ void VitalsWindow::HandleInput(float deltaTime, WindowManager& manager)
 	}
 	if (App::IsKeyPressed('R'))
 	{
-		m_scene->Restart();
+		manager.Restart();
 	}
 
 	m_timer += deltaTime / 100.f;

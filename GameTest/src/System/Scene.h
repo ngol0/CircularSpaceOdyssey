@@ -7,6 +7,9 @@
 #include "GameObject/EnemyPool.h"
 #include "GameObject/GameObjectFactory.h"
 
+#include "System/Event.h"
+
+class WindowManager;
 
 class Scene
 {
@@ -20,6 +23,7 @@ public:
 	void SetUp();
 	void Restart();
 	void OnScore();
+	void OnGameOver();
 
 	//getters
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().amount; }
@@ -30,8 +34,8 @@ public:
 	void OnPlayerCollisionEnter(BoxCollider& other);
 	void OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& bullet);
 
-	//input handling
-	//void HandleInput(float deltaTime);
+	//event
+	Event<WindowManager, bool> check_game_over;
 
 private:
 	Object::Ref m_player;
