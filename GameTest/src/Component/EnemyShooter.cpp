@@ -2,7 +2,7 @@
 #include "EnemyShooter.h"
 #include "Component/Transform.h"
 
-EnemyShooter::EnemyShooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shooter_transform(nullptr)
+EnemyShooter::EnemyShooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shooter_transform(nullptr), m_target_transform(nullptr)
 {
 	bullet_pool.Init();
 }

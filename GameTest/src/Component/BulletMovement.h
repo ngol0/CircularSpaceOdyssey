@@ -7,7 +7,7 @@ class Transform;
 class BulletMovement : public Component
 {
 public:
-	BulletMovement();
+	BulletMovement(int lifespan);
 
 	void Init() override;
 	void SetDirection(const Vector2& direction);
@@ -16,6 +16,7 @@ public:
 
 private:
 	int m_frame_left;
+	int m_initial_frame;
 	float m_speed;
 	Vector2 m_move_direction;
 	Transform* m_transform;

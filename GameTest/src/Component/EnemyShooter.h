@@ -4,7 +4,7 @@
 class EnemyShooter : public Component
 {
 public:
-	BulletPool bullet_pool{ 0.0f, 0.74, .78f, .15f, "enemy_bullet"};
+	BulletPool bullet_pool{ 0.0f, 0.74, .78f, .15f, 150, "enemy_bullet"};
 
 	EnemyShooter(float offset);
 

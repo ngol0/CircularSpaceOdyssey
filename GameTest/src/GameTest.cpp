@@ -3,10 +3,13 @@
 #include <windows.h>  
 //------------------------------------------------------------------------
 #include "System/Scene.h"
-#include "System/UI.h"
+#include "UI/UI.h"
+#include "UI/WindowManager.h"
+#include "UI/Window.h"
 
 Scene scene;
 UI ui;
+WindowManager window_manager;
 
 void Init()
 {
@@ -16,22 +19,26 @@ void Init()
 	freopen("conout$", "w", stderr);*/
 
 	scene.Init();
-	ui.Init(scene);
+	window_manager.Init(scene);
+	//ui.Init(scene);
 }
 
 void Update(float deltaTime)
 {
-	scene.HandleInput(deltaTime);
+	//scene.HandleInput(deltaTime);
+	window_manager.HandleInput(deltaTime);
 
-	if (scene.GetState() == SceneState::PAUSED || scene.GetState() == SceneState::START) return;
+	//if (scene.GetState() == SceneState::PAUSED || scene.GetState() == SceneState::START) return;
+	//if (*window_manager.GetCurrentWindow() == WindowState::title) return;
 
-	scene.Update(deltaTime);
-	ui.Update(deltaTime);
+	//scene.Update(deltaTime);
+	//ui.Update(deltaTime);
 }
 
 void Render()
 {
-	ui.Render();
+	//ui.Render();
+	window_manager.Render();
 
 	if (scene.GetState() == SceneState::START) return;
 	scene.Render();
