@@ -70,7 +70,9 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 	}
 	if (other.tag == "enemy")
 	{
-		m_player->GetComponent<Health>().TakeDamage(1);
+		m_player->GetComponent<Health>().TakeDamage(5);
+		m_player->GetComponent<HitEffect>().Play();
+		other.object->Deactivate();
 	}
 	if (other.tag == "enemy_bullet")
 	{

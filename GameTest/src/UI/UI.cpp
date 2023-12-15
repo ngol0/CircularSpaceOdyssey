@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UI.h"
-#include "Scene.h"
-#include "Utils.h"
+#include "System/Scene.h"
+#include "System/Utils.h"
 
 UI::UI() : m_scene(nullptr) {}
 

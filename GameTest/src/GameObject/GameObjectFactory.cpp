@@ -26,7 +26,7 @@ namespace GameObjectFactory
 		//sprite
 		auto& player_sprite = player->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\player.png", 4, 1);
 		player_sprite.CreateAnimation(0, 0.05f, { 0,1,2,3 });
-		//player_sprite.SetAnimation(0);
+		player_sprite.SetAnimation(0);
 		//collider
 		Vector2 collider_size{ player_sprite.width() * 0.9f, player_sprite.height() * 0.6f };
 		auto& player_collider = player->AddComponent<BoxCollider>("player", collider_size);
@@ -83,7 +83,7 @@ namespace GameObjectFactory
 		return enemy;
 	}
 
-	Object::Ref CreateBullet(float r, float b, float g, float size, std::string tag)
+	Object::Ref CreateBullet(float r, float b, float g, float size, int lifespan, std::string tag)
 	{
 		Object::Ref bullet = GameObjectManager::GetInstance().AddToManager();
 		bullet->GetComponent<Transform>().scale = size;
@@ -94,7 +94,7 @@ namespace GameObjectFactory
 		Vector2 collider_size{ bullet_sprite.width(), bullet_sprite.height() };
 		bullet->AddComponent<BoxCollider>(tag, collider_size);
 		//bullet auto movement
-		bullet->AddComponent<BulletMovement>();
+		bullet->AddComponent<BulletMovement>(lifespan);
 
 		return bullet;
 	}
