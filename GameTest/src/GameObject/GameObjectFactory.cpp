@@ -25,14 +25,14 @@ namespace GameObjectFactory
 		//---components
 		//sprite
 		auto& player_sprite = player->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\player.png", 4, 1);
-		player_sprite.CreateAnimation(0, 0.05f, { 0,1,2,3 });
-		player_sprite.SetAnimation(0);
+		//player_sprite.CreateAnimation(0, 0.05f, { 0,1,2,3 });
+		//player_sprite.SetAnimation(0);
 		//collider
 		Vector2 collider_size{ player_sprite.width() * 0.9f, player_sprite.height() * 0.6f };
 		auto& player_collider = player->AddComponent<BoxCollider>("player", collider_size);
 		//movement input, health & shooting input
 		player->AddComponent<MovementInput>(center, distance);
-		player->AddComponent<Health>(100);
+		player->AddComponent<Health>(10);
 		player->AddComponent<PlayerShooter>(25.f);
 		player->AddComponent<HitEffect>(0.1f);
 

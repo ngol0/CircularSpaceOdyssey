@@ -19,6 +19,7 @@ public:
 private:
 	float m_timer;
 	float m_spawn_offset;
+	float m_shoot_time;
 	Transform* m_shooter_transform;
 	const Vector2* m_target_transform;
 };

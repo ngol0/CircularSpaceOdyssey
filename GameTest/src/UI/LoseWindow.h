@@ -1,10 +1,10 @@
 #pragma once
 #include "Window.h"
 
-class TitleWindow : public Window
+class LoseWindow : public Window
 {
 public:
-	TitleWindow();
+	LoseWindow();
 
 	virtual void HandleInput(float deltaTime, WindowManager& manager) override;
 	virtual void Render() override;

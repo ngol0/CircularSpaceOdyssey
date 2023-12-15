@@ -47,5 +47,10 @@ void EnemyPool::SetUp()
 	for (const auto& enemy : enemies)
 	{
 		enemy->Deactivate();
+
+		if (enemy->HasComponent<EnemyShooter>())
+		{
+			enemy->GetComponent<EnemyShooter>().SetBulletPool();
+		}
 	}
 }

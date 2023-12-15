@@ -211,8 +211,9 @@
     <ClInclude Include="src\GameObject\GameObject.h" />
     <ClInclude Include="src\System\Event.h" />
     <ClInclude Include="src\System\Scene.h" />
+    <ClInclude Include="src\UI\LoseWindow.h" />
+    <ClInclude Include="src\UI\PauseWindow.h" />
     <ClInclude Include="src\UI\TitleWindow.h" />
-    <ClInclude Include="src\UI\UI.h" />
     <ClInclude Include="src\System\Utils.h" />
     <ClInclude Include="src\UI\VitalsWindow.h" />
     <ClInclude Include="src\UI\Window.h" />
@@ -250,8 +251,9 @@
     <ClCompile Include="src\System\CollisionManager.cpp" />
     <ClCompile Include="src\GameObject\GameObject.cpp" />
     <ClCompile Include="src\System\Scene.cpp" />
+    <ClCompile Include="src\UI\LoseWindow.cpp" />
+    <ClCompile Include="src\UI\PauseWindow.cpp" />
     <ClCompile Include="src\UI\TitleWindow.cpp" />
-    <ClCompile Include="src\UI\UI.cpp" />
     <ClCompile Include="src\System\Utils.cpp" />
     <ClCompile Include="src\UI\VitalsWindow.cpp" />
     <ClCompile Include="src\UI\Window.cpp" />
