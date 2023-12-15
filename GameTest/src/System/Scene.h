@@ -7,15 +7,6 @@
 #include "GameObject/EnemyPool.h"
 #include "GameObject/GameObjectFactory.h"
 
-class UI;
-
-enum class SceneState
-{
-	START,
-	COMBAT,
-	PAUSED,
-	GAME_OVER,
-};
 
 class Scene
 {
@@ -33,7 +24,6 @@ public:
 	//getters
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().amount; }
 	int GetScore() const { return m_score; }
-	SceneState& GetState() { return m_scene_state; };
 	const Vector2& GetPlayerPos() { return m_player->GetComponent<Transform>().position; }
 
 	//event callback
@@ -41,7 +31,7 @@ public:
 	void OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& bullet);
 
 	//input handling
-	void HandleInput(float deltaTime);
+	//void HandleInput(float deltaTime);
 
 private:
 	Object::Ref m_player;
@@ -53,8 +43,6 @@ private:
 
 	//general datas
 	int m_score;
-	SceneState m_scene_state;
-	float m_timer{ 0.f };
 
 	//enemy pool
 	EnemyPool m_shoot_enemy_pool;

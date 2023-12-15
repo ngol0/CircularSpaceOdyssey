@@ -1,11 +1,16 @@
 #pragma once
 #include "Window.h"
 
-class TitleWindow : public Window
+class PauseWindow : public Window
 {
 public:
-	TitleWindow();
+	PauseWindow();
 
+	virtual void OnEnter() override;
+	virtual void Init(Scene& scene);
 	virtual void HandleInput(float deltaTime, WindowManager& manager) override;
 	virtual void Render() override;
+
+private:
+	Scene* m_scene;
 };

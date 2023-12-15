@@ -2,6 +2,7 @@
 #include "WindowManager.h"
 #include "TitleWindow.h"
 #include "VitalsWindow.h"
+#include "PauseWindow.h"
 #include "System/Utils.h"
 
 WindowManager::WindowManager() : m_current_window(nullptr) {}
@@ -9,6 +10,8 @@ WindowManager::WindowManager() : m_current_window(nullptr) {}
 void WindowManager::Init(Scene& scene)
 {
 	WindowState::vitals.Init(scene);
+	WindowState::pause.Init(scene);
+
 	SetWindow(WindowState::title);
 
 	for (int i = 0; i < MAX_STAR_NUMBER; i++)
@@ -19,7 +22,12 @@ void WindowManager::Init(Scene& scene)
 
 void WindowManager::SetWindow(Window& window)
 {
+	if (m_current_window != nullptr)
+	{
+		m_current_window->OnExit();
+	}
 	m_current_window = &window; 
+	m_current_window->OnEnter();
 }
 
 void WindowManager::HandleInput(float deltaTime)

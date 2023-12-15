@@ -12,8 +12,6 @@ Scene::Scene() : m_score(0), m_player(nullptr), m_chase_spawner(nullptr), m_shoo
 {
 	circle_center = Vector2{ 500.f, 400.f };
 	circle_radius = 300.f;
-
-	m_scene_state = SceneState::START;
 }
 
 //init game objects
@@ -129,52 +127,6 @@ void Scene::Restart()
 	m_chase_spawner->Reset();
 	
 	SetUp(); //set up player pos & stats
-}
-
-void Scene::HandleInput(float deltaTime)
-{
-	switch (m_scene_state)
-	{
-	case SceneState::START:
-		if (App::IsKeyPressed(VK_SPACE)) //start
-		{
-			m_scene_state = SceneState::COMBAT;
-		}
-		break;
-
-	case SceneState::COMBAT:
-		if (App::IsKeyPressed('R')) //restart
-		{
-			Restart();
-		}
-		if (App::IsKeyPressed('P') && m_timer >= 2.f) //pause
-		{
-			m_scene_state = SceneState::PAUSED;
-			m_timer = 0.f;
-		}
-		break;
-
-	case SceneState::PAUSED:
-		if (App::IsKeyPressed('R')) //restart
-		{
-			Restart();
-		}
-		if (App::IsKeyPressed('P') && m_timer >= 2.f) //play
-		{
-			m_scene_state = SceneState::COMBAT;
-			m_timer = 0.f;
-		}
-		break;
-
-	case SceneState::GAME_OVER:
-		if (App::IsKeyPressed('R')) //restart
-		{
-			Restart();
-		}
-		break;
-	}
-
-	m_timer += deltaTime / 100.f;
 }
 
 

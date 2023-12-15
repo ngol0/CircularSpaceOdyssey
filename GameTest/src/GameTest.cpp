@@ -3,12 +3,11 @@
 #include <windows.h>  
 //------------------------------------------------------------------------
 #include "System/Scene.h"
-#include "UI/UI.h"
 #include "UI/WindowManager.h"
-#include "UI/Window.h"
+#include "UI/TitleWindow.h"
+#include "UI/PauseWindow.h"
 
 Scene scene;
-UI ui;
 WindowManager window_manager;
 
 void Init()
@@ -20,27 +19,23 @@ void Init()
 
 	scene.Init();
 	window_manager.Init(scene);
-	//ui.Init(scene);
 }
 
 void Update(float deltaTime)
 {
-	//scene.HandleInput(deltaTime);
 	window_manager.HandleInput(deltaTime);
+	if (dynamic_cast<TitleWindow*>(window_manager.GetCurrentWindow())) return;
+	if(dynamic_cast<PauseWindow*>(window_manager.GetCurrentWindow())) return;
 
-	//if (scene.GetState() == SceneState::PAUSED || scene.GetState() == SceneState::START) return;
-	//if (*window_manager.GetCurrentWindow() == WindowState::title) return;
-
-	//scene.Update(deltaTime);
-	//ui.Update(deltaTime);
+	scene.Update(deltaTime);
 }
 
 void Render()
 {
-	//ui.Render();
 	window_manager.Render();
 
-	if (scene.GetState() == SceneState::START) return;
+	if (dynamic_cast<TitleWindow*>(window_manager.GetCurrentWindow())) return;
+	if (dynamic_cast<PauseWindow*>(window_manager.GetCurrentWindow())) return;
 	scene.Render();
 }
 
