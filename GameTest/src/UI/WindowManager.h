@@ -8,6 +8,8 @@ class WindowManager
 {
 public:
 	WindowManager();
+	WindowManager(const WindowManager&) = delete; //avoid copy constructor
+
 	void Init(Scene& scene);
 	void SetWindow(Window& window);
 	void HandleInput(float deltaTime);

@@ -62,4 +62,10 @@ namespace Utils
 	{
 		return 0.f;
 	}
+
+	EnemyType ConvertToEnemyType(const std::string& str)
+	{
+		if (str == "Shoot") return EnemyType::ShootType;
+		else if (str == "Chase") return EnemyType::ChaseType;
+	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Math/Vector2.h"
+#include "Data.h"
 
 namespace Utils
 {
@@ -11,4 +12,6 @@ namespace Utils
 	int RandomInt(int min, int max);
 	float RandomFloat(float min, float max);
 	float RandomColor();
+
+	EnemyType ConvertToEnemyType(const std::string& str);
 };

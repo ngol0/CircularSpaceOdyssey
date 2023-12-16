@@ -5,6 +5,7 @@ class TitleWindow;
 class VitalsWindow;
 class PauseWindow;
 class LoseWindow;
+class LevelWindow;
 class WindowManager;
 class Scene;
 
@@ -31,5 +32,6 @@ public:
 	static VitalsWindow vitals;
 	static PauseWindow pause;
 	static LoseWindow lose;
+	static LevelWindow level;
 };
 
