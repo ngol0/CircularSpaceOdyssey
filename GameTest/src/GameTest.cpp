@@ -8,34 +8,36 @@
 #include "UI/PauseWindow.h"
 
 Scene scene;
-WindowManager window_manager;
 
 void Init()
 {
+	
 	/*AllocConsole();
 	freopen("conin$", "r", stdin);
 	freopen("conout$", "w", stdout);
 	freopen("conout$", "w", stderr);*/
 
 	scene.Init();
-	window_manager.Init(scene);
+	WindowManager::GetInstance().Init(scene);
 }
 
 void Update(float deltaTime)
 {
-	window_manager.HandleInput(deltaTime);
-	if (dynamic_cast<TitleWindow*>(window_manager.GetCurrentWindow())) return;
-	if(dynamic_cast<PauseWindow*>(window_manager.GetCurrentWindow())) return;
+	WindowManager::GetInstance().HandleInput(deltaTime);
+
+	if (dynamic_cast<TitleWindow*>(WindowManager::GetInstance().GetCurrentWindow())) return;
+	if(dynamic_cast<PauseWindow*>(WindowManager::GetInstance().GetCurrentWindow())) return;
 
 	scene.Update(deltaTime);
 }
 
 void Render()
 {
-	window_manager.Render();
+	WindowManager::GetInstance().Render();
 
-	if (dynamic_cast<TitleWindow*>(window_manager.GetCurrentWindow())) return;
-	if (dynamic_cast<PauseWindow*>(window_manager.GetCurrentWindow())) return;
+	if (dynamic_cast<TitleWindow*>(WindowManager::GetInstance().GetCurrentWindow())) return;
+	if (dynamic_cast<PauseWindow*>(WindowManager::GetInstance().GetCurrentWindow())) return;
+
 	scene.Render();
 }
 

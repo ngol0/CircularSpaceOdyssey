@@ -5,11 +5,6 @@
 #include "Component/Transform.h"
 //
 #include "GameObject/EnemyPool.h"
-#include "GameObject/GameObjectFactory.h"
-
-#include "System/Event.h"
-
-class WindowManager;
 
 class Scene
 {
@@ -33,9 +28,6 @@ public:
 	//event callback
 	void OnPlayerCollisionEnter(BoxCollider& other);
 	void OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& bullet);
-
-	//event
-	Event<WindowManager, bool> check_game_over;
 
 private:
 	Object::Ref m_player;

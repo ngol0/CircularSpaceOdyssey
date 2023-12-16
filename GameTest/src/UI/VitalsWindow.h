@@ -8,7 +8,7 @@ public:
 	VitalsWindow();
 
 	virtual void OnEnter() override;
-	virtual void HandleInput(float deltaTime, WindowManager& manager) override;
+	virtual void HandleInput(float deltaTime) override;
 	virtual void Render() override;
 
 	void UpdateScoreText(int score);

@@ -108,6 +108,7 @@
     <ClInclude Include="src\UI\VitalsWindow.h" />
     <ClInclude Include="src\UI\PauseWindow.h" />
     <ClInclude Include="src\UI\LoseWindow.h" />
+    <ClInclude Include="src\System\Data.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

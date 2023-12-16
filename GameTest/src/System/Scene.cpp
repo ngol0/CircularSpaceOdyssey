@@ -3,10 +3,13 @@
 #include "Component/MovementInput.h"
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
-#include "Component/EnemyMovement.h"
+#include "UI/LoseWindow.h"
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
+#include "System/Data.h"
+#include "UI/WindowManager.h"
+#include "GameObject/GameObjectFactory.h"
 
 Scene::Scene() : m_score(0), m_player(nullptr), m_chase_spawner(nullptr), m_shoot_spawner(nullptr)
 {
@@ -130,17 +133,17 @@ void Scene::OnScore()
 {
 	m_score++;
 
-	if (m_score >= 100)
+	if (m_score >= MAX_SCORE)
 	{
 		//win
-		check_game_over.Notify(true);
+		//WindowManager::GetInstance()
 	}
 }
 
 //player die -- lose
 void Scene::OnGameOver()
 {
-	check_game_over.Notify(false);
+	WindowManager::GetInstance().SetWindow(WindowState::lose);
 }
 
 

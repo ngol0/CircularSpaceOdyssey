@@ -7,6 +7,6 @@ public:
 	PauseWindow();
 
 	virtual void OnEnter() override;
-	virtual void HandleInput(float deltaTime, WindowManager& manager) override;
+	virtual void HandleInput(float deltaTime) override;
 	virtual void Render() override;
 };

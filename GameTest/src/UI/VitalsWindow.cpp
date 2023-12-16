@@ -4,6 +4,7 @@
 #include "System/Scene.h"
 #include "WindowManager.h"
 #include "System/Utils.h"
+#include "System/Data.h"
 
 VitalsWindow::VitalsWindow() {}
 
@@ -12,22 +13,23 @@ void VitalsWindow::OnEnter()
 	m_timer = 0.f;
 }
 
-void VitalsWindow::HandleInput(float deltaTime, WindowManager& manager)
+void VitalsWindow::HandleInput(float deltaTime)
 {
-	UpdateScoreText(manager.GetScore());
-	UpdateHealthText(manager.GetHealth());
-
 	if (App::IsKeyPressed('P') && m_timer > 2.f)
 	{
-		manager.SetWindow(WindowState::pause);
+		WindowManager::GetInstance().SetWindow(WindowState::pause);
 		m_timer = 0.f;
 	}
 	if (App::IsKeyPressed('R'))
 	{
-		manager.Restart();
+		WindowManager::GetInstance().Restart();
 	}
 
 	m_timer += deltaTime / 100.f;
+
+	UpdateHealthText(WindowManager::GetInstance().GetHealth());
+	if (WindowManager::GetInstance().GetScore() > MAX_SCORE) return;
+	UpdateScoreText(WindowManager::GetInstance().GetScore());
 }
 
 void VitalsWindow::Render()

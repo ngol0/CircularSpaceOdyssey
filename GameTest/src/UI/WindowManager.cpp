@@ -10,7 +10,6 @@ WindowManager::WindowManager() : m_current_window(nullptr), m_scene(nullptr) {}
 void WindowManager::Init(Scene& scene)
 {
 	m_scene = &scene;
-	m_scene->check_game_over.Register(this, &WindowManager::CheckGameOver);
 
 	SetWindow(WindowState::title);
 
@@ -32,7 +31,7 @@ void WindowManager::SetWindow(Window& window)
 
 void WindowManager::HandleInput(float deltaTime)
 {
-	m_current_window->HandleInput(deltaTime, *this);
+	m_current_window->HandleInput(deltaTime);
 }
 
 void WindowManager::Render()
@@ -49,19 +48,13 @@ void WindowManager::RenderBackground()
 	}
 }
 
-void WindowManager::CheckGameOver(bool is_win)
-{
-	if (is_win)
-	{
-		
-	}
-	else
-	{
-		SetWindow(WindowState::lose);
-	}
-}
-
 void WindowManager::Restart()
 {
 	m_scene->Restart();
+}
+
+WindowManager& WindowManager::GetInstance()
+{
+	static WindowManager manager;
+	return manager;
 }
