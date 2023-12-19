@@ -2,6 +2,7 @@
 //--managers
 #include "GameObjectManager.h"
 #include "GameObjectFactory.h"
+#include "System/Data.h"
 //--components
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
@@ -32,7 +33,7 @@ namespace GameObjectFactory
 		auto& player_collider = player->AddComponent<BoxCollider>("player", collider_size);
 		//movement input, health & shooting input
 		player->AddComponent<MovementInput>(center, distance);
-		player->AddComponent<Health>(10);
+		player->AddComponent<Health>(50);
 		player->AddComponent<PlayerShooter>(25.f);
 		player->AddComponent<HitEffect>(0.1f);
 
@@ -53,11 +54,9 @@ namespace GameObjectFactory
 
 	Object::Ref CreateEnemy(Transform& transform, EnemyType enemy_type)
 	{
-		//auto& spike = scene.object_manager.AddToManager(transform);
 		Object::Ref enemy = GameObjectManager::GetInstance().AddToManager(transform);
 		//sprite
 		SpriteRenderer& enemy_sprite = enemy->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\enemies.png", 4, 5);
-		enemy_sprite.SetFrame((int)enemy_type);
 		//collider
 		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height()/2 };
 		auto& enemy_collision = enemy->AddComponent<BoxCollider>("enemy", collider_size);
@@ -71,6 +70,8 @@ namespace GameObjectFactory
 			enemy->AddComponent<Health>(100);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.02f);
+			//prite
+			enemy_sprite.SetFrame(1);
 			break;
 		case EnemyType::ShootType:
 			enemy->AddComponent<Health>(200);
@@ -78,6 +79,8 @@ namespace GameObjectFactory
 			enemy->AddComponent<EnemyShooter>(20.f);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.2f);
+			//sprite
+			enemy_sprite.SetFrame(17);
 			break;
 		}
 		return enemy;
@@ -109,17 +112,7 @@ namespace GameObjectFactory
 		return circle;
 	}
 
-	Object::Ref CreateShootEnemySpawner(const Vector2& spawn_pos)
-	{
-		Transform transform{ spawn_pos, 0.f };
-		Object::Ref spawner = GameObjectManager::GetInstance().AddToManager(transform);
-		//enemy spawner
-		spawner->AddComponent<EnemySpawner>();
-
-		return spawner;
-	}
-
-	Object::Ref CreateChaseEnemySpawner(const Vector2& spawn_pos)
+	Object::Ref CreateEnemySpawner(const Vector2& spawn_pos)
 	{
 		Transform transform{ spawn_pos, 0.f };
 		Object::Ref spawner = GameObjectManager::GetInstance().AddToManager(transform);

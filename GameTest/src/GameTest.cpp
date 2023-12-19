@@ -6,36 +6,42 @@
 #include "UI/WindowManager.h"
 #include "UI/TitleWindow.h"
 #include "UI/PauseWindow.h"
+#include "UI/LevelWindow.h"
 
 Scene scene;
-WindowManager window_manager;
+auto& window = WindowManager::GetInstance();
 
 void Init()
 {
-	/*AllocConsole();
+	
+	AllocConsole();
 	freopen("conin$", "r", stdin);
 	freopen("conout$", "w", stdout);
-	freopen("conout$", "w", stderr);*/
+	freopen("conout$", "w", stderr);
 
 	scene.Init();
-	window_manager.Init(scene);
+	window.Init(scene);
 }
 
 void Update(float deltaTime)
 {
-	window_manager.HandleInput(deltaTime);
-	if (dynamic_cast<TitleWindow*>(window_manager.GetCurrentWindow())) return;
-	if(dynamic_cast<PauseWindow*>(window_manager.GetCurrentWindow())) return;
+	window.HandleInput(deltaTime);
+
+	if (dynamic_cast<TitleWindow*>(window.GetCurrentWindow())) return;
+	if(dynamic_cast<PauseWindow*>(window.GetCurrentWindow())) return;
+	if (dynamic_cast<LevelWindow*>(window.GetCurrentWindow())) return;
 
 	scene.Update(deltaTime);
 }
 
 void Render()
 {
-	window_manager.Render();
+	window.Render();
 
-	if (dynamic_cast<TitleWindow*>(window_manager.GetCurrentWindow())) return;
-	if (dynamic_cast<PauseWindow*>(window_manager.GetCurrentWindow())) return;
+	if (dynamic_cast<TitleWindow*>(window.GetCurrentWindow())) return;
+	if (dynamic_cast<PauseWindow*>(window.GetCurrentWindow())) return;
+	if (dynamic_cast<LevelWindow*>(window.GetCurrentWindow())) return;
+
 	scene.Render();
 }
 

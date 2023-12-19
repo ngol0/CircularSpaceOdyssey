@@ -5,12 +5,12 @@
 
 LoseWindow::LoseWindow() {}
 
-void LoseWindow::HandleInput(float deltaTime, WindowManager& manager)
+void LoseWindow::HandleInput(float deltaTime)
 {
 	if (App::IsKeyPressed('R'))
 	{
-		manager.SetWindow(WindowState::vitals);
-		manager.Restart();
+		WindowManager::GetInstance().SetWindow(WindowState::vitals);
+		WindowManager::GetInstance().Restart();
 	}
 }
 

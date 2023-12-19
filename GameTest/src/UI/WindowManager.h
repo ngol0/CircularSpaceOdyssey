@@ -8,11 +8,12 @@ class WindowManager
 {
 public:
 	WindowManager();
+	WindowManager(const WindowManager&) = delete; //avoid copy constructor
+
 	void Init(Scene& scene);
 	void SetWindow(Window& window);
 	void HandleInput(float deltaTime);
 	void Render();
-	void CheckGameOver(bool is_win);
 
 	//getter
 	float GetHealth() { return m_scene->GetPlayerHealth(); }
@@ -21,6 +22,9 @@ public:
 	Window* GetCurrentWindow() { return m_current_window; }
 	void RenderBackground();
 	void Restart();
+
+	//singleton
+	static WindowManager& GetInstance();
 
 private:
 	Window* m_current_window;

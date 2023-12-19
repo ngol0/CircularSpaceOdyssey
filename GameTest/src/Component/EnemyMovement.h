@@ -22,12 +22,3 @@ private:
 	Waypoint* m_destination;
 	Transform* m_transform;
 };
-
-enum class EnemyType
-{
-	ChaseType = 1,
-	Type_2 = 5,
-	Type_3 = 9,
-	Type_4 = 13,
-	ShootType = 17
-};

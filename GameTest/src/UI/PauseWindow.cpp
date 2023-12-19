@@ -11,26 +11,27 @@ void PauseWindow::OnEnter()
 	m_timer = 0.f;
 }
 
-void PauseWindow::HandleInput(float deltaTime, WindowManager& manager)
+void PauseWindow::HandleInput(float deltaTime)
 {
 	if (App::IsKeyPressed('P') && m_timer > 2.f)
 	{
-		manager.SetWindow(WindowState::vitals);
+		WindowManager::GetInstance().SetWindow(WindowState::vitals);
 		m_timer = 0.f;
 	}
 	if (App::IsKeyPressed('R'))
 	{
-		manager.SetWindow(WindowState::vitals);
-		manager.Restart();
+		WindowManager::GetInstance().SetWindow(WindowState::vitals);
+		WindowManager::GetInstance().Restart();
 	}
 	m_timer += deltaTime / 100.f;
 }
 
 void PauseWindow::Render()
 {
-	App::Print(300.f, 550.f, "Paused", 1.f, 1.f, 1.f, m_FONT);
+	App::Print(500.f, 550.f, "PAUSED", 0.859, 0.91, 0.043, m_FONT);
+	App::Print(300.f, 500.f, "Control list:", 0.98, 0.569, 0.263, m_FONT);
 	App::Print(300.f, 450.f, "A or D to move", 1.f, 1.f, 1.f, m_FONT);
-	App::Print(300.f, 400, "LEFT CLICK to shoot or jump between planets", 1.f, 1.f, 1.f, m_FONT);
-	App::Print(300.f, 350, "R to restart", 1.f, 1.f, 1.f, m_FONT);
-	App::Print(300.f, 300, "P to continue", 1.f, 1.f, 1.f, m_FONT);
+	App::Print(300.f, 400.f, "LEFT CLICK to shoot or jump between planets", 1.f, 1.f, 1.f, m_FONT);
+	App::Print(300.f, 350.f, "R to restart", 1.f, 1.f, 1.f, m_FONT);
+	App::Print(300.f, 300.f, "P to continue", 1.f, 1.f, 1.f, m_FONT);
 }

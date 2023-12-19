@@ -3,12 +3,20 @@
 #include "Component/MovementInput.h"
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
-#include "Component/EnemyMovement.h"
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
+#include "UI/WindowManager.h"
+//
+#include "UI/LoseWindow.h"
+#include "GameObject/GameObjectFactory.h"
+#include "System/Data.h"
 
-Scene::Scene() : m_score(0), m_player(nullptr), m_chase_spawner(nullptr), m_shoot_spawner(nullptr)
+auto& collision_manager = CollisionManager::GetInstance();
+auto& object_manager = GameObjectManager::GetInstance();
+auto& window_manager = WindowManager::GetInstance();
+
+Scene::Scene() : m_score(0), m_player(nullptr)
 {
 	circle_center = Vector2{ 500.f, 400.f };
 	circle_radius = 300.f;
@@ -25,20 +33,9 @@ void Scene::Init()
 	m_player->GetComponent<BoxCollider>().collision_enter.Register(this, &Scene::OnPlayerCollisionEnter);
 	m_player->GetComponent<Health>().on_die.Register(this, &Scene::OnGameOver);
 
-	//spawners init
-	m_shoot_spawner_obj = GameObjectFactory::CreateShootEnemySpawner(circle_center);
-	m_shoot_spawner = &m_shoot_spawner_obj->GetComponent<EnemySpawner>();
-	m_shoot_spawner->SetUp(m_shoot_enemy_pool, 10.f);
-	m_shoot_spawner->InitWaypoints();
-
-	m_chase_spawner_obj = GameObjectFactory::CreateChaseEnemySpawner(circle_center);
-	m_chase_spawner = &m_chase_spawner_obj->GetComponent<EnemySpawner>();
-	m_chase_spawner->SetUp(m_chase_enemy_pool, 50.f);
-
-	//enemy
-	Transform enemy_transform = Transform{ circle_center, 1.2f };
-	m_shoot_enemy_pool.Init(enemy_transform, EnemyType::ShootType, *this);
-	m_chase_enemy_pool.Init(enemy_transform, EnemyType::ChaseType, *this);
+	//level manager
+	level_manager.LoadFile(".\\Data\\Level1.txt");
+	level_manager.Init(*this);
 
 	//coin
 	/*for (int i = 0; i < 5; i++)
@@ -93,36 +90,28 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 
 void Scene::Update(float deltaTime)
 {
-	Vector2 player_pos = m_player->GetComponent<Transform>().position;
+	level_manager.Update(deltaTime, GetPlayerPos());
 
-	//spawn enemy
-	m_chase_spawner->SpawnEnemy(Waypoint{ player_pos, true }, deltaTime);
-	m_shoot_spawner->SpawnEnemyToWaypoint(deltaTime);
-
-	GameObjectManager::GetInstance().Update(deltaTime);
-	CollisionManager::GetInstance().Update(deltaTime);
+	object_manager.Update(deltaTime);
+	collision_manager.Update(deltaTime);
 }
 
 void Scene::Render()
 {
-	GameObjectManager::GetInstance().Render();
+	object_manager.Render();
 }
 
 void Scene::Restart()
 {
 	//reactivate game objects
-	GameObjectManager::GetInstance().Reactivate();
-
-	//reset waypoints and timer
-	m_shoot_spawner->Reset();
-	m_chase_spawner->Reset();
+	object_manager.Reactivate();
 
 	//deactivates pool objects
 	m_player->GetComponent<PlayerShooter>().SetBulletPool();
-	m_shoot_enemy_pool.SetUp();
-	m_chase_enemy_pool.SetUp();
 	
 	SetUp(); //set up player pos & stats
+
+	level_manager.Restart();
 }
 
 //enemy die -- check if win?
@@ -130,17 +119,17 @@ void Scene::OnScore()
 {
 	m_score++;
 
-	if (m_score >= 100)
+	if (m_score >= MAX_SCORE)
 	{
 		//win
-		check_game_over.Notify(true);
+		//WindowManager::GetInstance()
 	}
 }
 
 //player die -- lose
 void Scene::OnGameOver()
 {
-	check_game_over.Notify(false);
+	window_manager.SetWindow(WindowState::lose);
 }
 
 

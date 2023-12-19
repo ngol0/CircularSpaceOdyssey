@@ -65,6 +65,6 @@ void CollisionManager::Update(float deltaTime)
 
 CollisionManager& CollisionManager::GetInstance()
 {
-	static CollisionManager object_manager;
-	return object_manager;
+	static CollisionManager manager;
+	return manager;
 }

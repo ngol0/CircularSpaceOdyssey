@@ -5,6 +5,7 @@ class TitleWindow;
 class VitalsWindow;
 class PauseWindow;
 class LoseWindow;
+class LevelWindow;
 class WindowManager;
 class Scene;
 
@@ -14,7 +15,7 @@ public:
 	virtual ~Window() {};
 	virtual void Init(Scene& scene) {};
 	virtual void OnEnter() {};
-	virtual void HandleInput(float deltaTime, WindowManager& manager) {};
+	virtual void HandleInput(float deltaTime) {};
 	virtual void Render() {};
 	virtual void OnExit() {};
 
@@ -31,5 +32,6 @@ public:
 	static VitalsWindow vitals;
 	static PauseWindow pause;
 	static LoseWindow lose;
+	static LevelWindow level;
 };
 
