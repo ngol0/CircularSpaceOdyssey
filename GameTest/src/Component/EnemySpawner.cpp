@@ -47,13 +47,13 @@ void EnemySpawner::SpawnEnemyToWaypoint(float dt, float rotation_angle)
 void EnemySpawner::SpawnEnemy(Waypoint& destination, float dt)
 {
 	//if yes, spawn enemy and move it there
-	m_timer -= dt / 100.f;
-	if (m_timer <= 0.f)
-	{
+	//m_timer -= dt / 100.f;
+	//if (m_timer <= 0.f)
+	//{
 		Object::Ref enemy = m_pool->Spawn(m_transform->position, destination, 0.f);
 		destination.is_available = false;
-		m_timer = m_max_spawn_time;
-	}
+		//m_timer = m_max_spawn_time;
+	//}
 }
 
 Waypoint* EnemySpawner::GetAvailableWaypoint()

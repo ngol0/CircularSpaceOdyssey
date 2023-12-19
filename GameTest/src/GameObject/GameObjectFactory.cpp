@@ -112,17 +112,7 @@ namespace GameObjectFactory
 		return circle;
 	}
 
-	Object::Ref CreateShootEnemySpawner(const Vector2& spawn_pos)
-	{
-		Transform transform{ spawn_pos, 0.f };
-		Object::Ref spawner = GameObjectManager::GetInstance().AddToManager(transform);
-		//enemy spawner
-		spawner->AddComponent<EnemySpawner>();
-
-		return spawner;
-	}
-
-	Object::Ref CreateChaseEnemySpawner(const Vector2& spawn_pos)
+	Object::Ref CreateEnemySpawner(const Vector2& spawn_pos)
 	{
 		Transform transform{ spawn_pos, 0.f };
 		Object::Ref spawner = GameObjectManager::GetInstance().AddToManager(transform);
