@@ -16,8 +16,13 @@ public:
 	void Complete() {};
 	void Restart();
 
-	void ReadFirstLine();
-	void ReadSpecificInfo(float& time, int& type);
+	void ReadEnemyType();
+	void ReadSpawnInfo();
+	void SkipFirstLine();
+	void ReRead();
+
+	//singleton
+	static LevelManager& GetInstance();
 
 private:
 	//spawner
@@ -30,12 +35,13 @@ private:
 	EnemyPool m_enemy_pool;
 	EnemyPool m_enemy_pool_2;
 
-	int enemy1;
-	int enemy2;
+	int enemy_type_1{ 0 };
+	int enemy_type_2{ 0 };
 
 	std::ifstream input;
 
-	float m_timer;
-	float m_current_timer;
-	int m_current_enemy_type;
+	float m_timer{ 0.f };
+	float m_current_timer{ 0.f };
+	int m_current_enemy_type{ -1 };
+	const char* m_current_filename;
 };

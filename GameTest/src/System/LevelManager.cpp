@@ -11,43 +11,50 @@ LevelManager::LevelManager() : m_second_spawner(nullptr), m_first_spawner(nullpt
 void LevelManager::LoadFile(const char* filename)
 {
 	input.open(filename);
+	m_current_filename = filename;
 }
 
-void LevelManager::ReadFirstLine()
+void LevelManager::ReadEnemyType()
 {
+	if (!input) return;
 	std::string s;
 	std::getline(input, s, ',');
-	std::cout << s << "\n";
-	enemy1 = stoi(s);
+	enemy_type_1 = stoi(s);
 
 	std::string s2;
 	std::getline(input, s2, '\n');
-	enemy2 = stoi(s2);
-	std::cout << s2 << "\n";
+	enemy_type_2 = stoi(s2);
 }
 
-void LevelManager::ReadSpecificInfo(float& time, int& type)
+void LevelManager::SkipFirstLine()
 {
+	if (!input) return;
+	std::string s;
+	std::getline(input, s, '\n');
+}
+
+void LevelManager::ReadSpawnInfo()
+{
+	if (!input) return;
 	std::string s1;
 	std::string s2;
 
 	std::getline(input, s1, ',');
-	std::cout << s1 << std::endl;
-	time = stof(s1);
+	m_current_timer = stof(s1);
 
 	std::getline(input, s2, '\n');
-	std::cout << "s2: " << s2 << "\n";
-	type = stoi(s2);
+	m_current_enemy_type = stoi(s2);
 }
 
 void LevelManager::Init(Scene& scene)
 {
-	ReadFirstLine();
+	if (!input) return;
+	ReadEnemyType();
 
 	//enemy pools
 	Transform enemy_transform = Transform{ scene.GetPlanetPosition(), 1.2f };
-	m_enemy_pool.Init(enemy_transform, static_cast<EnemyType>(enemy1), scene);
-	m_enemy_pool_2.Init(enemy_transform, static_cast<EnemyType>(enemy2), scene);
+	m_enemy_pool.Init(enemy_transform, static_cast<EnemyType>(enemy_type_1), scene);
+	m_enemy_pool_2.Init(enemy_transform, static_cast<EnemyType>(enemy_type_2), scene);
 
 	//enemy spawner init
 	m_first_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
@@ -60,7 +67,7 @@ void LevelManager::Init(Scene& scene)
 	m_second_spawner->SetUp(m_enemy_pool_2, 10.f);
 	m_second_spawner->InitWaypoints();
 
-	ReadSpecificInfo(m_current_timer, m_current_enemy_type);
+	ReadSpawnInfo();
 }
 
 void LevelManager::Update(float deltaTime, const Vector2& player_pos)
@@ -70,20 +77,25 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 	if (m_timer >= m_current_timer)
 	{
 		//spawn based on type
-		if (m_current_enemy_type == enemy1)
+		//first one moves towards player
+		if (m_current_enemy_type == enemy_type_1)
 		{
+			//std::cout << "x: "<< player_pos.x << std::endl;
 			//spawn enemy
-			m_first_spawner->SpawnEnemy(Waypoint{ player_pos, true }, deltaTime);
+			m_first_spawner->SpawnEnemy(player_pos, deltaTime);
 		}
-		else if (m_current_enemy_type == enemy2)
+		//second one moves to and stays at waypoint
+		else if (m_current_enemy_type == enemy_type_2)
 		{
-			m_second_spawner->SpawnEnemy(*m_second_spawner->GetAvailableWaypoint(), deltaTime);
+			Waypoint* destination = m_second_spawner->GetAvailableWaypoint();
+			if (destination == nullptr) return;
+			m_second_spawner->SpawnEnemy(*destination, deltaTime);
 		}
 
 		//read the next line
 		if (!input.eof())
 		{
-			ReadSpecificInfo(m_current_timer, m_current_enemy_type);
+			ReadSpawnInfo();
 		}
 		else
 		{
@@ -100,4 +112,25 @@ void LevelManager::Restart()
 
 	m_enemy_pool.SetUp();
 	m_enemy_pool_2.SetUp();
+
+	ReRead();
+}
+
+void LevelManager::ReRead()
+{
+	//close and reload -- skip first line of enemy type
+	input.close();
+	LoadFile(m_current_filename);
+	SkipFirstLine();
+
+	//reset timer and current enemy type
+	m_timer = 0.f;
+	m_current_timer = 0.f;
+	m_current_enemy_type = -1;
+}
+
+LevelManager& LevelManager::GetInstance()
+{
+	static LevelManager manager;
+	return manager;
 }

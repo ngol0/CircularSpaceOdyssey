@@ -11,10 +11,11 @@ public:
 	EnemyPool();
 
 	void Init(Transform& transform, EnemyType enemy_type, Scene& scene);
-	Object::Ref Spawn(const Vector2& spawn_pos, Waypoint& destination, float rotation_angle);
+	void Spawn(const Vector2& spawn_pos, Waypoint& destination, float rotation_angle);
+	void Spawn(const Vector2& spawn_pos, const Vector2& destination, float rotation_angle);
 	void SetUp();
 
 private:
-	static const int POOL_SIZE = 6;
+	static const int POOL_SIZE = 10;
 	Object::Ref enemies[POOL_SIZE];
 };

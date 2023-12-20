@@ -16,9 +16,7 @@ class EnemySpawner : public Component
 {
 private:
 	std::vector<Waypoint> m_waypoint_list;
-	float m_timer;
 	float m_distance_to_center = 150.f;
-	float m_max_spawn_time;
 
 	EnemyPool* m_pool;
 	Transform* m_transform;
@@ -32,7 +30,7 @@ public:
 	void Reset();
 	void InitWaypoints();
 
-	void SpawnEnemyToWaypoint(float dt = 0.f, float rotation_angle = 0.f);
 	void SpawnEnemy(Waypoint& destination, float dt);
+	void SpawnEnemy(const Vector2& destination, float dt);
 	Waypoint* GetAvailableWaypoint();
 };
