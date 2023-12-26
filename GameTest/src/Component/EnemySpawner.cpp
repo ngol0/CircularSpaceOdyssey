@@ -9,7 +9,7 @@
 
 EnemySpawner::EnemySpawner() : m_pool(nullptr), m_transform(nullptr) {}
 
-void EnemySpawner::SetUp(EnemyPool& pool, float max_spawn_time)
+void EnemySpawner::SetUp(EnemyPool& pool)
 {
 	m_pool = &pool;
 	m_transform = &Component::object->GetComponent<Transform>();

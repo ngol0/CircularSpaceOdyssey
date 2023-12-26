@@ -209,7 +209,7 @@
     <ClInclude Include="src\Component\Circle.h" />
     <ClInclude Include="src\System\CollisionManager.h" />
     <ClInclude Include="src\GameObject\GameObject.h" />
-    <ClInclude Include="src\System\Data.h" />
+    <ClInclude Include="src\System\EnemyType.h" />
     <ClInclude Include="src\System\Event.h" />
     <ClInclude Include="src\System\LevelManager.h" />
     <ClInclude Include="src\System\Scene.h" />

@@ -4,7 +4,7 @@
 #include "System/Scene.h"
 #include "WindowManager.h"
 #include "System/Utils.h"
-#include "System/Data.h"
+#include "System/EnemyType.h"
 
 VitalsWindow::VitalsWindow() {}
 

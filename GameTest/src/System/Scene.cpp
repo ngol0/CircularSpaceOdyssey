@@ -10,7 +10,7 @@
 //
 #include "UI/LoseWindow.h"
 #include "GameObject/GameObjectFactory.h"
-#include "System/Data.h"
+#include "System/EnemyType.h"
 
 auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();

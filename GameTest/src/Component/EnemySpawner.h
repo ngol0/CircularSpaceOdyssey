@@ -26,7 +26,7 @@ public:
 	~EnemySpawner() {};
 
 	void Init() override {};
-	void SetUp(EnemyPool& pool, float max_spawn_time);
+	void SetUp(EnemyPool& pool);
 	void Reset();
 	void InitWaypoints();
 

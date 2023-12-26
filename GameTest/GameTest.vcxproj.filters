@@ -110,7 +110,7 @@
     <ClInclude Include="src\UI\VitalsWindow.h" />
     <ClInclude Include="src\UI\PauseWindow.h" />
     <ClInclude Include="src\UI\LoseWindow.h" />
-    <ClInclude Include="src\System\Data.h" />
+    <ClInclude Include="src\System\EnemyType.h" />
     <ClInclude Include="src\System\LevelManager.h" />
     <ClInclude Include="src\UI\LevelWindow.h" />
   </ItemGroup>
