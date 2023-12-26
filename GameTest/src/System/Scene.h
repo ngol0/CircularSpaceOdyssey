@@ -38,8 +38,5 @@ private:
 
 	//general datas
 	int m_score;
-
-	//level manager
-	LevelManager level_manager;
 };
 

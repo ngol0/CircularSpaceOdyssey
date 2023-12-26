@@ -1,6 +1,6 @@
 #pragma once
 #include "Math/Vector2.h"
-#include "Data.h"
+#include "EnemyType.h"
 
 namespace Utils
 {

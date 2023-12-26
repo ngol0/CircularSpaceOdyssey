@@ -3,6 +3,9 @@
 #include "WindowManager.h"
 #include "VitalsWindow.h"
 
+auto& window_mg = WindowManager::GetInstance();
+auto& level_mg = LevelManager::GetInstance();
+
 LevelWindow::LevelWindow() {}
 
 void LevelWindow::HandleInput(float deltaTime)
@@ -10,8 +13,9 @@ void LevelWindow::HandleInput(float deltaTime)
 	if (App::IsKeyPressed('1'))
 	{
 		//load level 1
-
-		WindowManager::GetInstance().SetWindow(WindowState::vitals);
+		level_mg.LoadFile(".\\Data\\Level1.txt");
+		window_mg.SetWindow(WindowState::vitals);
+		level_mg.Init(*window_mg.GetScene());
 	}
 }
 

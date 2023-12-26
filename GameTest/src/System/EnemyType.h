@@ -4,7 +4,9 @@
 enum class EnemyType
 {
 	ChaseType,
-	ShootType
+	ShootType,
+	ExplodeType,
+	RespawnType
 };
 
 #define PI 3.14159

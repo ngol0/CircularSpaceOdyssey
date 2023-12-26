@@ -26,7 +26,7 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 	}
 }
 
-Object::Ref EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination, float rotation_angle)
+void EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination, float rotation_angle)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
@@ -36,10 +36,24 @@ Object::Ref EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination, fl
 			enemies[i]->GetComponent<EnemyMovement>().MoveTo(destination);
 			enemies[i]->Activate();
 
-			return enemies[i];
+			return;
 		}
 	}
-	return nullptr;
+}
+
+void EnemyPool::Spawn(const Vector2& spawn_pos, const Vector2& destination, float rotation_angle)
+{
+	for (int i = 0; i < POOL_SIZE; i++)
+	{
+		if (!enemies[i]->IsAlive())
+		{
+			enemies[i]->SetPosition(spawn_pos);
+			enemies[i]->GetComponent<EnemyMovement>().MoveTo(destination);
+			enemies[i]->Activate();
+
+			return;
+		}
+	}
 }
 
 void EnemyPool::SetUp()

@@ -10,11 +10,12 @@
 //
 #include "UI/LoseWindow.h"
 #include "GameObject/GameObjectFactory.h"
-#include "System/Data.h"
+#include "System/EnemyType.h"
 
 auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();
 auto& window_manager = WindowManager::GetInstance();
+auto& level_manager = LevelManager::GetInstance();
 
 Scene::Scene() : m_score(0), m_player(nullptr)
 {
@@ -34,8 +35,7 @@ void Scene::Init()
 	m_player->GetComponent<Health>().on_die.Register(this, &Scene::OnGameOver);
 
 	//level manager
-	level_manager.LoadFile(".\\Data\\Level1.txt");
-	level_manager.Init(*this);
+	//level_manager.Init(*this);
 
 	//coin
 	/*for (int i = 0; i < 5; i++)

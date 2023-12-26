@@ -5,6 +5,12 @@
 
 class Scene;
 
+struct Enemy
+{
+	float timer;
+	int id;
+};
+
 class LevelManager
 {
 public:
@@ -16,26 +22,32 @@ public:
 	void Complete() {};
 	void Restart();
 
-	void ReadFirstLine();
-	void ReadSpecificInfo(float& time, int& type);
+	void ReadSpawnInfo();
+	void SetUpTimer();
+	void SetUpEnemy(Scene& scene);
+
+	//singleton
+	static LevelManager& GetInstance();
 
 private:
 	//spawner
-	Object::Ref m_second_spawner_obj;
-	Object::Ref m_first_spawner_obj;
-	EnemySpawner* m_second_spawner;
-	EnemySpawner* m_first_spawner;
+	Object::Ref m_shoot_spawner_obj;
+	Object::Ref m_chase_spawner_obj;
+	EnemySpawner* m_shoot_spawner;
+	EnemySpawner* m_chase_spawner;
 
 	//enemy pool
-	EnemyPool m_enemy_pool;
-	EnemyPool m_enemy_pool_2;
+	EnemyPool m_chase_pool;
+	EnemyPool m_shoot_pool;
 
-	int enemy1;
-	int enemy2;
+	std::ifstream m_input;
 
-	std::ifstream input;
+	float m_timer{ 0.f };
+	float m_current_timer{ 0.f };
+	int m_current_enemy_type{ -1 };
+	const char* m_current_filename{ nullptr };
 
-	float m_timer;
-	float m_current_timer;
-	int m_current_enemy_type;
+	std::vector<std::unique_ptr<Enemy>> m_enemies;
+	bool m_is_complete;
+	int m_index;
 };

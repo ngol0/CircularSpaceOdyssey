@@ -4,7 +4,7 @@
 #include "System/Scene.h"
 #include "WindowManager.h"
 #include "System/Utils.h"
-#include "System/Data.h"
+#include "System/EnemyType.h"
 
 VitalsWindow::VitalsWindow() {}
 
@@ -35,7 +35,7 @@ void VitalsWindow::HandleInput(float deltaTime)
 void VitalsWindow::Render()
 {
 	App::Print(120, 35, m_score_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
-	App::Print(50, 700, m_health_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
+	App::Print(50, 730, m_health_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
 
 	Utils::DrawRectangle(Vector2{220.f, 30.f}, 1.f, 1.f, 1.f, Vector2{600.f, 17.f});
 }
@@ -47,5 +47,5 @@ void VitalsWindow::UpdateScoreText(int score)
 
 void VitalsWindow::UpdateHealthText(int health)
 {
-	m_health_string = "Health: " + std::to_string(health);
+	m_health_string = "Health: " + std::string(health, '|');
 }
