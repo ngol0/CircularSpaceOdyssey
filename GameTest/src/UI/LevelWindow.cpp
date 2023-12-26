@@ -14,8 +14,28 @@ void LevelWindow::HandleInput(float deltaTime)
 	{
 		//load level 1
 		level_mg.LoadFile(".\\Data\\Level1.txt");
-		window_mg.SetWindow(WindowState::vitals);
 		level_mg.Init(*window_mg.GetScene());
+		level_mg.SetLevel(1);
+
+		window_mg.SetWindow(WindowState::vitals);
+	}
+	else if (App::IsKeyPressed('2'))
+	{
+		//load level 2
+		level_mg.LoadFile(".\\Data\\Level2.txt");
+		level_mg.Init(*window_mg.GetScene());
+		level_mg.SetLevel(2);
+
+		window_mg.SetWindow(WindowState::vitals);
+	}
+	else if (App::IsKeyPressed('3'))
+	{
+		//load level 3
+		level_mg.LoadFile(".\\Data\\Level3.txt");
+		level_mg.Init(*window_mg.GetScene());
+		level_mg.SetLevel(3);
+
+		window_mg.SetWindow(WindowState::vitals);
 	}
 }
 

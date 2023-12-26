@@ -3,8 +3,8 @@
 #include "PauseWindow.h"
 #include "System/Scene.h"
 #include "WindowManager.h"
-#include "System/Utils.h"
-#include "System/EnemyType.h"
+#include "Global/Utils.h"
+#include "Global/GameGlobal.h"
 
 VitalsWindow::VitalsWindow() {}
 
@@ -28,7 +28,7 @@ void VitalsWindow::HandleInput(float deltaTime)
 	m_timer += deltaTime / 100.f;
 
 	UpdateHealthText(WindowManager::GetInstance().GetHealth());
-	if (WindowManager::GetInstance().GetScore() > MAX_SCORE) return;
+	if (WindowManager::GetInstance().GetScore() > GameGlobal::MAX_SCORE) return;
 	UpdateScoreText(WindowManager::GetInstance().GetScore());
 }
 

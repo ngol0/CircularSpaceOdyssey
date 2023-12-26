@@ -39,7 +39,7 @@
     <ClCompile Include="src\Component\EnemyMovement.cpp" />
     <ClCompile Include="src\GameObject\EnemyPool.cpp" />
     <ClCompile Include="src\Component\EnemySpawner.cpp" />
-    <ClCompile Include="src\System\Utils.cpp" />
+    <ClCompile Include="src\Global\Utils.cpp" />
     <ClCompile Include="src\Component\EnemyShooter.cpp" />
     <ClCompile Include="src\Component\HitEffect.cpp" />
     <ClCompile Include="src\GameObject\ParticlePool.cpp" />
@@ -52,6 +52,7 @@
     <ClCompile Include="src\UI\LoseWindow.cpp" />
     <ClCompile Include="src\System\LevelManager.cpp" />
     <ClCompile Include="src\UI\LevelWindow.cpp" />
+    <ClCompile Include="src\UI\VictoryWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -92,14 +93,14 @@
     <ClInclude Include="src\GameObject\GameObjectManager.h" />
     <ClInclude Include="src\Component\MovementInput.h" />
     <ClInclude Include="src\GameObject\GameObjectFactory.h" />
-    <ClInclude Include="src\System\Event.h" />
+    <ClInclude Include="src\Global\Event.h" />
     <ClInclude Include="src\Component\BulletMovement.h" />
     <ClInclude Include="src\Component\PlayerShooter.h" />
     <ClInclude Include="src\GameObject\BulletPool.h" />
     <ClInclude Include="src\Component\EnemyMovement.h" />
     <ClInclude Include="src\GameObject\EnemyPool.h" />
     <ClInclude Include="src\Component\EnemySpawner.h" />
-    <ClInclude Include="src\System\Utils.h" />
+    <ClInclude Include="src\Global\Utils.h" />
     <ClInclude Include="src\Component\EnemyShooter.h" />
     <ClInclude Include="src\Component\HitEffect.h" />
     <ClInclude Include="src\GameObject\ParticlePool.h" />
@@ -110,9 +111,11 @@
     <ClInclude Include="src\UI\VitalsWindow.h" />
     <ClInclude Include="src\UI\PauseWindow.h" />
     <ClInclude Include="src\UI\LoseWindow.h" />
-    <ClInclude Include="src\System\EnemyType.h" />
+    <ClInclude Include="src\Global\EnemyType.h" />
     <ClInclude Include="src\System\LevelManager.h" />
     <ClInclude Include="src\UI\LevelWindow.h" />
+    <ClInclude Include="src\Global\GameGlobal.h" />
+    <ClInclude Include="src\UI\VictoryWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

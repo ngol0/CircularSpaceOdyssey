@@ -2,7 +2,7 @@
 //--managers
 #include "GameObjectManager.h"
 #include "GameObjectFactory.h"
-#include "System/Data.h"
+#include "Global/EnemyType.h"
 //--components
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
@@ -70,8 +70,8 @@ namespace GameObjectFactory
 			enemy->AddComponent<Health>(100);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.02f);
-			//prite
-			enemy_sprite.SetFrame(1);
+			//sprite
+			enemy_sprite.SetFrame(3);
 			break;
 		case EnemyType::ShootType:
 			enemy->AddComponent<Health>(200);
@@ -81,6 +81,22 @@ namespace GameObjectFactory
 			enemy->AddComponent<EnemyMovement>(0.2f);
 			//sprite
 			enemy_sprite.SetFrame(17);
+			break;
+		case EnemyType::MultiplyType:
+			//health
+			enemy->AddComponent<Health>(100);
+			//movement
+			enemy->AddComponent<EnemyMovement>(0.02f);
+			//sprite
+			enemy_sprite.SetFrame(15);
+			break;
+		case EnemyType::RespawnType:
+			//health
+			enemy->AddComponent<Health>(100);
+			//movement
+			enemy->AddComponent<EnemyMovement>(0.02f);
+			//sprite
+			enemy_sprite.SetFrame(11);
 			break;
 		}
 		return enemy;

@@ -6,11 +6,12 @@
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
-#include "UI/WindowManager.h"
-//
-#include "UI/LoseWindow.h"
 #include "GameObject/GameObjectFactory.h"
-#include "System/EnemyType.h"
+#include "UI/WindowManager.h"
+#include "UI/LoseWindow.h"
+#include "UI/VictoryWindow.h"
+//
+#include "Global/GameGlobal.h"
 
 auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();
@@ -119,10 +120,9 @@ void Scene::OnScore()
 {
 	m_score++;
 
-	if (m_score >= MAX_SCORE)
+	if (m_score >= GameGlobal::MAX_SCORE)
 	{
-		//win
-		//WindowManager::GetInstance()
+		WindowManager::GetInstance().SetWindow(WindowState::win);
 	}
 }
 

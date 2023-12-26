@@ -19,12 +19,12 @@ namespace Utils
 		}
 	}
 
-	void DrawDot(const Vector2& position, int r, int g, int b)
+	void DrawDot(const Vector2& position, float r, float g, float b)
 	{
 		App::DrawLine(position.x, position.y, position.x + 1, position.y + 1, r, g, b);
 	}
 
-	void DrawRectangle(const Vector2& position, int r, int g, int b, const Vector2& size)
+	void DrawRectangle(const Vector2& position, float r, float g, float b, const Vector2& size)
 	{
 		App::DrawLine(position.x, position.y, position.x + size.x, position.y, r, g, b);
 		App::DrawLine(position.x, position.y, position.x, position.y + size.y, r, g, b);

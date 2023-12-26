@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Circle.h"
 #include "Math/Vector2.h"
-#include "System/Utils.h"
+#include "Global/Utils.h"
 
 Circle::Circle(const Vector2& center_position, float radius, int steps) : m_center(&center_position), m_radius(radius), m_vertices_number(0), m_steps(steps) {}
 

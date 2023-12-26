@@ -16,8 +16,8 @@ public:
 	void Render();
 
 	//getter
-	float GetHealth() { return m_scene->GetPlayerHealth(); }
-	float GetScore() { return m_scene->GetScore(); }
+	int GetHealth() { return m_scene->GetPlayerHealth(); }
+	int GetScore() { return m_scene->GetScore(); }
 	Scene* GetScene() { return m_scene; }
 
 	Window* GetCurrentWindow() { return m_current_window; }

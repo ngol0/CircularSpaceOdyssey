@@ -3,10 +3,12 @@
 #include <windows.h>  
 //------------------------------------------------------------------------
 #include "System/Scene.h"
+//------------------------------------------------------------------------
 #include "UI/WindowManager.h"
 #include "UI/TitleWindow.h"
 #include "UI/PauseWindow.h"
 #include "UI/LevelWindow.h"
+#include "UI/VictoryWindow.h"
 
 Scene scene;
 auto& window = WindowManager::GetInstance();
@@ -29,6 +31,7 @@ void Update(float deltaTime)
 	if (dynamic_cast<TitleWindow*>(window.GetCurrentWindow())) return;
 	if(dynamic_cast<PauseWindow*>(window.GetCurrentWindow())) return;
 	if (dynamic_cast<LevelWindow*>(window.GetCurrentWindow())) return;
+	if (dynamic_cast<VictoryWindow*>(window.GetCurrentWindow())) return;
 
 	scene.Update(deltaTime);
 }
@@ -40,6 +43,7 @@ void Render()
 	if (dynamic_cast<TitleWindow*>(window.GetCurrentWindow())) return;
 	if (dynamic_cast<PauseWindow*>(window.GetCurrentWindow())) return;
 	if (dynamic_cast<LevelWindow*>(window.GetCurrentWindow())) return;
+	if (dynamic_cast<VictoryWindow*>(window.GetCurrentWindow())) return;
 
 	scene.Render();
 }

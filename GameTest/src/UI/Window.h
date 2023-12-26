@@ -1,5 +1,5 @@
 #pragma once
-#include "System/Event.h"
+#include "Global/Event.h"
 
 class TitleWindow;
 class VitalsWindow;
@@ -7,6 +7,7 @@ class PauseWindow;
 class LoseWindow;
 class LevelWindow;
 class WindowManager;
+class VictoryWindow;
 class Scene;
 
 class Window
@@ -33,5 +34,6 @@ public:
 	static PauseWindow pause;
 	static LoseWindow lose;
 	static LevelWindow level;
+	static VictoryWindow win;
 };
 

@@ -6,7 +6,7 @@
 #include "System/Scene.h"
 #include "System/CollisionManager.h"
 //
-#include "System/Utils.h"
+#include "Global/Utils.h"
 
 BoxCollider::BoxCollider(std::string tag) : size(Vector2{0.f}), position(Vector2{0.f}), tag(tag), transform(nullptr) {}
 

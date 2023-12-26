@@ -2,12 +2,17 @@
 #include "LevelManager.h"
 #include "GameObject/GameObjectFactory.h"
 #include "Scene.h"
-#include "System/EnemyType.h"
-#include "System/Utils.h"
-
+#include "Global/EnemyType.h"
+#include "Global/Utils.h"
+//
 #include <sstream>
 
-LevelManager::LevelManager() : m_shoot_spawner(nullptr), m_chase_spawner(nullptr), m_index(0), m_is_complete(false) {}
+LevelManager::LevelManager() {}
+
+void LevelManager::SetLevel(int current_level)
+{
+	m_current_level = current_level;
+}
 
 void LevelManager::LoadFile(const char* filename)
 {
@@ -17,13 +22,13 @@ void LevelManager::LoadFile(const char* filename)
 		//std::cerr << "Failed to open file." << std::endl;
 		return;
 	}
-	m_current_filename = filename;
 	ReadSpawnInfo();
 	m_input.close();
 }
 
 void LevelManager::ReadSpawnInfo()
 {
+	m_enemies.clear();
 	std::string line;
 	while (std::getline(m_input, line)) 
 	{
@@ -76,7 +81,7 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 			//spawn enemy
 			m_chase_spawner->SpawnEnemy(player_pos, deltaTime);
 		}
-		else if (m_current_enemy_type == (int)EnemyType::ExplodeType)
+		else if (m_current_enemy_type == (int)EnemyType::MultiplyType)
 		{
 
 		}
@@ -92,10 +97,10 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 
 		}
 
+		m_index++;
 		//if not ends - moves to next enemy
-		if (m_index <= m_enemies.size() && m_enemies.size() != 0)
+		if (m_index < m_enemies.size())
 		{
-			m_index++;
 			m_current_timer = m_enemies[m_index]->timer;
 			m_current_enemy_type = m_enemies[m_index]->id;
 		}
