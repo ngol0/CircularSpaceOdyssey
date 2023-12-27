@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "System/Event.h"
+#include "Global/Event.h"
 
 class Scene;
 

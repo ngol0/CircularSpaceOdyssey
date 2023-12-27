@@ -3,7 +3,7 @@
 #include "TitleWindow.h"
 #include "LoseWindow.h"
 
-#include "System/Utils.h"
+#include "Global/Utils.h"
 
 WindowManager::WindowManager() : m_current_window(nullptr), m_scene(nullptr) {}
 

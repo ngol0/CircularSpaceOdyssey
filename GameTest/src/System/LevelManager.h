@@ -16,6 +16,7 @@ class LevelManager
 public:
 	LevelManager();
 
+	void SetLevel(int current_level);
 	void LoadFile(const char* filename);
 	void Init(Scene& scene);
 	void Update(float deltaTime, const Vector2& player_pos);
@@ -29,12 +30,15 @@ public:
 	//singleton
 	static LevelManager& GetInstance();
 
+	//getter
+	int GetCurrentLevel() { return m_current_level; }
+
 private:
 	//spawner
 	Object::Ref m_shoot_spawner_obj;
 	Object::Ref m_chase_spawner_obj;
-	EnemySpawner* m_shoot_spawner;
-	EnemySpawner* m_chase_spawner;
+	EnemySpawner* m_shoot_spawner{ nullptr };
+	EnemySpawner* m_chase_spawner{ nullptr };
 
 	//enemy pool
 	EnemyPool m_chase_pool;
@@ -45,9 +49,10 @@ private:
 	float m_timer{ 0.f };
 	float m_current_timer{ 0.f };
 	int m_current_enemy_type{ -1 };
-	const char* m_current_filename{ nullptr };
 
 	std::vector<std::unique_ptr<Enemy>> m_enemies;
-	bool m_is_complete;
-	int m_index;
+	bool m_is_complete{ false };
+	int m_index{ 0 };
+
+	int m_current_level{ 0 };
 };

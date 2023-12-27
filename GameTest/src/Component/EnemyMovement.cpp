@@ -15,7 +15,6 @@ void EnemyMovement::Init()
 void EnemyMovement::MoveTo(Waypoint& pos)
 {
 	m_destination = &pos;
-	std::cout << "x-2: " << m_destination->position.x << std::endl;
 }
 
 void EnemyMovement::MoveTo(const Vector2& pos)
