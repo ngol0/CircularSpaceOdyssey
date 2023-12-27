@@ -192,6 +192,7 @@
     <ClInclude Include="src\Component\EnemyMovement.h" />
     <ClInclude Include="src\Component\EnemyShooter.h" />
     <ClInclude Include="src\Component\EnemySpawner.h" />
+    <ClInclude Include="src\Component\EnemySplit.h" />
     <ClInclude Include="src\Component\HitEffect.h" />
     <ClInclude Include="src\Component\MovementInput.h" />
     <ClInclude Include="src\Component\ParticleSpawner.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="src\Component\EnemyMovement.cpp" />
     <ClCompile Include="src\Component\EnemyShooter.cpp" />
     <ClCompile Include="src\Component\EnemySpawner.cpp" />
+    <ClCompile Include="src\Component\EnemySplit.cpp" />
     <ClCompile Include="src\Component\HitEffect.cpp" />
     <ClCompile Include="src\Component\MovementInput.cpp" />
     <ClCompile Include="src\Component\ParticleSpawner.cpp" />

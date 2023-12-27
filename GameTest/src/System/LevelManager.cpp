@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "LevelManager.h"
 #include "GameObject/GameObjectFactory.h"
-#include "Scene.h"
 #include "Global/EnemyType.h"
 #include "Global/Utils.h"
 //
 #include <sstream>
 
-LevelManager::LevelManager() {}
+LevelManager::LevelManager() : m_scene(nullptr) {}
 
 void LevelManager::SetLevel(int current_level)
 {
@@ -50,21 +49,29 @@ void LevelManager::Init(Scene& scene)
 
 void LevelManager::SetUpEnemy(Scene& scene)
 {
+	m_scene = &scene;
 	//enemy pools
-	Transform enemy_transform = Transform{ scene.GetPlanetPosition(), 1.2f };
-	m_chase_pool.Init(enemy_transform, EnemyType::ChaseType, scene);
-	m_shoot_pool.Init(enemy_transform, EnemyType::ShootType, scene);
+	Transform starting_transform = Transform{ scene.GetPlanetPosition(), 1.2f };
+	m_chase_pool.Init(starting_transform, EnemyType::SlowChaseType, scene);
+	m_shoot_pool.Init(starting_transform, EnemyType::ShootType, scene);
+	m_child_pool.Init(starting_transform, EnemyType::FastChaseType, scene);
 
 	//enemy spawner init
+	//slow chase enemy
 	m_chase_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
 	m_chase_spawner = &m_chase_spawner_obj->GetComponent<EnemySpawner>();
 	m_chase_spawner->SetUp(m_chase_pool);
-	m_chase_spawner->InitWaypoints();
 
+	//shoot enemy that stays at waypoint
 	m_shoot_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
 	m_shoot_spawner = &m_shoot_spawner_obj->GetComponent<EnemySpawner>();
 	m_shoot_spawner->SetUp(m_shoot_pool);
 	m_shoot_spawner->InitWaypoints();
+
+	//respawn enemy from a parent enemy and follows player in fast speed
+	m_child_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
+	m_child_spawner = &m_child_spawner_obj->GetComponent<EnemySpawner>();
+	m_child_spawner->SetUp(m_child_pool);
 }
 
 void LevelManager::Update(float deltaTime, const Vector2& player_pos)
@@ -75,13 +82,13 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 	{
 		//spawn based on type
 		//chase and explode enemies moves towards player
-		if (m_current_enemy_type == (int)EnemyType::ChaseType)
+		if (m_current_enemy_type == (int)EnemyType::SlowChaseType)
 		{
 			//std::cout << "x: "<< player_pos.x << std::endl;
 			//spawn enemy
-			m_chase_spawner->SpawnEnemy(player_pos, deltaTime);
+			m_chase_spawner->SpawnEnemy(player_pos);
 		}
-		else if (m_current_enemy_type == (int)EnemyType::MultiplyType)
+		else if (m_current_enemy_type == (int)EnemyType::DashType)
 		{
 
 		}
@@ -90,9 +97,9 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 		{
 			Waypoint* destination = m_shoot_spawner->GetAvailableWaypoint();
 			if (destination == nullptr) return;
-			m_shoot_spawner->SpawnEnemy(*destination, deltaTime);
+			m_shoot_spawner->SpawnEnemy(*destination);
 		}
-		else if (m_current_enemy_type == (int)EnemyType::RespawnType)
+		else if (m_current_enemy_type == (int)EnemyType::SplitType)
 		{
 
 		}

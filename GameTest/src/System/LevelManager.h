@@ -1,9 +1,8 @@
 #pragma once
 #include "Component/EnemySpawner.h"
 #include "GameObject/EnemyPool.h"
+#include "Scene.h"
 #include <fstream>
-
-class Scene;
 
 struct Enemy
 {
@@ -13,6 +12,33 @@ struct Enemy
 
 class LevelManager
 {
+private:
+	//spawner
+	Object::Ref m_shoot_spawner_obj;
+	Object::Ref m_chase_spawner_obj;
+	Object::Ref m_child_spawner_obj;
+	EnemySpawner* m_shoot_spawner{ nullptr };
+	EnemySpawner* m_chase_spawner{ nullptr };
+	EnemySpawner* m_child_spawner{ nullptr };
+
+	//enemy pool
+	EnemyPool m_chase_pool;
+	EnemyPool m_shoot_pool;
+	EnemyPool m_child_pool;
+
+	std::ifstream m_input;
+
+	float m_timer{ 0.f };
+	float m_current_timer{ 0.f };
+	int m_current_enemy_type{ -1 };
+
+	std::vector<std::unique_ptr<Enemy>> m_enemies;
+	bool m_is_complete{ false };
+	int m_index{ 0 };
+
+	int m_current_level{ 0 };
+	Scene* m_scene;
+
 public:
 	LevelManager();
 
@@ -32,27 +58,6 @@ public:
 
 	//getter
 	int GetCurrentLevel() { return m_current_level; }
-
-private:
-	//spawner
-	Object::Ref m_shoot_spawner_obj;
-	Object::Ref m_chase_spawner_obj;
-	EnemySpawner* m_shoot_spawner{ nullptr };
-	EnemySpawner* m_chase_spawner{ nullptr };
-
-	//enemy pool
-	EnemyPool m_chase_pool;
-	EnemyPool m_shoot_pool;
-
-	std::ifstream m_input;
-
-	float m_timer{ 0.f };
-	float m_current_timer{ 0.f };
-	int m_current_enemy_type{ -1 };
-
-	std::vector<std::unique_ptr<Enemy>> m_enemies;
-	bool m_is_complete{ false };
-	int m_index{ 0 };
-
-	int m_current_level{ 0 };
+	EnemySpawner* GetChildSpawner() { return m_child_spawner; }
+	const Vector2& GetPlayerPos() { return m_scene->GetPlayerPos(); }
 };

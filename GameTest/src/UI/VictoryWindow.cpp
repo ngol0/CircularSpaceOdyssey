@@ -3,6 +3,7 @@
 #include "VictoryWindow.h"
 #include "LevelWindow.h"
 #include "VitalsWindow.h"
+#include "System/LevelManager.h"
 
 auto& window_mgr = WindowManager::GetInstance();
 auto& level_mgr = LevelManager::GetInstance();
