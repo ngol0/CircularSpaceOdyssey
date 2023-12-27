@@ -54,6 +54,7 @@
     <ClCompile Include="src\UI\LevelWindow.cpp" />
     <ClCompile Include="src\UI\VictoryWindow.cpp" />
     <ClCompile Include="src\Component\EnemySplit.cpp" />
+    <ClCompile Include="src\Component\EnemyDefense.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="src\Global\GameGlobal.h" />
     <ClInclude Include="src\UI\VictoryWindow.h" />
     <ClInclude Include="src\Component\EnemySplit.h" />
+    <ClInclude Include="src\Component\EnemyDefense.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

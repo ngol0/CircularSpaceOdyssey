@@ -189,6 +189,7 @@
     <ClInclude Include="external\App\SimpleSprite.h" />
     <ClInclude Include="src\Component\Component.h" />
     <ClInclude Include="src\Component\BulletMovement.h" />
+    <ClInclude Include="src\Component\EnemyDefense.h" />
     <ClInclude Include="src\Component\EnemyMovement.h" />
     <ClInclude Include="src\Component\EnemyShooter.h" />
     <ClInclude Include="src\Component\EnemySpawner.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="external\App\SimpleSound.cpp" />
     <ClCompile Include="external\App\SimpleSprite.cpp" />
     <ClCompile Include="src\Component\BulletMovement.cpp" />
+    <ClCompile Include="src\Component\EnemyDefense.cpp" />
     <ClCompile Include="src\Component\EnemyMovement.cpp" />
     <ClCompile Include="src\Component\EnemyShooter.cpp" />
     <ClCompile Include="src\Component\EnemySpawner.cpp" />

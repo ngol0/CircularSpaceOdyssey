@@ -4,7 +4,7 @@ enum class EnemyType
 {
 	SlowChaseType,
 	ShootType,
-	DashType,
+	TwoModeType,
 	SplitType,
 	FastChaseType
 };
