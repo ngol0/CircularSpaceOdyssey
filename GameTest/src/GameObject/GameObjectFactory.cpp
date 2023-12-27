@@ -15,6 +15,7 @@
 #include "Component/EnemySpawner.h"
 #include "Component/EnemyShooter.h"
 #include "Component/HitEffect.h"
+#include "Component/EnemySplit.h"
 
 namespace GameObjectFactory
 {
@@ -65,7 +66,7 @@ namespace GameObjectFactory
 
 		switch (enemy_type)
 		{
-		case EnemyType::ChaseType:
+		case EnemyType::SlowChaseType:
 			//health
 			enemy->AddComponent<Health>(100);
 			//movement
@@ -80,9 +81,9 @@ namespace GameObjectFactory
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.2f);
 			//sprite
-			enemy_sprite.SetFrame(17);
+			enemy_sprite.SetFrame(19);
 			break;
-		case EnemyType::MultiplyType:
+		case EnemyType::DashType:
 			//health
 			enemy->AddComponent<Health>(100);
 			//movement
@@ -90,13 +91,23 @@ namespace GameObjectFactory
 			//sprite
 			enemy_sprite.SetFrame(15);
 			break;
-		case EnemyType::RespawnType:
+		case EnemyType::SplitType:
 			//health
 			enemy->AddComponent<Health>(100);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.02f);
 			//sprite
 			enemy_sprite.SetFrame(11);
+			//split
+			enemy->AddComponent<EnemySplit>(2);
+			break;
+		case EnemyType::FastChaseType:
+			//health
+			enemy->AddComponent<Health>(100);
+			//movement
+			enemy->AddComponent<EnemyMovement>(0.1f);
+			//sprite
+			enemy_sprite.SetFrame(7);
 			break;
 		}
 		return enemy;

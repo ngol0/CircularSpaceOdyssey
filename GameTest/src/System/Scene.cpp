@@ -12,6 +12,7 @@
 #include "UI/VictoryWindow.h"
 //
 #include "Global/GameGlobal.h"
+#include "LevelManager.h"
 
 auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();
@@ -106,16 +107,14 @@ void Scene::Restart()
 {
 	//reactivate game objects
 	object_manager.Reactivate();
-
 	//deactivates pool objects
 	m_player->GetComponent<PlayerShooter>().SetBulletPool();
-	
-	SetUp(); //set up player pos & stats
 
+	SetUp(); //set up player pos & stats
 	level_manager.Restart();
 }
 
-//enemy die -- check if win?
+//enemy die -- check if win
 void Scene::OnScore()
 {
 	m_score++;

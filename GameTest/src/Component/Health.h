@@ -15,8 +15,10 @@ public:
 
 	void ResetHealth();
 
-	int amount;
-	int initial_amount;
-
 	Event<Scene> on_die;
+
+	int health_amount;
+
+private:
+	int m_initial_amount;
 };

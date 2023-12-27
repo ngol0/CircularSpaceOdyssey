@@ -27,15 +27,20 @@ void EnemySpawner::InitWaypoints()
 	}
 }
 
-void EnemySpawner::SpawnEnemy(Waypoint& destination, float dt)
+void EnemySpawner::SpawnEnemy(Waypoint& destination)
 {
 	m_pool->Spawn(m_transform->position, destination, 0.f);
 	destination.is_available = false;
 }
 
-void EnemySpawner::SpawnEnemy(const Vector2& destination, float dt)
+void EnemySpawner::SpawnEnemy(const Vector2& destination)
 {
 	m_pool->Spawn(m_transform->position, destination, 0.f);
+}
+
+void EnemySpawner::SpawnEnemyAtPos(const Vector2 spawn_pos, const Vector2& destination)
+{
+	m_pool->Spawn(spawn_pos, destination, 0.f);
 }
 
 Waypoint* EnemySpawner::GetAvailableWaypoint()

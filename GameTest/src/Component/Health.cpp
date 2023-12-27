@@ -2,17 +2,19 @@
 #include "Health.h"
 #include "GameObject/GameObject.h"
 #include "Component/EnemyMovement.h"
+#include "Component/EnemySplit.h"
+#include "Component/Transform.h"
 
-Health::Health(int health) : amount(health)
+Health::Health(int health) : health_amount(health)
 {
-	initial_amount = amount;
+	m_initial_amount = health_amount;
 }
 
 void Health::TakeDamage(int damage_amount)
 {
-	amount -= damage_amount;
+	health_amount -= damage_amount;
 
-	if (amount <= 0)
+	if (health_amount <= 0)
 	{
 		on_die.Notify();
 
@@ -23,10 +25,16 @@ void Health::TakeDamage(int damage_amount)
 			Component::object->GetComponent<EnemyMovement>().Reset();
 		}
 		Component::object->Deactivate();
+
+		//if enemies has split behavior, split when it dies
+		if (Component::object->HasComponent<EnemySplit>())
+		{
+			Component::object->GetComponent<EnemySplit>().Split();
+		}
 	}
 }
 
 void Health::ResetHealth()
 {
-	amount = initial_amount;
+	health_amount = m_initial_amount;
 }
