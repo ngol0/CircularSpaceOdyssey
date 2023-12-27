@@ -30,6 +30,7 @@ public:
 	void Reset();
 	void InitWaypoints();
 
+	void SpawnEnemy();
 	void SpawnEnemy(Waypoint& destination);
 	void SpawnEnemy(const Vector2& destination);
 	void SpawnEnemyAtPos(const Vector2 spawn_pos, const Vector2& destination);

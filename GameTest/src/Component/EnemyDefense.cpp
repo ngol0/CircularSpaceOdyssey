@@ -20,7 +20,7 @@ void EnemyDefense::Update(float deltaTime)
 {
 	m_timer += deltaTime / 100.f;
 
-	if (m_timer > 5.f)
+	if (m_timer > 30.f)
 	{
 		m_on_defense = !m_on_defense;
 		SetMode();

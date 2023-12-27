@@ -101,7 +101,7 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 			//spawn enemy
 			m_chase_spawner->SpawnEnemy(player_pos);
 		}
-		//
+		//enemy that can be on defense and stays at waypoint
 		else if (m_current_enemy_type == (int)EnemyType::TwoModeType)
 		{
 			Waypoint* destination = m_shoot_spawner->GetAvailableWaypoint();
@@ -118,10 +118,8 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 		//split type moves randomly
 		else if (m_current_enemy_type == (int)EnemyType::SplitType)
 		{
-			//todo: random movement
-			Waypoint* destination = m_shoot_spawner->GetAvailableWaypoint();
-			if (destination == nullptr) return;
-			m_split_spawner->SpawnEnemy(*destination);
+			//float x = Utils::RandomFloat();
+			m_split_spawner->SpawnEnemy();
 		}
 
 		m_index++;

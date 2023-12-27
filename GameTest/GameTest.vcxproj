@@ -191,6 +191,7 @@
     <ClInclude Include="src\Component\BulletMovement.h" />
     <ClInclude Include="src\Component\EnemyDefense.h" />
     <ClInclude Include="src\Component\EnemyMovement.h" />
+    <ClInclude Include="src\Component\EnemyRandomMovement.h" />
     <ClInclude Include="src\Component\EnemyShooter.h" />
     <ClInclude Include="src\Component\EnemySpawner.h" />
     <ClInclude Include="src\Component\EnemySplit.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="src\Component\BulletMovement.cpp" />
     <ClCompile Include="src\Component\EnemyDefense.cpp" />
     <ClCompile Include="src\Component\EnemyMovement.cpp" />
+    <ClCompile Include="src\Component\EnemyRandomMovement.cpp" />
     <ClCompile Include="src\Component\EnemyShooter.cpp" />
     <ClCompile Include="src\Component\EnemySpawner.cpp" />
     <ClCompile Include="src\Component\EnemySplit.cpp" />

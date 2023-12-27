@@ -16,6 +16,7 @@
 #include "Component/EnemyShooter.h"
 #include "Component/HitEffect.h"
 #include "Component/EnemySplit.h"
+#include "Component/EnemyDefense.h"
 
 namespace GameObjectFactory
 {
@@ -92,6 +93,7 @@ namespace GameObjectFactory
 			enemy_sprite.SetColor(0.f, 1.f, 0.212f);
 			//shooter
 			enemy->AddComponent<EnemyShooter>(20.f);
+			enemy->AddComponent<EnemyDefense>();
 			break;
 		case EnemyType::SplitType:
 			//health
@@ -149,5 +151,10 @@ namespace GameObjectFactory
 		spawner->AddComponent<EnemySpawner>();
 
 		return spawner;
+	}
+
+	Object::Ref CreateHealthPowerUp()
+	{
+
 	}
 }
