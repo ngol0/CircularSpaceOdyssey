@@ -56,6 +56,7 @@
     <ClCompile Include="src\Component\EnemySplit.cpp" />
     <ClCompile Include="src\Component\EnemyDefense.cpp" />
     <ClCompile Include="src\Component\EnemyRandomMovement.cpp" />
+    <ClCompile Include="src\Component\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -122,6 +123,7 @@
     <ClInclude Include="src\Component\EnemySplit.h" />
     <ClInclude Include="src\Component\EnemyDefense.h" />
     <ClInclude Include="src\Component\EnemyRandomMovement.h" />
+    <ClInclude Include="src\Component\Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

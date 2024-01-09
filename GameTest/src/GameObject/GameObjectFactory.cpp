@@ -18,6 +18,7 @@
 #include "Component/HitEffect.h"
 #include "Component/EnemySplit.h"
 #include "Component/EnemyDefense.h"
+#include "Component/Particle.h"
 
 namespace GameObjectFactory
 {
@@ -155,11 +156,13 @@ namespace GameObjectFactory
 		return spawner;
 	}
 
-	Object::Ref CreateParticle()
+	Object::Ref CreateParticle(float size, int lifespan)
 	{
 		Object::Ref particle = GameObjectManager::GetInstance().AddToManager();
+		particle->GetComponent<Transform>().scale = size;
 		//sprite
 		auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\test.png", 1, 1);
+		particle->AddComponent<Particle>(lifespan);
 
 		return particle;
 	}

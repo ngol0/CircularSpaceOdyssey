@@ -35,7 +35,7 @@ void EnemyPool::Spawn(const Vector2& spawn_pos,float rotation_angle)
 		if (!enemies[i]->IsAlive())
 		{
 			enemies[i]->SetPosition(spawn_pos);
-			enemies[i]->GetComponent<EnemyRandomMovement>().Move();
+			enemies[i]->GetComponent<EnemyRandomMovement>().GetNextDestination();
 			enemies[i]->Activate();
 
 			return;

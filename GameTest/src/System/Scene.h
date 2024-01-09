@@ -3,6 +3,8 @@
 #include "Component/Health.h"
 #include "GameObject/GameObject.h"
 #include "Component/Transform.h"
+#include "Component/ParticleSpawner.h"
+#include "GameObject/ParticlePool.h"
 
 class Scene
 {
@@ -38,5 +40,9 @@ private:
 
 	//general datas
 	int m_score;
+
+	//particles
+	ParticlePool particle_pool;
+	ParticleSpawner particle_spawner;
 };
 
