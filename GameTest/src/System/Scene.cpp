@@ -3,6 +3,7 @@
 #include "Component/MovementInput.h"
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
+#include "Component/EnemyDefense.h"
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
@@ -85,8 +86,16 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 	if (other.tag == "player_bullet")
 	{
 		other.object->Deactivate();
-		enemy.object->GetComponent<Health>().TakeDamage(30);
-		enemy.object->GetComponent<HitEffect>().Play();
+
+		if (!enemy.object->HasComponent<EnemyDefense>())
+		{
+			enemy.object->GetComponent<Health>().TakeDamage(30);
+			enemy.object->GetComponent<HitEffect>().Play();
+		}
+		else
+		{
+			enemy.object->GetComponent<EnemyDefense>().CheckDefense();
+		}
 	}
 }
 

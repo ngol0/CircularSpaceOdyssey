@@ -17,14 +17,20 @@ private:
 	Object::Ref m_shoot_spawner_obj;
 	Object::Ref m_chase_spawner_obj;
 	Object::Ref m_child_spawner_obj;
+	Object::Ref m_split_spawner_obj;
+	Object::Ref m_defense_spawner_obj;
 	EnemySpawner* m_shoot_spawner{ nullptr };
 	EnemySpawner* m_chase_spawner{ nullptr };
 	EnemySpawner* m_child_spawner{ nullptr };
+	EnemySpawner* m_split_spawner{ nullptr };
+	EnemySpawner* m_defense_spawner{ nullptr };
 
 	//enemy pool
 	EnemyPool m_chase_pool;
 	EnemyPool m_shoot_pool;
 	EnemyPool m_child_pool;
+	EnemyPool m_split_pool;
+	EnemyPool m_defense_pool;
 
 	std::ifstream m_input;
 

@@ -16,6 +16,7 @@
 #include "Component/EnemyShooter.h"
 #include "Component/HitEffect.h"
 #include "Component/EnemySplit.h"
+#include "Component/EnemyDefense.h"
 
 namespace GameObjectFactory
 {
@@ -56,7 +57,6 @@ namespace GameObjectFactory
 	Object::Ref CreateEnemy(Transform& transform, EnemyType enemy_type)
 	{
 		Object::Ref enemy = GameObjectManager::GetInstance().AddToManager(transform);
-		//sprite
 		SpriteRenderer& enemy_sprite = enemy->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\enemies.png", 4, 5);
 		//collider
 		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height()/2 };
@@ -83,13 +83,17 @@ namespace GameObjectFactory
 			//sprite
 			enemy_sprite.SetFrame(19);
 			break;
-		case EnemyType::DashType:
+		case EnemyType::TwoModeType:
 			//health
 			enemy->AddComponent<Health>(100);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.02f);
 			//sprite
 			enemy_sprite.SetFrame(15);
+			enemy_sprite.SetColor(0.f, 1.f, 0.212f);
+			//shooter
+			enemy->AddComponent<EnemyShooter>(20.f);
+			enemy->AddComponent<EnemyDefense>();
 			break;
 		case EnemyType::SplitType:
 			//health
@@ -113,13 +117,13 @@ namespace GameObjectFactory
 		return enemy;
 	}
 
-	Object::Ref CreateBullet(float r, float b, float g, float size, int lifespan, std::string tag)
+	Object::Ref CreateBullet(float r, float g, float b, float size, int lifespan, std::string tag)
 	{
 		Object::Ref bullet = GameObjectManager::GetInstance().AddToManager();
 		bullet->GetComponent<Transform>().scale = size;
 		//sprite
 		auto& bullet_sprite = bullet->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\bullet.png", 1, 1);
-		bullet_sprite.SetColor(r,b,g);
+		bullet_sprite.SetColor(r,g,b);
 		//collider
 		Vector2 collider_size{ bullet_sprite.width(), bullet_sprite.height() };
 		bullet->AddComponent<BoxCollider>(tag, collider_size);
@@ -147,5 +151,10 @@ namespace GameObjectFactory
 		spawner->AddComponent<EnemySpawner>();
 
 		return spawner;
+	}
+
+	Object::Ref CreateHealthPowerUp()
+	{
+
 	}
 }

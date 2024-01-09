@@ -4,6 +4,6 @@
 
 namespace GameGlobal
 {
-	const static int MAX_SCORE = 2;
+	const static int MAX_SCORE = 67;
 	const static int MAX_PLAYER_HEALTH = 100;
 }
