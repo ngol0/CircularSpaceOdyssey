@@ -11,6 +11,6 @@ namespace GameObjectFactory
 	Object::Ref CreateBullet(float r, float g, float b, float size, int lifespan, std::string tag);
 	Object::Ref CreateCombatPlanet(const Vector2& center_position, float radius);
 	Object::Ref CreateEnemySpawner(const Vector2& spanw_pos);
-	//Object::Ref CreateParticle();
-	Object::Ref CreateHealthPowerUp();
+	Object::Ref CreateParticle();
+	//Object::Ref CreateHealthPowerUp();
 };

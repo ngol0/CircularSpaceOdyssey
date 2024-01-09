@@ -18,3 +18,9 @@ struct Vector2
 	Vector2 normalize() const;
 	float magnitude() const;
 };
+
+struct Waypoint
+{
+	Vector2 position;
+	bool is_available;
+};

@@ -118,7 +118,6 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 		//split type moves randomly
 		else if (m_current_enemy_type == (int)EnemyType::SplitType)
 		{
-			//float x = Utils::RandomFloat();
 			m_split_spawner->SpawnEnemy();
 		}
 

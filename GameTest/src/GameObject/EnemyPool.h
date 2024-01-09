@@ -13,6 +13,7 @@ public:
 	void Init(Transform& transform, EnemyType enemy_type, Scene& scene);
 	void Spawn(const Vector2& spawn_pos, Waypoint& destination, float rotation_angle);
 	void Spawn(const Vector2& spawn_pos, const Vector2& destination, float rotation_angle);
+	void Spawn(const Vector2& spawn_pos, float rotation_angle);
 	void SetUp();
 
 private:
