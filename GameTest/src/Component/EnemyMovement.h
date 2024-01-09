@@ -1,9 +1,9 @@
 #pragma once
 #include "Component.h"
 #include "Math/Vector2.h"
+#include "Global/Event.h"
 
 class Transform;
-struct Waypoint;
 
 class EnemyMovement : public Component
 {
@@ -20,7 +20,7 @@ public:
 private:
 	float m_speed;
 
-	Waypoint* m_destination;
+	Waypoint* m_waypoint_destination;
 	Transform* m_transform;
-	const Vector2* m_pos;
+	const Vector2* m_pos_destination;
 };

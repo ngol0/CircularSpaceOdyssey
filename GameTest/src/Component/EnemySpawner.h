@@ -6,12 +6,6 @@ class Scene;
 class EnemyPool;
 class Transform;
 
-struct Waypoint
-{
-	Vector2 position;
-	bool is_available;
-};
-
 class EnemySpawner : public Component
 {
 private:

@@ -29,7 +29,7 @@ void EnemySpawner::InitWaypoints()
 
 void EnemySpawner::SpawnEnemy()
 {
-
+	m_pool->Spawn(m_transform->position, 0.f);
 }
 
 void EnemySpawner::SpawnEnemy(Waypoint& destination)

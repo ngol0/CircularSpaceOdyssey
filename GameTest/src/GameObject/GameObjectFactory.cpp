@@ -12,6 +12,7 @@
 #include "Component/BulletMovement.h"
 #include "Component/Circle.h"
 #include "Component/EnemyMovement.h"
+#include "Component/EnemyRandomMovement.h"
 #include "Component/EnemySpawner.h"
 #include "Component/EnemyShooter.h"
 #include "Component/HitEffect.h"
@@ -100,6 +101,7 @@ namespace GameObjectFactory
 			enemy->AddComponent<Health>(100);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.02f);
+			enemy->AddComponent<EnemyRandomMovement>();
 			//sprite
 			enemy_sprite.SetFrame(11);
 			//split
@@ -153,8 +155,17 @@ namespace GameObjectFactory
 		return spawner;
 	}
 
-	Object::Ref CreateHealthPowerUp()
+	Object::Ref CreateParticle()
+	{
+		Object::Ref particle = GameObjectManager::GetInstance().AddToManager();
+		//sprite
+		auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\test.png", 1, 1);
+
+		return particle;
+	}
+
+	/*Object::Ref CreateHealthPowerUp()
 	{
 
-	}
+	}*/
 }
