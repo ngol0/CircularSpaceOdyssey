@@ -7,9 +7,7 @@ class ParticlePool;
 class ParticleSpawner : public Component
 {
 private:
-	float m_timer;
-
-	ParticlePool* m_pool;
+	ParticlePool* m_pool{ nullptr };
 
 public:
 	ParticleSpawner();
@@ -17,9 +15,8 @@ public:
 
 	void Init() override {};
 	void SetUp(ParticlePool& pool);
-	void Reset();
 
-	void Spawn(const Vector2& spawn_pos, float rotation_angle, float dt);
+	void Emit(const Vector2& spawn_pos);
 
-	static const int MAX_PARTICLES = 5; //max particles to spawn each time
+	static const int MAX_PARTICLES = 8; //max particles to spawn each time
 };

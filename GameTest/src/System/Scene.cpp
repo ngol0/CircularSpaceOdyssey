@@ -29,6 +29,10 @@ Scene::Scene() : m_score(0), m_player(nullptr)
 //init game objects
 void Scene::Init()
 {
+	//particles
+	particle_pool.Init();
+	particle_spawner.SetUp(particle_pool);
+
 	//planet
 	m_planet = GameObjectFactory::CreateCombatPlanet(circle_center, circle_radius);
 
@@ -127,6 +131,7 @@ void Scene::Restart()
 void Scene::OnScore()
 {
 	m_score++;
+	particle_spawner.Emit(Vector2(500.f));
 
 	if (m_score >= GameGlobal::MAX_SCORE)
 	{
