@@ -57,6 +57,7 @@
     <ClCompile Include="src\Component\EnemyDefense.cpp" />
     <ClCompile Include="src\Component\EnemyRandomMovement.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
+    <ClCompile Include="src\Global\WaypointGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="src\Component\EnemyDefense.h" />
     <ClInclude Include="src\Component\EnemyRandomMovement.h" />
     <ClInclude Include="src\Component\Particle.h" />
+    <ClInclude Include="src\Global\WaypointGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

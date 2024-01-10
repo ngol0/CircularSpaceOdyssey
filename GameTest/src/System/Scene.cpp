@@ -1,20 +1,20 @@
 #include "stdafx.h"
 #include "Scene.h"
+#include "LevelManager.h"
+//
 #include "Component/MovementInput.h"
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
 #include "Component/EnemyDefense.h"
 //
-#include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
+#include "GameObject/GameObjectManager.h"
 #include "GameObject/GameObjectFactory.h"
 #include "UI/WindowManager.h"
 #include "UI/LoseWindow.h"
 #include "UI/VictoryWindow.h"
-//
 #include "Global/GameGlobal.h"
 #include "Global/ParticleEmitter.h"
-#include "LevelManager.h"
 
 auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();
@@ -30,9 +30,6 @@ Scene::Scene() : m_score(0), m_player(nullptr)
 //init game objects
 void Scene::Init()
 {
-	//particles
-	m_explosion_particle_pool.Init();
-
 	//planet
 	m_planet = GameObjectFactory::CreateCombatPlanet(m_circle_center, m_circle_radius);
 
@@ -41,12 +38,8 @@ void Scene::Init()
 	m_player->GetComponent<BoxCollider>().collision_enter.Register(this, &Scene::OnPlayerCollisionEnter);
 	m_player->GetComponent<Health>().on_die.Register(this, &Scene::OnGameOver);
 
-	//coin
-	/*for (int i = 0; i < 5; i++)
-	{
-		Transform coin_transform = Transform{ Vector2{ 200.f + i * 150.f, 300.f }, 0.5f };
-		Core::Ref coin = GameObjectFactory::CreateCoin(coin_transform, *this);
-	}*/
+	//particles
+	m_explosion_particle_pool.Init();
 
 	SetUp();
 }
@@ -72,6 +65,7 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 	{
 		m_player->GetComponent<Health>().TakeDamage(5);
 		m_player->GetComponent<HitEffect>().Play();
+		ExplosionParticleEmitter::Emit(m_explosion_particle_pool, other.object->GetComponent<Transform>().position);
 		other.object->Deactivate();
 	}
 	if (other.tag == "enemy_bullet")
@@ -118,12 +112,14 @@ void Scene::Restart()
 	object_manager.Reactivate();
 	//deactivates pool objects
 	m_player->GetComponent<PlayerShooter>().SetBulletPool();
+	//reset particle pool
+	m_explosion_particle_pool.SetUp();
 
 	SetUp(); //set up player pos & stats
 	level_manager.Restart();
 }
 
-//enemy die -- check if win
+//enemy die -- if score % 10 = 0, spawn a health power up; also check if win
 void Scene::OnEnemyDie(const Vector2& pos)
 {
 	m_score++;
@@ -131,6 +127,10 @@ void Scene::OnEnemyDie(const Vector2& pos)
 	//particle effect
 	ExplosionParticleEmitter::Emit(m_explosion_particle_pool, pos);
 
+	//health pickup
+	
+
+	//win condition
 	if (m_score >= GameGlobal::MAX_SCORE)
 	{
 		WindowManager::GetInstance().SetWindow(WindowState::win);

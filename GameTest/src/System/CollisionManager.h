@@ -10,7 +10,7 @@ private:
 	std::map<std::pair<BoxCollider*, BoxCollider*>, bool> collision_map;
 
 	CollisionManager() {};
-	~CollisionManager() {};
+	CollisionManager(const CollisionManager&) = delete; //avoid copy constructor
 
 public:
 	bool IsCollided(BoxCollider& main, BoxCollider& other);

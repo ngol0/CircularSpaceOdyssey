@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "EnemySpawner.h"
-#include "EnemyMovement.h"
 #include "Transform.h"
 //
 #include "GameObject/EnemyPool.h"
-#include "Global/Utils.h"
 
 
 EnemySpawner::EnemySpawner() : m_pool(nullptr), m_transform(nullptr) {}
@@ -15,30 +13,18 @@ void EnemySpawner::SetUp(EnemyPool& pool)
 	m_transform = &Component::object->GetComponent<Transform>();
 }
 
-void EnemySpawner::InitWaypoints()
-{
-	//init waypoints
-	std::vector<Vector2> m_vertices;
-	Utils::GenerateCircleVertices(m_distance_to_center, m_transform->position, 10, m_vertices);
-
-	for (auto& vertice : m_vertices)
-	{
-		m_waypoint_list.push_back(Waypoint{ vertice, true });
-	}
-}
-
 void EnemySpawner::SpawnEnemy()
 {
 	m_pool->Spawn(m_transform->position, 0.f);
 }
 
-void EnemySpawner::SpawnEnemy(Waypoint& destination)
+void EnemySpawner::SpawnEnemyToPos(Waypoint& destination)
 {
 	m_pool->Spawn(m_transform->position, destination, 0.f);
 	destination.is_available = false;
 }
 
-void EnemySpawner::SpawnEnemy(const Vector2& destination)
+void EnemySpawner::SpawnEnemyToPos(const Vector2& destination)
 {
 	m_pool->Spawn(m_transform->position, destination, 0.f);
 }
@@ -46,18 +32,6 @@ void EnemySpawner::SpawnEnemy(const Vector2& destination)
 void EnemySpawner::SpawnEnemyAtPos(const Vector2 spawn_pos, const Vector2& destination)
 {
 	m_pool->Spawn(spawn_pos, destination, 0.f);
-}
-
-Waypoint* EnemySpawner::GetAvailableWaypoint()
-{
-	for (auto& waypoint : m_waypoint_list)
-	{
-		if (waypoint.is_available)
-		{
-			return &waypoint;
-		}
-	}
-	return nullptr;
 }
 
 void EnemySpawner::Reset()

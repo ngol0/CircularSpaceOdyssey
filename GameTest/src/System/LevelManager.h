@@ -39,14 +39,17 @@ private:
 	int m_current_enemy_type{ -1 };
 
 	std::vector<std::unique_ptr<Enemy>> m_enemies;
+	std::vector<Waypoint> m_outer_waypoints;
+
 	bool m_is_complete{ false };
 	int m_index{ 0 };
 
 	int m_current_level{ 0 };
-	Scene* m_scene;
+	Scene* m_scene{ nullptr };
 
 public:
 	LevelManager();
+	LevelManager(const LevelManager&) = delete; //avoid copy constructor
 
 	void SetLevel(int current_level);
 	void LoadFile(const char* filename);

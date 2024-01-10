@@ -10,7 +10,7 @@ namespace ExplosionParticleEmitter
 	{
 		for (int i = 0; i < MAX_PARTICLES; i++)
 		{
-			pool.Spawn(spawn_pos);
+			pool.Emit(spawn_pos);
 		}
 	}
 }

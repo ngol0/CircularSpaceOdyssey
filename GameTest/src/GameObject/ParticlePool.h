@@ -7,7 +7,7 @@ public:
 	ParticlePool();
 
 	void Init();
-	void Spawn(const Vector2& spawn_pos);
+	void Emit(const Vector2& spawn_pos);
 	void SetUp();
 
 private:

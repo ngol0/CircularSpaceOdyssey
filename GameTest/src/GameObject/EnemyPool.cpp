@@ -28,7 +28,7 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 }
 
 //if spawn without pre-stated destination, the enemies move to random positions among the inner vertices
-void EnemyPool::Spawn(const Vector2& spawn_pos,float rotation_angle)
+void EnemyPool::Spawn(const Vector2& spawn_pos, float rotation_angle)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{

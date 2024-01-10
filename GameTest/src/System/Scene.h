@@ -1,8 +1,8 @@
 #pragma once
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
-#include "GameObject/GameObject.h"
 #include "Component/Transform.h"
+#include "GameObject/GameObject.h"
 #include "GameObject/ParticlePool.h"
 
 class Scene
