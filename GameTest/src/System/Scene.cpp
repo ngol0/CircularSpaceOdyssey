@@ -15,6 +15,8 @@
 #include "UI/VictoryWindow.h"
 #include "Global/GameGlobal.h"
 #include "Global/ParticleEmitter.h"
+#include "Global/WaypointGenerator.h"
+#include "Global/PowerUpType.h"
 
 auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();
@@ -25,13 +27,14 @@ Scene::Scene() : m_score(0), m_player(nullptr)
 {
 	m_circle_center = Vector2{ 500.f, 400.f };
 	m_circle_radius = 300.f;
+	m_circle_steps = 30;
 }
 
 //init game objects
 void Scene::Init()
 {
 	//planet
-	m_planet = GameObjectFactory::CreateCombatPlanet(m_circle_center, m_circle_radius);
+	m_planet = GameObjectFactory::CreateCombatPlanet(m_circle_center, m_circle_radius, m_circle_steps);
 
 	//player
 	m_player = GameObjectFactory::CreatePlayer(m_circle_center, m_circle_radius, 0.5f);
@@ -40,6 +43,10 @@ void Scene::Init()
 
 	//particles
 	m_explosion_particle_pool.Init();
+
+	//powerups
+	WaypointGenerator::InitWaypoints(m_circle_radius, m_circle_center, m_circle_steps, m_powerup_positions);
+	m_health_powerup_pool.Init(PowerUpType::Health);
 
 	SetUp();
 }
@@ -55,10 +62,9 @@ void Scene::SetUp()
 
 void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 {
-	if (other.tag == "coin")
+	if (other.tag == "health_power")
 	{
-		//todo: special power
-
+		m_player->GetComponent<Health>().health_amount += 2;
 		other.object->Deactivate();
 	}
 	if (other.tag == "enemy")
@@ -117,6 +123,12 @@ void Scene::Restart()
 
 	SetUp(); //set up player pos & stats
 	level_manager.Restart();
+
+	//reset waypoints
+	for (auto& wp : m_powerup_positions)
+	{
+		wp.is_available = true;
+	}
 }
 
 //enemy die -- if score % 10 = 0, spawn a health power up; also check if win
@@ -127,13 +139,16 @@ void Scene::OnEnemyDie(const Vector2& pos)
 	//particle effect
 	ExplosionParticleEmitter::Emit(m_explosion_particle_pool, pos);
 
-	//health pickup
-	
+	//health pickup every 10 points
+	if (m_score % 10 == 0)
+	{
+		m_health_powerup_pool.Spawn(*WaypointGenerator::GetRandomlyAvailableWaypoint(m_powerup_positions));
+	}
 
 	//win condition
 	if (m_score >= GameGlobal::MAX_SCORE)
 	{
-		WindowManager::GetInstance().SetWindow(WindowState::win);
+		window_manager.SetWindow(WindowState::win);
 	}
 }
 

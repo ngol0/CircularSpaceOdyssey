@@ -28,7 +28,7 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 }
 
 //if spawn without pre-stated destination, the enemies move to random positions among the inner vertices
-void EnemyPool::Spawn(const Vector2& spawn_pos, float rotation_angle)
+void EnemyPool::Spawn(const Vector2& spawn_pos)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
@@ -44,7 +44,7 @@ void EnemyPool::Spawn(const Vector2& spawn_pos, float rotation_angle)
 }
 
 //enemies move to outer vertices
-void EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination, float rotation_angle)
+void EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
@@ -60,7 +60,7 @@ void EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination, float rot
 }
 
 //enemies move to specific position
-void EnemyPool::Spawn(const Vector2& spawn_pos, const Vector2& destination, float rotation_angle)
+void EnemyPool::Spawn(const Vector2& spawn_pos, const Vector2& destination)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{

@@ -4,6 +4,7 @@
 #include "Component/Transform.h"
 #include "GameObject/GameObject.h"
 #include "GameObject/ParticlePool.h"
+#include "GameObject/PowerUpPool.h"
 
 class Scene
 {
@@ -36,11 +37,16 @@ private:
 	//planet
 	Vector2 m_circle_center;
 	float m_circle_radius;
+	int m_circle_steps;
 
 	//general datas
 	int m_score;
 
 	//particles
 	ParticlePool m_explosion_particle_pool;
+
+	//power ups
+	std::vector<Waypoint> m_powerup_positions;
+	PowerUpPool m_health_powerup_pool;
 };
 

@@ -138,13 +138,6 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 
 void LevelManager::Restart()
 {
-	//reset waypoints and timer
-	m_shoot_spawner->Reset();
-	m_chase_spawner->Reset();
-	m_split_spawner->Reset();
-	m_defense_spawner->Reset();
-	m_child_spawner->Reset();
-
 	m_chase_pool.SetUp();
 	m_shoot_pool.SetUp();
 	m_split_pool.SetUp();
@@ -152,6 +145,12 @@ void LevelManager::Restart()
 	m_child_pool.SetUp();
 	
 	SetUpTimer();
+
+	//reset waypoints
+	for (auto& wp : m_outer_waypoints)
+	{
+		wp.is_available = true;
+	}
 }
 
 void LevelManager::SetUpTimer()
