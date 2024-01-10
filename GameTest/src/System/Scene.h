@@ -22,7 +22,7 @@ public:
 	//getters
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().health_amount; }
 	int GetScore() const { return m_score; }
-	const Vector2& GetPlayerPos() const { return m_player->GetComponent<Transform>().position; }
+	const Vector2& GetPlayerPosition() const { return m_player->GetComponent<Transform>().position; }
 	const Vector2& GetPlanetPosition() const { return m_circle_center; }
 
 	//event callback

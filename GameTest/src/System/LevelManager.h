@@ -68,5 +68,5 @@ public:
 	//getter
 	int GetCurrentLevel() { return m_current_level; }
 	EnemySpawner* GetChildSpawner() { return m_child_spawner; }
-	const Vector2& GetPlayerPos() { return m_scene->GetPlayerPos(); }
+	const Vector2& GetPlayerPosition() { return m_scene->GetPlayerPosition(); }
 };

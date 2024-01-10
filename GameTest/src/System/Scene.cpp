@@ -96,7 +96,7 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 
 void Scene::Update(float deltaTime)
 {
-	level_manager.Update(deltaTime, GetPlayerPos());
+	level_manager.Update(deltaTime, GetPlayerPosition());
 	collision_manager.Update(deltaTime);
 	object_manager.Update(deltaTime);
 }
