@@ -4,7 +4,6 @@
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
 #include "Component/EnemyDefense.h"
-#include "Component/ParticleSpawner.h"
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
@@ -14,6 +13,7 @@
 #include "UI/VictoryWindow.h"
 //
 #include "Global/GameGlobal.h"
+#include "Global/ParticleEmitter.h"
 #include "LevelManager.h"
 
 auto& collision_manager = CollisionManager::GetInstance();

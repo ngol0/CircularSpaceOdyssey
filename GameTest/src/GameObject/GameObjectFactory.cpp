@@ -161,7 +161,7 @@ namespace GameObjectFactory
 		Object::Ref particle = GameObjectManager::GetInstance().AddToManager();
 		particle->GetComponent<Transform>().scale = size;
 		//sprite
-		auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\test.png", 1, 1);
+		auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\ball.png", 1, 1);
 		particle_sprite.SetColor(r, g, b);
 		particle->AddComponent<Particle>(lifespan);
 
