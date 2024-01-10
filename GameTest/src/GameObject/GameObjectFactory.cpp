@@ -3,6 +3,7 @@
 #include "GameObjectManager.h"
 #include "GameObjectFactory.h"
 #include "Global/EnemyType.h"
+#include "Global/PowerUpType.h"
 //--components
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
@@ -44,16 +45,23 @@ namespace GameObjectFactory
 		return player;
 	}
 
-	Object::Ref CreateCoin(Transform& transform)
+	Object::Ref CreatePowerUp(PowerUpType powerup_type)
 	{
-		Object::Ref coin = GameObjectManager::GetInstance().AddToManager(transform);
-		//sprite
-		auto& coin_spike = coin->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\coin.bmp", 8, 1);
-		//collider
-		Vector2 collider_size{ coin_spike.width(), coin_spike.height() };
-		coin->AddComponent<BoxCollider>("coin", collider_size);
+		Object::Ref power_up = GameObjectManager::GetInstance().AddToManager();
 
-		return coin;
+		switch (powerup_type)
+		{
+		case PowerUpType::Health:
+			//sprite
+			auto& sprite = power_up->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\coin.bmp", 8, 1);
+			sprite.SetScale(0.5f);
+			//collider
+			Vector2 collider_size{ sprite.width(), sprite.height() };
+			power_up->AddComponent<BoxCollider>("health_power", collider_size);
+			break;
+		}
+
+		return power_up;
 	}
 
 	Object::Ref CreateEnemy(Transform& transform, EnemyType enemy_type)
@@ -136,12 +144,12 @@ namespace GameObjectFactory
 		return bullet;
 	}
 
-	Object::Ref CreateCombatPlanet(const Vector2& center_position, float radius)
+	Object::Ref CreateCombatPlanet(const Vector2& center_position, float radius, int steps)
 	{
 		Transform circle_transfrom{ center_position, radius };
 		Object::Ref circle = GameObjectManager::GetInstance().AddToManager(circle_transfrom);
 		//shape
-		circle->AddComponent<Circle>(center_position, radius, 30);
+		circle->AddComponent<Circle>(center_position, radius, steps);
 
 		return circle;
 	}
@@ -167,9 +175,4 @@ namespace GameObjectFactory
 
 		return particle;
 	}
-
-	/*Object::Ref CreateHealthPowerUp()
-	{
-
-	}*/
 }

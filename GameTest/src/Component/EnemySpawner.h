@@ -9,9 +9,6 @@ class Transform;
 class EnemySpawner : public Component
 {
 private:
-	std::vector<Waypoint> m_waypoint_list;
-	float m_distance_to_center = 150.f;
-
 	EnemyPool* m_pool;
 	Transform* m_transform;
 
@@ -21,10 +18,9 @@ public:
 
 	void Init() override {};
 	void SetUp(EnemyPool& pool);
-	void Reset();
 
 	void SpawnEnemy();
 	void SpawnEnemyToPos(Waypoint& destination);
 	void SpawnEnemyToPos(const Vector2& destination);
-	void SpawnEnemyAtPos(const Vector2 spawn_pos, const Vector2& destination);
+	void SpawnEnemyAtPos(const Vector2& spawn_pos, const Vector2& destination);
 };

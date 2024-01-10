@@ -14,7 +14,7 @@ void EnemySplit::Split()
 		LevelManager::GetInstance().GetChildSpawner()->SpawnEnemyAtPos
 		(
 			spawn_pos + i * m_offset,
-			LevelManager::GetInstance().GetPlayerPos()
+			LevelManager::GetInstance().GetPlayerPosition()
 		);
 	}
 }

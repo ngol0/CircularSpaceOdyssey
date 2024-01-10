@@ -20,24 +20,16 @@ void EnemySpawner::SpawnEnemy()
 
 void EnemySpawner::SpawnEnemyToPos(Waypoint& destination)
 {
-	m_pool->Spawn(m_transform->position, destination, 0.f);
+	m_pool->Spawn(m_transform->position, destination);
 	destination.is_available = false;
 }
 
 void EnemySpawner::SpawnEnemyToPos(const Vector2& destination)
 {
-	m_pool->Spawn(m_transform->position, destination, 0.f);
+	m_pool->Spawn(m_transform->position, destination);
 }
 
-void EnemySpawner::SpawnEnemyAtPos(const Vector2 spawn_pos, const Vector2& destination)
+void EnemySpawner::SpawnEnemyAtPos(const Vector2& spawn_pos, const Vector2& destination)
 {
-	m_pool->Spawn(spawn_pos, destination, 0.f);
-}
-
-void EnemySpawner::Reset()
-{
-	for (auto& waypoint : m_waypoint_list)
-	{
-		waypoint.is_available = true;
-	}
+	m_pool->Spawn(spawn_pos, destination);
 }

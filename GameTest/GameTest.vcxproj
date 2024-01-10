@@ -198,6 +198,7 @@
     <ClInclude Include="src\Component\HitEffect.h" />
     <ClInclude Include="src\Component\MovementInput.h" />
     <ClInclude Include="src\Component\Particle.h" />
+    <ClInclude Include="src\GameObject\PowerUpPool.h" />
     <ClInclude Include="src\Global\ParticleEmitter.h" />
     <ClInclude Include="src\Component\PlayerShooter.h" />
     <ClInclude Include="src\Component\SpriteRenderer.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="src\Component\Health.h" />
     <ClInclude Include="src\GameObject\ParticlePool.h" />
     <ClInclude Include="src\Global\GameGlobal.h" />
+    <ClInclude Include="src\Global\PowerUpType.h" />
     <ClInclude Include="src\Global\WaypointGenerator.h" />
     <ClInclude Include="src\Math\Vector2.h" />
     <ClInclude Include="src\Component\Circle.h" />
@@ -248,6 +250,7 @@
     <ClCompile Include="src\Component\HitEffect.cpp" />
     <ClCompile Include="src\Component\MovementInput.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
+    <ClCompile Include="src\GameObject\PowerUpPool.cpp" />
     <ClCompile Include="src\Global\ParticleEmitter.cpp" />
     <ClCompile Include="src\Component\PlayerShooter.cpp" />
     <ClCompile Include="src\Component\SpriteRenderer.cpp" />
