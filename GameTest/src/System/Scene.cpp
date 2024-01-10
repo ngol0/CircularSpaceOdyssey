@@ -4,6 +4,7 @@
 #include "Component/PlayerShooter.h"
 #include "Component/HitEffect.h"
 #include "Component/EnemyDefense.h"
+#include "Component/ParticleSpawner.h"
 //
 #include "GameObject/GameObjectManager.h"
 #include "System/CollisionManager.h"
@@ -22,27 +23,23 @@ auto& level_manager = LevelManager::GetInstance();
 
 Scene::Scene() : m_score(0), m_player(nullptr)
 {
-	circle_center = Vector2{ 500.f, 400.f };
-	circle_radius = 300.f;
+	m_circle_center = Vector2{ 500.f, 400.f };
+	m_circle_radius = 300.f;
 }
 
 //init game objects
 void Scene::Init()
 {
 	//particles
-	particle_pool.Init();
-	particle_spawner.SetUp(particle_pool);
+	m_explosion_particle_pool.Init();
 
 	//planet
-	m_planet = GameObjectFactory::CreateCombatPlanet(circle_center, circle_radius);
+	m_planet = GameObjectFactory::CreateCombatPlanet(m_circle_center, m_circle_radius);
 
 	//player
-	m_player = GameObjectFactory::CreatePlayer(circle_center, circle_radius, 0.5f);
+	m_player = GameObjectFactory::CreatePlayer(m_circle_center, m_circle_radius, 0.5f);
 	m_player->GetComponent<BoxCollider>().collision_enter.Register(this, &Scene::OnPlayerCollisionEnter);
 	m_player->GetComponent<Health>().on_die.Register(this, &Scene::OnGameOver);
-
-	//level manager
-	//level_manager.Init(*this);
 
 	//coin
 	/*for (int i = 0; i < 5; i++)
@@ -106,9 +103,8 @@ void Scene::OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& other)
 void Scene::Update(float deltaTime)
 {
 	level_manager.Update(deltaTime, GetPlayerPos());
-
-	object_manager.Update(deltaTime);
 	collision_manager.Update(deltaTime);
+	object_manager.Update(deltaTime);
 }
 
 void Scene::Render()
@@ -128,10 +124,12 @@ void Scene::Restart()
 }
 
 //enemy die -- check if win
-void Scene::OnScore()
+void Scene::OnEnemyDie(const Vector2& pos)
 {
 	m_score++;
-	particle_spawner.Emit(Vector2(500.f));
+
+	//particle effect
+	ExplosionParticleEmitter::Emit(m_explosion_particle_pool, pos);
 
 	if (m_score >= GameGlobal::MAX_SCORE)
 	{
@@ -140,8 +138,11 @@ void Scene::OnScore()
 }
 
 //player die -- lose
-void Scene::OnGameOver()
+void Scene::OnGameOver(const Vector2& pos)
 {
+	//particle effect
+	ExplosionParticleEmitter::Emit(m_explosion_particle_pool, pos);
+
 	window_manager.SetWindow(WindowState::lose);
 }
 

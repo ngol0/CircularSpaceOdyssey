@@ -18,7 +18,7 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 		enemies[i] = GameObjectFactory::CreateEnemy(transform, enemy_type);
 		enemies[i]->Deactivate();
 		enemies[i]->GetComponent<BoxCollider>().collisions_enter.Register(&scene, &Scene::OnEnemyCollisionEnter);
-		enemies[i]->GetComponent<Health>().on_die.Register(&scene, &Scene::OnScore);
+		enemies[i]->GetComponent<Health>().on_die.Register(&scene, &Scene::OnEnemyDie);
 
 		if (enemies[i]->HasComponent<EnemyShooter>())
 		{

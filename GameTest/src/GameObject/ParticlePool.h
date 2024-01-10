@@ -11,6 +11,6 @@ public:
 	void SetUp();
 
 private:
-	static const int POOL_SIZE = 100;
+	static const int POOL_SIZE = 200;
 	Object::Ref particles[POOL_SIZE];
 };

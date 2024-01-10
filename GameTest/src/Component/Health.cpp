@@ -16,7 +16,7 @@ void Health::TakeDamage(int damage_amount)
 
 	if (health_amount <= 0)
 	{
-		on_die.Notify();
+		on_die.Notify(Component::object->GetComponent<Transform>().position);
 
 		if (Component::object->HasComponent<EnemyMovement>())
 		{

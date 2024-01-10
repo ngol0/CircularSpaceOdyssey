@@ -2,17 +2,15 @@
 #include "ParticleSpawner.h"
 #include "GameObject/ParticlePool.h"
 
-ParticleSpawner::ParticleSpawner() {}
+static const int MAX_PARTICLES = 8; //max particles to spawn each time
 
-void ParticleSpawner::SetUp(ParticlePool& pool)
+namespace ExplosionParticleEmitter
 {
-	m_pool = &pool;
-}
-
-void ParticleSpawner::Emit(const Vector2& spawn_pos)
-{
-	for (int i = 0; i < MAX_PARTICLES; i++)
+	void Emit(ParticlePool& pool, const Vector2& spawn_pos)
 	{
-		m_pool->Spawn(spawn_pos);
+		for (int i = 0; i < MAX_PARTICLES; i++)
+		{
+			pool.Spawn(spawn_pos);
+		}
 	}
 }

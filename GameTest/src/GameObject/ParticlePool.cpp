@@ -12,7 +12,11 @@ void ParticlePool::Init()
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
-		particles[i] = GameObjectFactory::CreateParticle(Utils::RandomFloat(3.f, 10.f)/100.f, 100.f);
+		float r = Utils::RandomFloat(1.f, 10.f) / 10.f;
+		float g = Utils::RandomFloat(1.f, 10.f) / 10.f;
+		float b = Utils::RandomFloat(1.f, 10.f) / 10.f;
+		float size = Utils::RandomFloat(3.f, 10.f) / 100.f;
+		particles[i] = GameObjectFactory::CreateParticle(r, g, b, size, 50.f);
 		particles[i]->Deactivate();
 	}
 }

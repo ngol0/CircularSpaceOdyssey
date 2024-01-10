@@ -3,6 +3,7 @@
 #include "Global/Event.h"
 
 class Scene;
+struct Vector2;
 
 class Health : public Component
 {
@@ -15,7 +16,7 @@ public:
 
 	void ResetHealth();
 
-	Event<Scene> on_die;
+	Event<Scene, const Vector2&> on_die;
 
 	int health_amount;
 

@@ -9,12 +9,13 @@ Particle::Particle(int lifespan) : m_frame_left(lifespan), m_initial_frame(lifes
 
 void Particle::Init()
 {
-	m_speed = 0.05f;
+	m_speed = 0.08f;
 	m_transform = &Component::object->GetComponent<Transform>();
 }
 
 void Particle::Update(float deltaTime)
 {
+	//moving
 	m_frame_left--;
 	m_transform->position = m_transform->position + m_move_direction * m_speed * deltaTime;
 
