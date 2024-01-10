@@ -3,10 +3,11 @@
 #include "GameObject/GameObjectFactory.h"
 #include "Global/EnemyType.h"
 #include "Global/Utils.h"
+#include "Global/WaypointGenerator.h"
 //
 #include <sstream>
 
-LevelManager::LevelManager() : m_scene(nullptr) {}
+LevelManager::LevelManager() {}
 
 void LevelManager::SetLevel(int current_level)
 {
@@ -68,13 +69,11 @@ void LevelManager::SetUpEnemy(Scene& scene)
 	m_shoot_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
 	m_shoot_spawner = &m_shoot_spawner_obj->GetComponent<EnemySpawner>();
 	m_shoot_spawner->SetUp(m_shoot_pool);
-	m_shoot_spawner->InitWaypoints();
 
 	//enemy that can splits into different ones if destroyed
 	m_split_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
 	m_split_spawner = &m_split_spawner_obj->GetComponent<EnemySpawner>();
 	m_split_spawner->SetUp(m_split_pool);
-	m_split_spawner->InitWaypoints();
 
 	//splitted enemy that follows player in fast speed
 	m_child_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
@@ -85,6 +84,9 @@ void LevelManager::SetUpEnemy(Scene& scene)
 	m_defense_spawner_obj = GameObjectFactory::CreateEnemySpawner(scene.GetPlanetPosition());
 	m_defense_spawner = &m_defense_spawner_obj->GetComponent<EnemySpawner>();
 	m_defense_spawner->SetUp(m_defense_pool);
+
+	//init waypoints
+	WaypointGenerator::InitWaypoints(150.f, m_scene->GetPlanetPosition(), 10, m_outer_waypoints);
 }
 
 void LevelManager::Update(float deltaTime, const Vector2& player_pos)
@@ -97,25 +99,24 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 		//chase and explode enemies moves towards player
 		if (m_current_enemy_type == (int)EnemyType::SlowChaseType)
 		{
-			//std::cout << "x: "<< player_pos.x << std::endl;
 			//spawn enemy
-			m_chase_spawner->SpawnEnemy(player_pos);
+			m_chase_spawner->SpawnEnemyToPos(player_pos);
 		}
 		//enemy that can be on defense and stays at waypoint
 		else if (m_current_enemy_type == (int)EnemyType::TwoModeType)
 		{
-			Waypoint* destination = m_shoot_spawner->GetAvailableWaypoint();
+			Waypoint* destination = WaypointGenerator::GetNextAvailableWaypoint(m_outer_waypoints);
 			if (destination == nullptr) return;
-			m_defense_spawner->SpawnEnemy(*destination);
+			m_defense_spawner->SpawnEnemyToPos(*destination);
 		}
-		//shoot moves to and stays at waypoint
+		//shoot moves to and stays at outer waypoint
 		else if (m_current_enemy_type == (int)EnemyType::ShootType)
 		{
-			Waypoint* destination = m_shoot_spawner->GetAvailableWaypoint();
+			Waypoint* destination = WaypointGenerator::GetNextAvailableWaypoint(m_outer_waypoints);
 			if (destination == nullptr) return;
-			m_shoot_spawner->SpawnEnemy(*destination);
+			m_shoot_spawner->SpawnEnemyToPos(*destination);
 		}
-		//split type moves randomly
+		//split type moves to random inner waypoints
 		else if (m_current_enemy_type == (int)EnemyType::SplitType)
 		{
 			m_split_spawner->SpawnEnemy();
@@ -140,9 +141,15 @@ void LevelManager::Restart()
 	//reset waypoints and timer
 	m_shoot_spawner->Reset();
 	m_chase_spawner->Reset();
+	m_split_spawner->Reset();
+	m_defense_spawner->Reset();
+	m_child_spawner->Reset();
 
 	m_chase_pool.SetUp();
 	m_shoot_pool.SetUp();
+	m_split_pool.SetUp();
+	m_defense_pool.SetUp();
+	m_child_pool.SetUp();
 	
 	SetUpTimer();
 }

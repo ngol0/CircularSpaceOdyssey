@@ -198,7 +198,7 @@
     <ClInclude Include="src\Component\HitEffect.h" />
     <ClInclude Include="src\Component\MovementInput.h" />
     <ClInclude Include="src\Component\Particle.h" />
-    <ClInclude Include="src\Component\ParticleSpawner.h" />
+    <ClInclude Include="src\Global\ParticleEmitter.h" />
     <ClInclude Include="src\Component\PlayerShooter.h" />
     <ClInclude Include="src\Component\SpriteRenderer.h" />
     <ClInclude Include="src\Component\Transform.h" />
@@ -210,6 +210,7 @@
     <ClInclude Include="src\Component\Health.h" />
     <ClInclude Include="src\GameObject\ParticlePool.h" />
     <ClInclude Include="src\Global\GameGlobal.h" />
+    <ClInclude Include="src\Global\WaypointGenerator.h" />
     <ClInclude Include="src\Math\Vector2.h" />
     <ClInclude Include="src\Component\Circle.h" />
     <ClInclude Include="src\System\CollisionManager.h" />
@@ -247,7 +248,7 @@
     <ClCompile Include="src\Component\HitEffect.cpp" />
     <ClCompile Include="src\Component\MovementInput.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
-    <ClCompile Include="src\Component\ParticleSpawner.cpp" />
+    <ClCompile Include="src\Global\ParticleEmitter.cpp" />
     <ClCompile Include="src\Component\PlayerShooter.cpp" />
     <ClCompile Include="src\Component\SpriteRenderer.cpp" />
     <ClCompile Include="src\Component\Transform.cpp" />
@@ -259,6 +260,7 @@
     <ClCompile Include="src\Component\Health.cpp" />
     <ClCompile Include="src\GameObject\ParticlePool.cpp" />
     <ClCompile Include="src\GameTest.cpp" />
+    <ClCompile Include="src\Global\WaypointGenerator.cpp" />
     <ClCompile Include="src\Math\Vector2.cpp" />
     <ClCompile Include="src\Component\Circle.cpp" />
     <ClCompile Include="src\System\CollisionManager.cpp" />

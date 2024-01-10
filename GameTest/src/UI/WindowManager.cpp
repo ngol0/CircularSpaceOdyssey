@@ -44,7 +44,13 @@ void WindowManager::RenderBackground()
 {
 	for (const auto& pos : m_random_pos)
 	{
-		Utils::DrawDot(pos, Utils::RandomFloat(0, 3.f), Utils::RandomFloat(0, 3.f), Utils::RandomFloat(0, 3.f));
+		Utils::DrawDot
+		(
+			pos, 
+			Utils::RandomFloat(1.f, 10.f) / 10.f, 
+			Utils::RandomFloat(1.f, 10.f) / 10.f, 
+			Utils::RandomFloat(1.f, 10.f) / 10.f
+		);
 	}
 }
 

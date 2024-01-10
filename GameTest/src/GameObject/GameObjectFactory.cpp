@@ -156,12 +156,13 @@ namespace GameObjectFactory
 		return spawner;
 	}
 
-	Object::Ref CreateParticle(float size, int lifespan)
+	Object::Ref CreateParticle(float r, float b, float g, float size, int lifespan)
 	{
 		Object::Ref particle = GameObjectManager::GetInstance().AddToManager();
 		particle->GetComponent<Transform>().scale = size;
 		//sprite
-		auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\test.png", 1, 1);
+		auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\flower.png", 1, 1);
+		particle_sprite.SetColor(r, g, b);
 		particle->AddComponent<Particle>(lifespan);
 
 		return particle;

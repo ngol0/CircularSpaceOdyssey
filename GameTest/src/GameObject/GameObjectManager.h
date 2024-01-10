@@ -7,7 +7,7 @@ private:
 	Object::Ref_List object_container;
 
 	GameObjectManager() {};
-	~GameObjectManager() {};
+	GameObjectManager(const GameObjectManager&) = delete; //avoid copy constructor
 
 public:
 	void Init(){};

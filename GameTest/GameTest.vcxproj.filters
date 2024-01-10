@@ -43,7 +43,7 @@
     <ClCompile Include="src\Component\EnemyShooter.cpp" />
     <ClCompile Include="src\Component\HitEffect.cpp" />
     <ClCompile Include="src\GameObject\ParticlePool.cpp" />
-    <ClCompile Include="src\Component\ParticleSpawner.cpp" />
+    <ClCompile Include="src\Global\ParticleEmitter.cpp" />
     <ClCompile Include="src\UI\WindowManager.cpp" />
     <ClCompile Include="src\UI\TitleWindow.cpp" />
     <ClCompile Include="src\UI\Window.cpp" />
@@ -57,6 +57,7 @@
     <ClCompile Include="src\Component\EnemyDefense.cpp" />
     <ClCompile Include="src\Component\EnemyRandomMovement.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
+    <ClCompile Include="src\Global\WaypointGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h" />
@@ -108,7 +109,7 @@
     <ClInclude Include="src\Component\EnemyShooter.h" />
     <ClInclude Include="src\Component\HitEffect.h" />
     <ClInclude Include="src\GameObject\ParticlePool.h" />
-    <ClInclude Include="src\Component\ParticleSpawner.h" />
+    <ClInclude Include="src\Global\ParticleEmitter.h" />
     <ClInclude Include="src\UI\WindowManager.h" />
     <ClInclude Include="src\UI\TitleWindow.h" />
     <ClInclude Include="src\UI\Window.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="src\Component\EnemyDefense.h" />
     <ClInclude Include="src\Component\EnemyRandomMovement.h" />
     <ClInclude Include="src\Component\Particle.h" />
+    <ClInclude Include="src\Global\WaypointGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

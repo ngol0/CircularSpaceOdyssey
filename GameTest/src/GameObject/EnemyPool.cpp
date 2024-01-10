@@ -18,7 +18,7 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 		enemies[i] = GameObjectFactory::CreateEnemy(transform, enemy_type);
 		enemies[i]->Deactivate();
 		enemies[i]->GetComponent<BoxCollider>().collisions_enter.Register(&scene, &Scene::OnEnemyCollisionEnter);
-		enemies[i]->GetComponent<Health>().on_die.Register(&scene, &Scene::OnScore);
+		enemies[i]->GetComponent<Health>().on_die.Register(&scene, &Scene::OnEnemyDie);
 
 		if (enemies[i]->HasComponent<EnemyShooter>())
 		{
@@ -28,7 +28,7 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 }
 
 //if spawn without pre-stated destination, the enemies move to random positions among the inner vertices
-void EnemyPool::Spawn(const Vector2& spawn_pos,float rotation_angle)
+void EnemyPool::Spawn(const Vector2& spawn_pos, float rotation_angle)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{

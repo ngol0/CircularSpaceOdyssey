@@ -27,11 +27,11 @@ void EnemyMovement::Update(float deltaTime)
 {
 	Vector2 move_vector;
 	//move to destination
-	if (m_waypoint_destination == nullptr)
+	if (m_waypoint_destination == nullptr && m_pos_destination != nullptr)
 	{
 		move_vector = *m_pos_destination - m_transform->position;
 	}
-	else
+	else if (m_waypoint_destination != nullptr && m_pos_destination == nullptr)
 	{
 		move_vector = m_waypoint_destination->position - m_transform->position;
 	}
