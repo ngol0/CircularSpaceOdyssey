@@ -78,14 +78,14 @@ namespace GameObjectFactory
 		{
 		case EnemyType::SlowChaseType:
 			//health
-			enemy->AddComponent<Health>(100);
+			enemy->AddComponent<Health>(200);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.02f);
 			//sprite
 			enemy_sprite.SetFrame(3);
 			break;
 		case EnemyType::ShootType:
-			enemy->AddComponent<Health>(200);
+			enemy->AddComponent<Health>(100);
 			//shooter
 			enemy->AddComponent<EnemyShooter>(20.f);
 			//movement
@@ -95,9 +95,9 @@ namespace GameObjectFactory
 			break;
 		case EnemyType::TwoModeType:
 			//health
-			enemy->AddComponent<Health>(100);
+			enemy->AddComponent<Health>(120);
 			//movement
-			enemy->AddComponent<EnemyMovement>(0.02f);
+			enemy->AddComponent<EnemyMovement>(0.05f);
 			//sprite
 			enemy_sprite.SetFrame(15);
 			enemy_sprite.SetColor(0.f, 1.f, 0.212f);
@@ -107,9 +107,9 @@ namespace GameObjectFactory
 			break;
 		case EnemyType::SplitType:
 			//health
-			enemy->AddComponent<Health>(100);
+			enemy->AddComponent<Health>(60);
 			//movement
-			enemy->AddComponent<EnemyMovement>(0.02f);
+			enemy->AddComponent<EnemyMovement>(0.03f);
 			enemy->AddComponent<EnemyRandomMovement>();
 			//sprite
 			enemy_sprite.SetFrame(11);
@@ -118,7 +118,7 @@ namespace GameObjectFactory
 			break;
 		case EnemyType::FastChaseType:
 			//health
-			enemy->AddComponent<Health>(100);
+			enemy->AddComponent<Health>(60);
 			//movement
 			enemy->AddComponent<EnemyMovement>(0.1f);
 			//sprite

@@ -120,6 +120,7 @@ void Scene::Restart()
 	m_player->GetComponent<PlayerShooter>().SetBulletPool();
 	//reset particle pool
 	m_explosion_particle_pool.SetUp();
+	m_health_powerup_pool.SetUp();
 
 	SetUp(); //set up player pos & stats
 	level_manager.Restart();
