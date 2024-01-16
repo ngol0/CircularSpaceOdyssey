@@ -20,6 +20,7 @@ void VictoryWindow::HandleInput(float deltaTime)
 		switch (current_level)
 		{
 		case 1:
+			std::cout << "why???" << std::endl;
 			level_mgr.LoadFile(".\\Data\\Level2.txt");
 			level_mgr.SetLevel(2);
 

@@ -105,14 +105,14 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 		//enemy that can be on defense and stays at waypoint
 		else if (m_current_enemy_type == (int)EnemyType::TwoModeType)
 		{
-			Waypoint* destination = WaypointGenerator::GetNextAvailableWaypoint(m_outer_waypoints);
+			Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
 			if (destination == nullptr) return;
 			m_defense_spawner->SpawnEnemyToPos(*destination);
 		}
 		//shoot moves to and stays at outer waypoint
 		else if (m_current_enemy_type == (int)EnemyType::ShootType)
 		{
-			Waypoint* destination = WaypointGenerator::GetNextAvailableWaypoint(m_outer_waypoints);
+			Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
 			if (destination == nullptr) return;
 			m_shoot_spawner->SpawnEnemyToPos(*destination);
 		}
@@ -138,6 +138,7 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 
 void LevelManager::Restart()
 {
+	//reset pool
 	m_chase_pool.SetUp();
 	m_shoot_pool.SetUp();
 	m_split_pool.SetUp();
@@ -145,6 +146,7 @@ void LevelManager::Restart()
 	m_child_pool.SetUp();
 	
 	SetUpTimer();
+	m_is_complete = false;
 
 	//reset waypoints
 	for (auto& wp : m_outer_waypoints)
