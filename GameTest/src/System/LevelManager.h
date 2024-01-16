@@ -42,6 +42,7 @@ private:
 	std::vector<Waypoint> m_outer_waypoints;
 
 	bool m_is_complete{ false };
+	bool m_is_waiting{ false };
 	int m_index{ 0 };
 
 	int m_current_level{ 0 };
@@ -61,6 +62,7 @@ public:
 	void ReadSpawnInfo();
 	void SetUpTimer();
 	void SetUpEnemy(Scene& scene);
+	bool SpawnEnemy(const Vector2& player_pos);
 
 	//singleton
 	static LevelManager& GetInstance();

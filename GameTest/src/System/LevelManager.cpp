@@ -91,49 +91,65 @@ void LevelManager::SetUpEnemy(Scene& scene)
 
 void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 {
-	m_timer += deltaTime / 100.f;
+	if (!m_is_waiting)
+		m_timer += deltaTime / 100.f;
 
 	if (m_timer >= m_current_timer && !m_is_complete)
 	{
-		//spawn based on type
-		//chase and explode enemies moves towards player
-		if (m_current_enemy_type == (int)EnemyType::SlowChaseType)
+		//if there is available waypoint for next enemy, increase index
+		if (SpawnEnemy(player_pos))
 		{
-			//spawn enemy
-			m_chase_spawner->SpawnEnemyToPos(player_pos);
+			m_index++;
+			//if not ends - moves to next enemy
+			if (m_index < m_enemies.size())
+			{
+				std::cout << m_index << std::endl;
+				m_current_timer = m_enemies[m_index]->timer;
+				m_current_enemy_type = m_enemies[m_index]->id;
+				m_is_waiting = false;
+			}
+			else
+			{
+				m_is_complete = true;
+			}
 		}
-		//enemy that can be on defense and stays at waypoint
-		else if (m_current_enemy_type == (int)EnemyType::TwoModeType)
-		{
-			Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
-			if (destination == nullptr) return;
-			m_defense_spawner->SpawnEnemyToPos(*destination);
-		}
-		//shoot moves to and stays at outer waypoint
-		else if (m_current_enemy_type == (int)EnemyType::ShootType)
-		{
-			Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
-			if (destination == nullptr) return;
-			m_shoot_spawner->SpawnEnemyToPos(*destination);
-		}
-		//split type moves to random inner waypoints
-		else if (m_current_enemy_type == (int)EnemyType::SplitType)
-		{
-			m_split_spawner->SpawnEnemy();
-		}
-
-		m_index++;
-		//if not ends - moves to next enemy
-		if (m_index < m_enemies.size())
-		{
-			m_current_timer = m_enemies[m_index]->timer;
-			m_current_enemy_type = m_enemies[m_index]->id;
-		}
+		//else, stop timer and wait until there's an available waypoint
 		else
 		{
-			m_is_complete = true;
+			m_is_waiting = true;
 		}
 	}
+}
+
+bool LevelManager::SpawnEnemy(const Vector2& player_pos)
+{
+	//spawn based on type
+		//chase and explode enemies moves towards player
+	if (m_current_enemy_type == (int)EnemyType::SlowChaseType)
+	{
+		//spawn enemy
+		m_chase_spawner->SpawnEnemyToPos(player_pos);
+	}
+	//enemy that can be on defense and stays at waypoint
+	else if (m_current_enemy_type == (int)EnemyType::TwoModeType)
+	{
+		Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
+		if (destination == nullptr) return false;
+		m_defense_spawner->SpawnEnemyToPos(*destination);
+	}
+	//shoot moves to and stays at outer waypoint
+	else if (m_current_enemy_type == (int)EnemyType::ShootType)
+	{
+		Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
+		if (destination == nullptr) return false;
+		m_shoot_spawner->SpawnEnemyToPos(*destination);
+	}
+	//split type moves to random inner waypoints
+	else if (m_current_enemy_type == (int)EnemyType::SplitType)
+	{
+		m_split_spawner->SpawnEnemy();
+	}
+	return true;
 }
 
 void LevelManager::Restart()
