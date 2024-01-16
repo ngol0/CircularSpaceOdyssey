@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerShooter.h"
-#include "Component/Transform.h"
+#include "Transform.h"
+#include "System/AudioManager.h"
 
 PlayerShooter::PlayerShooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shooter_transform(nullptr)
 {
@@ -24,6 +25,8 @@ void PlayerShooter::Shoot(float deltaTime)
 		Vector2 spawn_pos = m_shooter_transform->position + m_shooter_transform->forward * m_spawn_offset;
 		bullet_pool.Spawn(spawn_pos, m_shooter_transform->forward, m_shooter_transform->rotation_angle);
 		m_timer = 0.f;
+
+		AudioManager::GetInstance().PlaySoundEffect("player_shoot", false);
 	}
 
 	m_timer += deltaTime / 100.f;

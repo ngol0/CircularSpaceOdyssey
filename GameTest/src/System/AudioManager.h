@@ -5,9 +5,16 @@ class AudioManager
 {
 public:
 	AudioManager();
-	void LoadAllAudios();
-	void Play(const char* id);
+	AudioManager(const AudioManager&) = delete; //avoid copy constructor
+
+	void Init();
+	void PlaySoundEffect(const std::string& id, bool looping);
+	void PlayMusic(const std::string& id, bool looping);
+
+	//singleton
+	static AudioManager& GetInstance();
 
 private:
-	std::map<std::string, std::string> audio_map;
+	std::map<std::string, const char*> sound_effects;
+	std::map<std::string, const char*> music;
 };

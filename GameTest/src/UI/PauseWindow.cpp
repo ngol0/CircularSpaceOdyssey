@@ -31,7 +31,7 @@ void PauseWindow::Render()
 	App::Print(500.f, 550.f, "PAUSED", 0.859, 0.91, 0.043, m_FONT);
 	App::Print(300.f, 500.f, "Control list:", 0.98, 0.569, 0.263, m_FONT);
 	App::Print(300.f, 450.f, "A or D to move", 1.f, 1.f, 1.f, m_FONT);
-	App::Print(300.f, 400.f, "LEFT CLICK to shoot or jump between planets", 1.f, 1.f, 1.f, m_FONT);
+	App::Print(300.f, 400.f, "LEFT CLICK to shoot", 1.f, 1.f, 1.f, m_FONT);
 	App::Print(300.f, 350.f, "R to restart", 1.f, 1.f, 1.f, m_FONT);
 	App::Print(300.f, 300.f, "P to continue", 1.f, 1.f, 1.f, m_FONT);
 }
