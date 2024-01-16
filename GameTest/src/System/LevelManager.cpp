@@ -38,6 +38,7 @@ void LevelManager::ReadSpawnInfo()
 		if (iss >> enem->timer >> enem->id)
 		{
 			m_enemies.emplace_back(std::move(enem));
+
 		}
 	}
 }
@@ -103,7 +104,7 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 			//if not ends - moves to next enemy
 			if (m_index < m_enemies.size())
 			{
-				std::cout << m_index << std::endl;
+				//std::cout << m_index << std::endl;
 				m_current_timer = m_enemies[m_index]->timer;
 				m_current_enemy_type = m_enemies[m_index]->id;
 				m_is_waiting = false;
