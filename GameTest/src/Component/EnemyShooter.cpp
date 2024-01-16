@@ -2,6 +2,7 @@
 #include "EnemyShooter.h"
 #include "Component/Transform.h"
 #include "Global/Utils.h"
+#include "System/AudioManager.h"
 
 EnemyShooter::EnemyShooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shooter_transform(nullptr), m_target_transform(nullptr)
 {
@@ -29,6 +30,8 @@ void EnemyShooter::Shoot(float deltaTime)
 		bullet_pool.Spawn(spawn_pos, shoot_direction, m_shooter_transform->rotation_angle);
 
 		m_timer = 0.f;
+
+		AudioManager::GetInstance().PlaySoundEffect("enemy_shoot", false);
 	}
 
 	m_timer += deltaTime / 100.f;

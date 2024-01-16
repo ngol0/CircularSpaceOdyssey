@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include "LevelManager.h"
+#include "AudioManager.h"
 //
 #include "Component/MovementInput.h"
 #include "Component/PlayerShooter.h"
@@ -22,6 +23,7 @@ auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();
 auto& window_manager = WindowManager::GetInstance();
 auto& level_manager = LevelManager::GetInstance();
+auto& audio_manager = AudioManager::GetInstance();
 
 Scene::Scene() : m_score(0), m_player(nullptr)
 {
@@ -69,6 +71,8 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 			m_player->GetComponent<Health>().health_amount += 2;
 		}
 		other.object->Deactivate();
+
+		audio_manager.PlaySoundEffect("power", false);
 	}
 	if (other.tag == "enemy")
 	{
@@ -76,12 +80,16 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 		m_player->GetComponent<HitEffect>().Play();
 		ExplosionParticleEmitter::Emit(m_explosion_particle_pool, other.object->GetComponent<Transform>().position);
 		other.object->Deactivate();
+
+		audio_manager.PlaySoundEffect("player_damaged", false);
 	}
 	if (other.tag == "enemy_bullet")
 	{
 		m_player->GetComponent<Health>().TakeDamage(1);
 		m_player->GetComponent<HitEffect>().Play();
 		other.object->Deactivate();
+
+		audio_manager.PlaySoundEffect("player_damaged", false);
 	}
 }
 
@@ -154,6 +162,8 @@ void Scene::OnEnemyDie(const Vector2& pos)
 	{
 		window_manager.SetWindow(WindowState::win);
 	}
+
+	audio_manager.PlaySoundEffect("enemy_explode", false);
 }
 
 //player die -- lose
@@ -162,7 +172,11 @@ void Scene::OnGameOver(const Vector2& pos)
 	//particle effect
 	ExplosionParticleEmitter::Emit(m_explosion_particle_pool, pos);
 
+	//ui
 	window_manager.SetWindow(WindowState::lose);
+
+	//sound
+	audio_manager.PlaySoundEffect("player_explode", false);
 }
 
 

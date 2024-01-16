@@ -3,6 +3,7 @@
 #include <windows.h>  
 //------------------------------------------------------------------------
 #include "System/Scene.h"
+#include "System/AudioManager.h"
 //------------------------------------------------------------------------
 #include "UI/WindowManager.h"
 #include "UI/TitleWindow.h"
@@ -10,8 +11,10 @@
 #include "UI/LevelWindow.h"
 #include "UI/VictoryWindow.h"
 
+
 Scene scene;
 auto& window = WindowManager::GetInstance();
+auto& audio = AudioManager::GetInstance();
 
 void Init()
 {
@@ -20,6 +23,7 @@ void Init()
 	freopen("conout$", "w", stdout);
 	freopen("conout$", "w", stderr);*/
 
+	audio.Init();
 	scene.Init();
 	window.Init(scene);
 }
