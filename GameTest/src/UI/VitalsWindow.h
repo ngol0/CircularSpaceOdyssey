@@ -9,6 +9,7 @@ public:
 
 	virtual void OnEnter() override;
 	virtual void HandleInput(float deltaTime) override;
+	virtual void OnExit() override;
 	virtual void Render() override;
 
 	void UpdateScoreText(int score);

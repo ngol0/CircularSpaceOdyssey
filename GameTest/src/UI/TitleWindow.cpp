@@ -10,7 +10,7 @@ void TitleWindow::HandleInput(float deltaTime)
 {
 	if (App::IsKeyPressed(VK_SPACE))
 	{
-		AudioManager::GetInstance().PlaySoundEffect("game_start", false);
+		AudioManager::GetInstance().PlaySoundEffect(SoundID::BUTTON, false);
 		WindowManager::GetInstance().SetWindow(WindowState::level);
 	}
 }

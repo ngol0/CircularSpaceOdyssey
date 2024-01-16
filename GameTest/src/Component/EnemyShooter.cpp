@@ -31,7 +31,7 @@ void EnemyShooter::Shoot(float deltaTime)
 
 		m_timer = 0.f;
 
-		AudioManager::GetInstance().PlaySoundEffect("enemy_shoot", false);
+		AudioManager::GetInstance().PlaySoundEffect(SoundID::ENEMY_SHOOT, false);
 	}
 
 	m_timer += deltaTime / 100.f;

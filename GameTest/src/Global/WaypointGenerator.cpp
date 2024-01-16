@@ -14,7 +14,7 @@ namespace WaypointGenerator
 		}
 		else
 		{
-			GetRandomlyAvailableWaypoint(in_vector);
+			return GetNextAvailableWaypoint(in_vector);
 		}
 	}
 

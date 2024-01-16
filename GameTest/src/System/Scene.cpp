@@ -72,7 +72,7 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 		}
 		other.object->Deactivate();
 
-		audio_manager.PlaySoundEffect("power", false);
+		audio_manager.PlaySoundEffect(SoundID::HEALTH_POWER, false);
 	}
 	if (other.tag == "enemy")
 	{
@@ -81,7 +81,7 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 		ExplosionParticleEmitter::Emit(m_explosion_particle_pool, other.object->GetComponent<Transform>().position);
 		other.object->Deactivate();
 
-		audio_manager.PlaySoundEffect("player_damaged", false);
+		audio_manager.PlaySoundEffect(SoundID::PLAYER_DAMAGED, false);
 	}
 	if (other.tag == "enemy_bullet")
 	{
@@ -89,7 +89,7 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 		m_player->GetComponent<HitEffect>().Play();
 		other.object->Deactivate();
 
-		audio_manager.PlaySoundEffect("player_damaged", false);
+		audio_manager.PlaySoundEffect(SoundID::PLAYER_DAMAGED, false);
 	}
 }
 
@@ -163,7 +163,7 @@ void Scene::OnEnemyDie(const Vector2& pos)
 		window_manager.SetWindow(WindowState::win);
 	}
 
-	audio_manager.PlaySoundEffect("enemy_explode", false);
+	audio_manager.PlaySoundEffect(SoundID::ENEMY_EXPLODE, false);
 }
 
 //player die -- lose
@@ -176,7 +176,7 @@ void Scene::OnGameOver(const Vector2& pos)
 	window_manager.SetWindow(WindowState::lose);
 
 	//sound
-	audio_manager.PlaySoundEffect("player_explode", false);
+	audio_manager.PlaySoundEffect(SoundID::PLAYER_EXPLODE, false);
 }
 
 

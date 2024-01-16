@@ -5,12 +5,14 @@
 #include "WindowManager.h"
 #include "Global/Utils.h"
 #include "Global/GameGlobal.h"
+#include "System/AudioManager.h"
 
 VitalsWindow::VitalsWindow() {}
 
 void VitalsWindow::OnEnter()
 {
 	m_timer = 0.f;
+	AudioManager::GetInstance().PlayMusic(MusicID::IN_GAME, true);
 }
 
 void VitalsWindow::HandleInput(float deltaTime)
@@ -48,4 +50,9 @@ void VitalsWindow::UpdateScoreText(int score)
 void VitalsWindow::UpdateHealthText(int health)
 {
 	m_health_string = "Health: " + std::string(health, '|');
+}
+
+void VitalsWindow::OnExit()
+{
+	AudioManager::GetInstance().StopMusic(MusicID::IN_GAME);
 }
