@@ -15,7 +15,7 @@ void EnemySpawner::SetUp(EnemyPool& pool)
 
 void EnemySpawner::SpawnEnemy()
 {
-	m_pool->Spawn(m_transform->position, 0.f);
+	m_pool->Spawn(m_transform->position);
 }
 
 void EnemySpawner::SpawnEnemyToPos(Waypoint& destination)

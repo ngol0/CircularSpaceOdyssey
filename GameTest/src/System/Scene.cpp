@@ -64,7 +64,10 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 {
 	if (other.tag == "health_power")
 	{
-		m_player->GetComponent<Health>().health_amount += 2;
+		if (m_player->GetComponent<Health>().health_amount < GameGlobal::MAX_PLAYER_HEALTH)
+		{
+			m_player->GetComponent<Health>().health_amount += 2;
+		}
 		other.object->Deactivate();
 	}
 	if (other.tag == "enemy")
@@ -120,6 +123,7 @@ void Scene::Restart()
 	m_player->GetComponent<PlayerShooter>().SetBulletPool();
 	//reset particle pool
 	m_explosion_particle_pool.SetUp();
+	m_health_powerup_pool.SetUp();
 
 	SetUp(); //set up player pos & stats
 	level_manager.Restart();
