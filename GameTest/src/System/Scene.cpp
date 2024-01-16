@@ -64,7 +64,10 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 {
 	if (other.tag == "health_power")
 	{
-		m_player->GetComponent<Health>().health_amount += 2;
+		if (m_player->GetComponent<Health>().health_amount < GameGlobal::MAX_PLAYER_HEALTH)
+		{
+			m_player->GetComponent<Health>().health_amount += 2;
+		}
 		other.object->Deactivate();
 	}
 	if (other.tag == "enemy")
