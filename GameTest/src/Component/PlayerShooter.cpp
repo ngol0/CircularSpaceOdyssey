@@ -26,7 +26,8 @@ void PlayerShooter::Shoot(float deltaTime)
 		bullet_pool.Spawn(spawn_pos, m_shooter_transform->forward, m_shooter_transform->rotation_angle);
 		m_timer = 0.f;
 
-		//AudioManager::GetInstance().PlaySoundEffect("player_shoot", false);
+		//sound effect
+		AudioManager::GetInstance().PlaySoundEffect(SoundID::PLAYER_SHOOT, false);
 	}
 
 	m_timer += deltaTime / 100.f;

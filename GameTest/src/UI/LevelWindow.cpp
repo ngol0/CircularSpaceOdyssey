@@ -20,7 +20,7 @@ void LevelWindow::HandleInput(float deltaTime)
 		level_mg.SetLevel(1);
 
 		window_mg.SetWindow(WindowState::vitals);
-		AudioManager::GetInstance().PlaySoundEffect("game_start", false);
+		AudioManager::GetInstance().PlaySoundEffect(SoundID::BUTTON, false);
 	}
 	else if (App::IsKeyPressed('2'))
 	{
@@ -30,7 +30,7 @@ void LevelWindow::HandleInput(float deltaTime)
 		level_mg.SetLevel(2);
 
 		window_mg.SetWindow(WindowState::vitals);
-		AudioManager::GetInstance().PlaySoundEffect("game_start", false);
+		AudioManager::GetInstance().PlaySoundEffect(SoundID::BUTTON, false);
 	}
 	else if (App::IsKeyPressed('3'))
 	{
@@ -40,7 +40,7 @@ void LevelWindow::HandleInput(float deltaTime)
 		level_mg.SetLevel(3);
 
 		window_mg.SetWindow(WindowState::vitals);
-		AudioManager::GetInstance().PlaySoundEffect("game_start", false);
+		AudioManager::GetInstance().PlaySoundEffect(SoundID::BUTTON, false);
 	}
 }
 
