@@ -44,6 +44,7 @@ private:
 
 	//particles
 	ParticlePool m_explosion_particle_pool;
+	ParticlePool m_healing_particle_pool;
 
 	//power ups
 	std::vector<Waypoint> m_powerup_positions;

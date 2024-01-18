@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 
-struct Transform;
+class Transform;
 
 class SpriteRenderer : public Component
 {

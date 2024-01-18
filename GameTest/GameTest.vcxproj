@@ -211,6 +211,7 @@
     <ClInclude Include="src\Component\Health.h" />
     <ClInclude Include="src\GameObject\ParticlePool.h" />
     <ClInclude Include="src\Global\GameGlobal.h" />
+    <ClInclude Include="src\Global\ParticleType.h" />
     <ClInclude Include="src\Global\PowerUpType.h" />
     <ClInclude Include="src\Global\WaypointGenerator.h" />
     <ClInclude Include="src\Math\Vector2.h" />

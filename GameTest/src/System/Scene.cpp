@@ -18,6 +18,7 @@
 #include "Global/ParticleEmitter.h"
 #include "Global/WaypointGenerator.h"
 #include "Global/PowerUpType.h"
+#include "Global/ParticleType.h"
 
 auto& collision_manager = CollisionManager::GetInstance();
 auto& object_manager = GameObjectManager::GetInstance();
@@ -44,7 +45,8 @@ void Scene::Init()
 	m_player->GetComponent<Health>().on_die.Register(this, &Scene::OnGameOver);
 
 	//particles
-	m_explosion_particle_pool.Init();
+	m_explosion_particle_pool.Init(50.f, ParticleType::Explosion);
+	m_healing_particle_pool.Init(50.f, ParticleType::Healing);
 
 	//powerups
 	WaypointGenerator::InitWaypoints(m_circle_radius, m_circle_center, m_circle_steps, m_powerup_positions);
@@ -66,19 +68,24 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 {
 	if (other.tag == "health_power")
 	{
-		if (m_player->GetComponent<Health>().health_amount < GameGlobal::MAX_PLAYER_HEALTH)
+		m_player->GetComponent<Health>().health_amount += 2;
+		if (m_player->GetComponent<Health>().health_amount > GameGlobal::MAX_PLAYER_HEALTH)
 		{
-			m_player->GetComponent<Health>().health_amount += 2;
+			m_player->GetComponent<Health>().health_amount = GameGlobal::MAX_PLAYER_HEALTH;
 		}
 		other.object->Deactivate();
 
+		//sound
 		audio_manager.PlaySoundEffect(SoundID::HEALTH_POWER, false);
+
+		//vfx
+		ParticleEmitter::EmitHealing(m_healing_particle_pool, GetPlayerPosition());
 	}
 	if (other.tag == "enemy")
 	{
 		m_player->GetComponent<Health>().TakeDamage(5);
 		m_player->GetComponent<HitEffect>().Play();
-		ExplosionParticleEmitter::Emit(m_explosion_particle_pool, other.object->GetComponent<Transform>().position);
+		ParticleEmitter::EmitExplosion(m_explosion_particle_pool, other.object->GetComponent<Transform>().position);
 		other.object->Deactivate();
 
 		audio_manager.PlaySoundEffect(SoundID::PLAYER_DAMAGED, false);
@@ -149,7 +156,7 @@ void Scene::OnEnemyDie(const Vector2& pos)
 	m_score++;
 
 	//particle effect
-	ExplosionParticleEmitter::Emit(m_explosion_particle_pool, pos);
+	ParticleEmitter::EmitExplosion(m_explosion_particle_pool, pos);
 
 	//health pickup every 10 points
 	if (m_score % 10 == 0)
@@ -170,7 +177,7 @@ void Scene::OnEnemyDie(const Vector2& pos)
 void Scene::OnGameOver(const Vector2& pos)
 {
 	//particle effect
-	ExplosionParticleEmitter::Emit(m_explosion_particle_pool, pos);
+	ParticleEmitter::EmitExplosion(m_explosion_particle_pool, pos);
 
 	//ui
 	window_manager.SetWindow(WindowState::lose);

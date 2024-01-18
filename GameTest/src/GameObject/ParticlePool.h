@@ -1,13 +1,19 @@
 #pragma once
 #include "GameObject.h"
 
+enum class ParticleType;
+
 class ParticlePool
 {
 public:
 	ParticlePool();
+	~ParticlePool() {};
 
-	void Init();
-	void Emit(const Vector2& spawn_pos);
+	void Init(float lifespan, ParticleType type);
+
+	void EmitToRandomDirection(const Vector2& spawn_pos);
+	void EmitToDirection(const Vector2& spawn_pos, float angle);
+
 	void SetUp();
 
 private:
