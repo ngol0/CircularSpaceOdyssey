@@ -132,9 +132,6 @@
     <ClInclude Include="src\Global\PowerUpType.h" />
     <ClInclude Include="src\System\AudioManager.h" />
     <ClInclude Include="src\Global\ParticleType.h" />
-    <ClInclude Include="src\System\Level\Command.h" />
-    <ClInclude Include="src\System\Level\WaitCommand.h" />
-    <ClInclude Include="src\System\Level\SpawnCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
