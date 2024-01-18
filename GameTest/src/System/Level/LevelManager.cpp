@@ -163,6 +163,7 @@ void LevelManager::Restart()
 	
 	SetUpTimer();
 	m_is_complete = false;
+	m_is_waiting = false;
 
 	//reset waypoints
 	for (auto& wp : m_outer_waypoints)
