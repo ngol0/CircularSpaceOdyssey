@@ -1,3 +1,8 @@
+/*This class manages all the audios in the game
+* The responsibility of this class is to:
+** Init a map of id and file name
+** Play sound or music based on the pre-stated id
+*/
 #pragma once
 #include <map>
 

@@ -30,7 +30,6 @@ void VitalsWindow::HandleInput(float deltaTime)
 	m_timer += deltaTime / 100.f;
 
 	UpdateHealthText(WindowManager::GetInstance().GetHealth());
-	if (WindowManager::GetInstance().GetScore() > GameGlobal::MAX_SCORE) return;
 	UpdateScoreText(WindowManager::GetInstance().GetScore());
 }
 
@@ -39,7 +38,8 @@ void VitalsWindow::Render()
 	App::Print(120, 35, m_score_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
 	App::Print(50, 730, m_health_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
 
-	Utils::DrawRectangle(Vector2{220.f, 30.f}, 1.f, 1.f, 1.f, Vector2{600.f, 17.f});
+	Utils::DrawRectangle(Vector2{ 220.f, 30.f }, 1.f, 1.f, 1.f, Vector2{ 600.f, 17.f });
+	Utils::DrawRectangle(Vector2{ 120.f, 725.f }, 1.f, 1.f, 1.f, Vector2{ 455.f, 17.f }); 
 }
 
 void VitalsWindow::UpdateScoreText(int score)

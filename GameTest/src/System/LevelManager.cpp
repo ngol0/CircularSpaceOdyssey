@@ -38,7 +38,6 @@ void LevelManager::ReadSpawnInfo()
 		if (iss >> enem->timer >> enem->id)
 		{
 			m_enemies.emplace_back(std::move(enem));
-
 		}
 	}
 }

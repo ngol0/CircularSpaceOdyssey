@@ -1,3 +1,9 @@
+/*This class is to manage the game levels
+* The responsibility of this class is to:
+** Initialize all the memory needed for all the enemy pools
+** Read a txt file and parse the information into a vector of commands structure
+** Loop through the commands and starts spawning enemies based on the commands
+*/
 #pragma once
 #include "Component/EnemySpawner.h"
 #include "GameObject/EnemyPool.h"

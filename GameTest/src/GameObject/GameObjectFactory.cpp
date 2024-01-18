@@ -4,6 +4,7 @@
 #include "GameObjectFactory.h"
 #include "Global/EnemyType.h"
 #include "Global/PowerUpType.h"
+#include "Global/ParticleType.h"
 //--components
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
@@ -53,8 +54,8 @@ namespace GameObjectFactory
 		{
 		case PowerUpType::Health:
 			//sprite
-			auto& sprite = power_up->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\coin.bmp", 8, 1);
-			sprite.SetScale(0.5f);
+			auto& sprite = power_up->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\PowerUp_05.png", 1, 1);
+			sprite.SetScale(.18f);
 			//collider
 			Vector2 collider_size{ sprite.width(), sprite.height() };
 			power_up->AddComponent<BoxCollider>("health_power", collider_size);
@@ -69,7 +70,7 @@ namespace GameObjectFactory
 		Object::Ref enemy = GameObjectManager::GetInstance().AddToManager(transform);
 		SpriteRenderer& enemy_sprite = enemy->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\enemies.png", 4, 5);
 		//collider
-		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height()/2 };
+		Vector2 collider_size{ enemy_sprite.width(), enemy_sprite.height() / 2 };
 		auto& enemy_collision = enemy->AddComponent<BoxCollider>("enemy", collider_size);
 		//hit effect, input the scale offset
 		enemy->AddComponent<HitEffect>(0.2f);
@@ -134,7 +135,7 @@ namespace GameObjectFactory
 		bullet->GetComponent<Transform>().scale = size;
 		//sprite
 		auto& bullet_sprite = bullet->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\bullet.png", 1, 1);
-		bullet_sprite.SetColor(r,g,b);
+		bullet_sprite.SetColor(r, g, b);
 		//collider
 		Vector2 collider_size{ bullet_sprite.width(), bullet_sprite.height() };
 		bullet->AddComponent<BoxCollider>(tag, collider_size);
@@ -164,13 +165,27 @@ namespace GameObjectFactory
 		return spawner;
 	}
 
-	Object::Ref CreateParticle(float r, float b, float g, float size, int lifespan)
+	Object::Ref CreateParticle(float r, float g, float b, float size, float lifespan, ParticleType type)
 	{
 		Object::Ref particle = GameObjectManager::GetInstance().AddToManager();
 		particle->GetComponent<Transform>().scale = size;
-		//sprite
-		auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\flower.png", 1, 1);
-		particle_sprite.SetColor(r, g, b);
+
+		switch (type)
+		{
+		case ParticleType::Explosion:
+		{
+			//sprite
+			auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\flower.png", 1, 1);
+			particle_sprite.SetColor(r, g, b);
+			break;
+		}
+		case ParticleType::Healing:
+		{
+			auto& particle_sprite = particle->AddComponent<SpriteRenderer>(".\\Data\\Sprite\\health.png", 1, 1);
+			particle_sprite.SetColor(r, g, b);
+			break;
+		}
+		}
 		particle->AddComponent<Particle>(lifespan);
 
 		return particle;
