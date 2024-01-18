@@ -221,7 +221,10 @@
     <ClInclude Include="src\GameObject\GameObject.h" />
     <ClInclude Include="src\Global\EnemyType.h" />
     <ClInclude Include="src\Global\Event.h" />
-    <ClInclude Include="src\System\LevelManager.h" />
+    <ClInclude Include="src\System\Level\Command.h" />
+    <ClInclude Include="src\System\Level\LevelManager.h" />
+    <ClInclude Include="src\System\Level\SpawnCommand.h" />
+    <ClInclude Include="src\System\Level\WaitCommand.h" />
     <ClInclude Include="src\System\Scene.h" />
     <ClInclude Include="src\UI\LevelWindow.h" />
     <ClInclude Include="src\UI\LoseWindow.h" />
@@ -271,7 +274,7 @@
     <ClCompile Include="src\System\AudioManager.cpp" />
     <ClCompile Include="src\System\CollisionManager.cpp" />
     <ClCompile Include="src\GameObject\GameObject.cpp" />
-    <ClCompile Include="src\System\LevelManager.cpp" />
+    <ClCompile Include="src\System\Level\LevelManager.cpp" />
     <ClCompile Include="src\System\Scene.cpp" />
     <ClCompile Include="src\UI\LevelWindow.cpp" />
     <ClCompile Include="src\UI\LoseWindow.cpp" />

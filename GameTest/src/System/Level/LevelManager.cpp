@@ -4,6 +4,7 @@
 #include "Global/EnemyType.h"
 #include "Global/Utils.h"
 #include "Global/WaypointGenerator.h"
+#include "SpawnCommand.h"
 //
 #include <sstream>
 
@@ -38,6 +39,30 @@ void LevelManager::ReadSpawnInfo()
 		if (iss >> enem->timer >> enem->id)
 		{
 			m_enemies.emplace_back(std::move(enem));
+		}
+	}
+}
+
+void LevelManager::ReadCommand()
+{
+	m_commands.clear();
+	std::string line;
+	while (std::getline(m_input, line))
+	{
+		std::istringstream iss(line);
+		std::string command_type;
+		if (command_type == "Spawn")
+		{
+			std::unique_ptr<SpawnCommand> cmd = std::make_unique<SpawnCommand>();
+			if (iss >> cmd->id >> cmd->spawn_time)
+			{
+				m_commands.emplace_back(std::move(cmd));
+			}
+		}
+		else if (command_type == "Wait")
+		{
+			std::unique_ptr<SpawnCommand> cmd = std::make_unique<SpawnCommand>();
+			m_commands.emplace_back(std::move(cmd));
 		}
 	}
 }
@@ -88,6 +113,38 @@ void LevelManager::SetUpEnemy(Scene& scene)
 	//init waypoints
 	WaypointGenerator::InitWaypoints(150.f, m_scene->GetPlanetPosition(), 10, m_outer_waypoints);
 }
+
+/*void LevelManager::Update(float deltaTime, const Vector2& player_pos)
+{
+	if (!m_is_waiting)
+		m_timer += deltaTime / 100.f;
+
+	if (m_timer >= m_current_timer && !m_is_complete)
+	{
+		//if there is available waypoint for next enemy, increase index
+		if (SpawnEnemy(player_pos))
+		{
+			m_index++;
+			//if not ends - moves to next enemy
+			if (m_index < m_enemies.size())
+			{
+				//std::cout << m_index << std::endl;
+				m_current_timer = m_enemies[m_index]->timer;
+				m_current_enemy_type = m_enemies[m_index]->id;
+				m_is_waiting = false;
+			}
+			else
+			{
+				m_is_complete = true;
+			}
+		}
+		//else, stop timer and wait until there's an available waypoint
+		else
+		{
+			m_is_waiting = true;
+		}
+	}
+}*/
 
 void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 {

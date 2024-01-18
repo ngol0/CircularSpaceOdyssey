@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "EnemySplit.h"
 #include "Transform.h"
-#include "System/LevelManager.h"
+#include "System/Level/LevelManager.h"
 
 EnemySplit::EnemySplit(int child_number) : m_child_number(child_number), m_offset(30.f) {}
 

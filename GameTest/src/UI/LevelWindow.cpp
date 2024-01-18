@@ -2,7 +2,7 @@
 #include "LevelWindow.h"
 #include "WindowManager.h"
 #include "VitalsWindow.h"
-#include "System/LevelManager.h"
+#include "System/Level/LevelManager.h"
 #include "System/AudioManager.h"
 
 auto& window_mg = WindowManager::GetInstance();

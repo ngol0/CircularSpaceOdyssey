@@ -50,7 +50,7 @@
     <ClCompile Include="src\UI\VitalsWindow.cpp" />
     <ClCompile Include="src\UI\PauseWindow.cpp" />
     <ClCompile Include="src\UI\LoseWindow.cpp" />
-    <ClCompile Include="src\System\LevelManager.cpp" />
+    <ClCompile Include="src\System\Level\LevelManager.cpp" />
     <ClCompile Include="src\UI\LevelWindow.cpp" />
     <ClCompile Include="src\UI\VictoryWindow.cpp" />
     <ClCompile Include="src\Component\EnemySplit.cpp" />
@@ -119,7 +119,7 @@
     <ClInclude Include="src\UI\PauseWindow.h" />
     <ClInclude Include="src\UI\LoseWindow.h" />
     <ClInclude Include="src\Global\EnemyType.h" />
-    <ClInclude Include="src\System\LevelManager.h" />
+    <ClInclude Include="src\System\Level\LevelManager.h" />
     <ClInclude Include="src\UI\LevelWindow.h" />
     <ClInclude Include="src\Global\GameGlobal.h" />
     <ClInclude Include="src\UI\VictoryWindow.h" />
@@ -132,6 +132,9 @@
     <ClInclude Include="src\Global\PowerUpType.h" />
     <ClInclude Include="src\System\AudioManager.h" />
     <ClInclude Include="src\Global\ParticleType.h" />
+    <ClInclude Include="src\System\Level\Command.h" />
+    <ClInclude Include="src\System\Level\WaitCommand.h" />
+    <ClInclude Include="src\System\Level\SpawnCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
