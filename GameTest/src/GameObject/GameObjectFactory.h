@@ -1,3 +1,6 @@
+/* This class's responsibility is to create all the specific game objects in the game (i.e: player, enemies, etc.)
+* by creating a general game object and then adding the suitable components to each of them
+*/
 #pragma once
 #include "GameObject.h"
 

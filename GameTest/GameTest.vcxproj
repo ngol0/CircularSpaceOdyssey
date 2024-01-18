@@ -221,10 +221,7 @@
     <ClInclude Include="src\GameObject\GameObject.h" />
     <ClInclude Include="src\Global\EnemyType.h" />
     <ClInclude Include="src\Global\Event.h" />
-    <ClInclude Include="src\System\Level\Command.h" />
     <ClInclude Include="src\System\Level\LevelManager.h" />
-    <ClInclude Include="src\System\Level\SpawnCommand.h" />
-    <ClInclude Include="src\System\Level\WaitCommand.h" />
     <ClInclude Include="src\System\Scene.h" />
     <ClInclude Include="src\UI\LevelWindow.h" />
     <ClInclude Include="src\UI\LoseWindow.h" />

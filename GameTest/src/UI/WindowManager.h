@@ -1,3 +1,7 @@
+/* This class's main responsibility is to manage all the UI windows in the game using State Pattern
+* It has a pointer to the current window that needs to be updated and rendered
+* 
+*/
 #pragma once
 #include "Math/Vector2.h"
 #include "System/Scene.h"
