@@ -16,6 +16,15 @@ struct Enemy
 	int id;
 };
 
+enum CommandType { SPAWN, WAIT };
+
+struct Command
+{
+	CommandType command;
+	float timer;
+	int id;
+};
+
 class LevelManager
 {
 private:
@@ -43,8 +52,11 @@ private:
 	float m_timer{ 0.f };
 	float m_current_timer{ 0.f };
 	int m_current_enemy_type{ -1 };
+	CommandType m_current_command;
 
 	std::vector<std::unique_ptr<Enemy>> m_enemies;
+	std::vector<std::unique_ptr<Command>> m_commands;
+
 	std::vector<Waypoint> m_outer_waypoints;
 
 	bool m_is_complete{ false };
@@ -77,4 +89,6 @@ public:
 	int GetCurrentLevel() { return m_current_level; }
 	EnemySpawner* GetChildSpawner() { return m_child_spawner; }
 	const Vector2& GetPlayerPosition() { return m_scene->GetPlayerPosition(); }
+
+	void ReadCommandInfo();
 };

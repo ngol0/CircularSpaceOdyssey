@@ -42,6 +42,33 @@ void LevelManager::ReadSpawnInfo()
 	}
 }
 
+void LevelManager::ReadCommandInfo()
+{
+	m_commands.clear();
+	std::string line;
+
+	while (std::getline(m_input, line)) 
+	{
+		std::istringstream iss(line);
+		std::string commandType;
+		iss >> commandType;
+
+		std::unique_ptr<Command> cmd = std::make_unique<Command>();
+		if (commandType == "Spawn") 
+		{
+			cmd->type = Command::SPAWN;
+			iss >> cmd->timer >> cmd->id;
+		}
+		else if (commandType == "Wait") {
+			cmd->type = Command::WAIT;
+			cmd->timer = -1.f;
+			cmd->id = -1;
+		}
+
+		m_commands.emplace_back(std::move(cmd));
+	}
+}
+
 void LevelManager::Init(Scene& scene)
 {
 	SetUpEnemy(scene);
@@ -94,37 +121,21 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 	if (!m_is_waiting)
 		m_timer += deltaTime / 100.f;
 
-	if (m_timer >= m_current_timer && !m_is_complete)
+	if (m_current_command == CommandType::SPAWN)
 	{
-		//if there is available waypoint for next enemy, increase index
-		if (SpawnEnemy(player_pos))
-		{
-			m_index++;
-			//if not ends - moves to next enemy
-			if (m_index < m_enemies.size())
-			{
-				//std::cout << m_index << std::endl;
-				m_current_timer = m_enemies[m_index]->timer;
-				m_current_enemy_type = m_enemies[m_index]->id;
-				m_is_waiting = false;
-			}
-			else
-			{
-				m_is_complete = true;
-			}
-		}
-		//else, stop timer and wait until there's an available waypoint
-		else
-		{
-			m_is_waiting = true;
-		}
+		m_current_timer = m_commands[m_index]->timer;
+		m_current_enemy_type = m_commands[m_index]->id;
+	}
+	else if (m_current_command == CommandType::WAIT)
+	{
+
 	}
 }
 
 bool LevelManager::SpawnEnemy(const Vector2& player_pos)
 {
 	//spawn based on type
-		//chase and explode enemies moves towards player
+	//chase and explode enemies moves towards player
 	if (m_current_enemy_type == (int)EnemyType::SlowChaseType)
 	{
 		//spawn enemy
@@ -161,6 +172,7 @@ void LevelManager::Restart()
 	m_defense_pool.SetUp();
 	m_child_pool.SetUp();
 	
+	//reset timers and flags
 	SetUpTimer();
 	m_is_complete = false;
 	m_is_waiting = false;
@@ -177,9 +189,11 @@ void LevelManager::SetUpTimer()
 	m_timer = 0.f;
 	m_index = 0;
 
-	if (m_enemies.size() == 0) return;
-	m_current_timer = m_enemies[m_index]->timer;
-	m_current_enemy_type = m_enemies[m_index]->id;
+	if (m_commands.size() == 0) return;
+
+	//m_current_timer = m_commands[m_index]->timer;
+	//m_current_enemy_type = m_commands[m_index]->id;
+	m_current_command = m_commands[m_index]->command;
 }
 
 LevelManager& LevelManager::GetInstance()
