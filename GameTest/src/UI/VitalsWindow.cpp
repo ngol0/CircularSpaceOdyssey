@@ -35,10 +35,13 @@ void VitalsWindow::HandleInput(float deltaTime)
 
 void VitalsWindow::Render()
 {
-	App::Print(120, 35, m_score_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
+	App::Print(170, 35, m_score_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
 	App::Print(50, 730, m_health_string.c_str(), 1.f, 1.f, 1.f, m_FONT);
 
-	Utils::DrawRectangle(Vector2{ 220.f, 30.f }, 1.f, 1.f, 1.f, Vector2{ 600.f, 17.f });
+	//resources bar
+	Utils::DrawRectangle(Vector2{ 270.f, 30.f }, 1.f, 1.f, 1.f, Vector2{ 455.f, 17.f });
+
+	//health bar
 	Utils::DrawRectangle(Vector2{ 120.f, 725.f }, 1.f, 1.f, 1.f, Vector2{ 455.f, 17.f }); 
 }
 

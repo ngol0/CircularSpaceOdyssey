@@ -1,3 +1,6 @@
+/* This class is responsible for the combat flow of the game
+* It uses the managers as a service to control the flow/update and render objects
+*/
 #pragma once
 #include "Component/BoxCollider.h"
 #include "Component/Health.h"
@@ -17,8 +20,6 @@ public:
 	void Shutdown() {};
 	void SetUp();
 	void Restart();
-	void OnEnemyDie(const Vector2& pos);
-	void OnGameOver(const Vector2& pos);
 
 	//getters
 	int GetPlayerHealth() const { return m_player->GetComponent<Health>().health_amount; }
@@ -26,15 +27,18 @@ public:
 	const Vector2& GetPlayerPosition() const { return m_player->GetComponent<Transform>().position; }
 	const Vector2& GetPlanetPosition() const { return m_circle_center; }
 
-	//event callback
+	//event callbacks
 	void OnPlayerCollisionEnter(BoxCollider& other);
 	void OnEnemyCollisionEnter(BoxCollider& enemy, BoxCollider& bullet);
+	void OnEnemyDie(const Vector2& pos);
+	void OnGameOver(const Vector2& pos);
 
 private:
+	//objects
 	Object::Ref m_player;
 	Object::Ref m_planet;
 
-	//planet
+	//planet vars
 	Vector2 m_circle_center;
 	float m_circle_radius;
 	int m_circle_steps;
