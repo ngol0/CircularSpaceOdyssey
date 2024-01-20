@@ -28,7 +28,7 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 }
 
 //if spawn without pre-stated destination, the enemies move to random positions among the inner vertices
-void EnemyPool::Spawn(const Vector2& spawn_pos)
+Object::Ref EnemyPool::Spawn(const Vector2& spawn_pos)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
@@ -38,13 +38,13 @@ void EnemyPool::Spawn(const Vector2& spawn_pos)
 			enemies[i]->GetComponent<EnemyRandomMovement>().GetNextDestination();
 			enemies[i]->Activate();
 
-			return;
+			return enemies[i];
 		}
 	}
 }
 
 //enemies move to outer vertices
-void EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination)
+Object::Ref EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
@@ -54,13 +54,13 @@ void EnemyPool::Spawn(const Vector2& spawn_pos, Waypoint& destination)
 			enemies[i]->GetComponent<EnemyMovement>().MoveTo(destination);
 			enemies[i]->Activate();
 
-			return;
+			return enemies[i];
 		}
 	}
 }
 
 //enemies move to specific position
-void EnemyPool::Spawn(const Vector2& spawn_pos, const Vector2& destination)
+Object::Ref EnemyPool::Spawn(const Vector2& spawn_pos, const Vector2& destination)
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
@@ -70,7 +70,7 @@ void EnemyPool::Spawn(const Vector2& spawn_pos, const Vector2& destination)
 			enemies[i]->GetComponent<EnemyMovement>().MoveTo(destination);
 			enemies[i]->Activate();
 
-			return;
+			return enemies[i];
 		}
 	}
 }

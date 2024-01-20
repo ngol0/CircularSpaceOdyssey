@@ -14,6 +14,6 @@ public:
 	void SetUp();
 
 private:
-	static const int POOL_SIZE = 10;
+	static const int POOL_SIZE = 7;
 	Object::Ref power_ups[POOL_SIZE];
 };

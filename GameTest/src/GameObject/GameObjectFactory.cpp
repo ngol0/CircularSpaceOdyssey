@@ -81,7 +81,7 @@ namespace GameObjectFactory
 			//health
 			enemy->AddComponent<Health>(200);
 			//movement
-			enemy->AddComponent<EnemyMovement>(0.02f);
+			enemy->AddComponent<EnemyMovement>(0.04f);
 			//sprite
 			enemy_sprite.SetFrame(3);
 			break;
