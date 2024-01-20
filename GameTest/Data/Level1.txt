@@ -1,67 +1,69 @@
-10 0
-30 1
-50 0
-70 1
-90 1
-100 1
-110 0
-120 1
-140 1
-150 1
-180 0
-200 1
-230 0
-250 0
-260 1
-300 0
-330 1
-350 1
-380 0
-400 0
-420 1
-450 1
-500 0
-510 0
-530 1
-550 0
-530 1
-600 0
-650 0
-680 1
-690 0
-700 1
-740 1
-750 0
-800 0
-850 0
-880 1
-900 1
-920 1
-930 0 
-980 0
-1000 1
-1010 1
-1020 1
-1030 0
-1060 1
-1100 0
-1110 1
-1130 1
-1150 0
-1160 1
-1180 1
-1200 1
-1230 0
-1250 1
-1300 0
-1320 1
-1350 0
-1370 1
-1400 0
-1420 1
-1430 0
-1440 1
-1460 1
-1470 0
-1500 0
-1510 1
+Spawn 10 0
+Spawn 30 1
+Spawn 50 0
+Wait
+Spawn 70 1
+Spawn 90 1
+Spawn 100 1
+Spawn 110 0
+Wait
+Spawn 120 1
+Spawn 140 1
+Spawn 150 1
+Spawn 180 0
+Spawn 200 1
+Spawn 230 0
+Spawn 250 0
+Spawn 260 1
+Spawn 300 0
+Spawn 330 1
+Spawn 350 1
+Spawn 380 0
+Spawn 400 0
+Spawn 420 1
+Spawn 450 1
+Spawn 500 0
+Spawn 510 0
+Spawn 530 1
+Spawn 550 0
+Spawn 530 1
+Spawn 600 0
+Spawn 650 0
+Spawn 680 1
+Spawn 690 0
+Spawn 700 1
+Spawn 740 1
+Spawn 750 0
+Spawn 800 0
+Spawn 850 0
+Spawn 880 1
+Spawn 900 1
+Spawn 920 1
+Spawn 930 0 
+Spawn 980 0
+Spawn 1000 1
+Spawn 1010 1
+Spawn 1020 1
+Spawn 1030 0
+Spawn 1060 1
+Spawn 1100 0
+Spawn 1110 1
+Spawn 1130 1
+Spawn 1150 0
+Spawn 1160 1
+Spawn 1180 1
+Spawn 1200 1
+Spawn 1230 0
+Spawn 1250 1
+Spawn 1300 0
+Spawn 1320 1
+Spawn 1350 0
+Spawn 1370 1
+Spawn 1400 0
+Spawn 1420 1
+Spawn 1430 0
+Spawn 1440 1
+Spawn 1460 1
+Spawn 1470 0
+Spawn 1500 0
+Spawn 1510 1

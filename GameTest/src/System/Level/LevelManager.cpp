@@ -22,24 +22,8 @@ void LevelManager::LoadFile(const char* filename)
 		//std::cerr << "Failed to open file." << std::endl;
 		return;
 	}
-	ReadSpawnInfo();
+	ReadCommandInfo();
 	m_input.close();
-}
-
-void LevelManager::ReadSpawnInfo()
-{
-	m_enemies.clear();
-	std::string line;
-	while (std::getline(m_input, line)) 
-	{
-		std::istringstream iss(line);
-		std::unique_ptr<Enemy> enem = std::make_unique<Enemy>();
-
-		if (iss >> enem->timer >> enem->id)
-		{
-			m_enemies.emplace_back(std::move(enem));
-		}
-	}
 }
 
 void LevelManager::ReadCommandInfo()
@@ -47,22 +31,21 @@ void LevelManager::ReadCommandInfo()
 	m_commands.clear();
 	std::string line;
 
-	while (std::getline(m_input, line)) 
+	while (std::getline(m_input, line))
 	{
 		std::istringstream iss(line);
 		std::string commandType;
 		iss >> commandType;
 
 		std::unique_ptr<Command> cmd = std::make_unique<Command>();
-		if (commandType == "Spawn") 
+		if (commandType == "Spawn")
 		{
-			cmd->type = Command::SPAWN;
+			cmd->command = CommandType::SPAWN;
 			iss >> cmd->timer >> cmd->id;
+			
 		}
 		else if (commandType == "Wait") {
-			cmd->type = Command::WAIT;
-			cmd->timer = -1.f;
-			cmd->id = -1;
+			cmd->command = CommandType::WAIT;
 		}
 
 		m_commands.emplace_back(std::move(cmd));
@@ -121,14 +104,55 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 	if (!m_is_waiting)
 		m_timer += deltaTime / 100.f;
 
-	if (m_current_command == CommandType::SPAWN)
+	if (m_current_command == CommandType::SPAWN && m_timer >= m_current_timer && !m_is_complete)
 	{
-		m_current_timer = m_commands[m_index]->timer;
-		m_current_enemy_type = m_commands[m_index]->id;
+		//if there is available waypoint for next enemy, increase index
+		if (SpawnEnemy(player_pos))
+		{
+			m_index++;
+			//if not ends - moves to next enemy
+			if (m_index < m_commands.size())
+			{
+				//std::cout << m_index << std::endl;
+				m_current_command = m_commands[m_index]->command;
+				m_current_timer = m_commands[m_index]->timer;
+				m_current_enemy_type = m_commands[m_index]->id;
+				m_is_waiting = false;
+			}
+			else
+			{
+				m_is_complete = true;
+			}
+		}
+		//else, stop timer and wait until there's an available waypoint
+		else
+		{
+			m_is_waiting = true;
+		}
+
 	}
 	else if (m_current_command == CommandType::WAIT)
 	{
-
+		//checking to see if the all the previous enemies are dead
+		//if not, stop the timer
+		if (!AreAllEnemiesDead())
+		{
+			m_is_waiting = true;
+		}
+		//if all are dead, move to the next command
+		else
+		{
+			m_active_enemies.clear();
+			m_index++;
+			//if not ends - moves to next enemy
+			if (m_index < m_commands.size())
+			{
+				m_current_command = m_commands[m_index]->command;
+				m_current_timer = m_commands[m_index]->timer;
+				m_current_enemy_type = m_commands[m_index]->id;
+				m_is_waiting = false;
+			}
+		}
 	}
 }
 
@@ -139,28 +163,41 @@ bool LevelManager::SpawnEnemy(const Vector2& player_pos)
 	if (m_current_enemy_type == (int)EnemyType::SlowChaseType)
 	{
 		//spawn enemy
-		m_chase_spawner->SpawnEnemyToPos(player_pos);
+		m_active_enemies.push_back(m_chase_spawner->SpawnEnemyToPos(player_pos));
 	}
 	//enemy that can be on defense and stays at waypoint
 	else if (m_current_enemy_type == (int)EnemyType::TwoModeType)
 	{
 		Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
 		if (destination == nullptr) return false;
-		m_defense_spawner->SpawnEnemyToPos(*destination);
+		m_active_enemies.push_back(m_defense_spawner->SpawnEnemyToPos(*destination));
 	}
 	//shoot moves to and stays at outer waypoint
 	else if (m_current_enemy_type == (int)EnemyType::ShootType)
 	{
 		Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
 		if (destination == nullptr) return false;
-		m_shoot_spawner->SpawnEnemyToPos(*destination);
+		m_active_enemies.push_back(m_shoot_spawner->SpawnEnemyToPos(*destination));
 	}
 	//split type moves to random inner waypoints
 	else if (m_current_enemy_type == (int)EnemyType::SplitType)
 	{
-		m_split_spawner->SpawnEnemy();
+		m_active_enemies.push_back(m_split_spawner->SpawnEnemy());
 	}
 	return true;
+}
+
+bool LevelManager::AreAllEnemiesDead()
+{
+	if (m_active_enemies.size() == 0) return true;
+	for (const auto& enemy : m_active_enemies) 
+	{
+		if (enemy->IsAlive()) 
+		{
+			return false; //found a living enemy
+		}
+	}
+	return true; //all enemies are dead
 }
 
 void LevelManager::Restart()
@@ -171,7 +208,7 @@ void LevelManager::Restart()
 	m_split_pool.SetUp();
 	m_defense_pool.SetUp();
 	m_child_pool.SetUp();
-	
+
 	//reset timers and flags
 	SetUpTimer();
 	m_is_complete = false;
@@ -190,10 +227,9 @@ void LevelManager::SetUpTimer()
 	m_index = 0;
 
 	if (m_commands.size() == 0) return;
-
-	//m_current_timer = m_commands[m_index]->timer;
-	//m_current_enemy_type = m_commands[m_index]->id;
 	m_current_command = m_commands[m_index]->command;
+	m_current_timer = m_commands[m_index]->timer;
+	m_current_enemy_type = m_commands[m_index]->id;
 }
 
 LevelManager& LevelManager::GetInstance()

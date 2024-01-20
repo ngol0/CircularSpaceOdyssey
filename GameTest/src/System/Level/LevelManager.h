@@ -52,9 +52,9 @@ private:
 	float m_timer{ 0.f };
 	float m_current_timer{ 0.f };
 	int m_current_enemy_type{ -1 };
-	CommandType m_current_command;
+	CommandType m_current_command{ SPAWN };
 
-	std::vector<std::unique_ptr<Enemy>> m_enemies;
+	std::vector<Object::Ref> m_active_enemies;
 	std::vector<std::unique_ptr<Command>> m_commands;
 
 	std::vector<Waypoint> m_outer_waypoints;
@@ -77,10 +77,11 @@ public:
 	void Complete() {};
 	void Restart();
 
-	void ReadSpawnInfo();
+	void ReadCommandInfo();
 	void SetUpTimer();
 	void SetUpEnemy(Scene& scene);
 	bool SpawnEnemy(const Vector2& player_pos);
+	bool AreAllEnemiesDead();
 
 	//singleton
 	static LevelManager& GetInstance();
@@ -89,6 +90,4 @@ public:
 	int GetCurrentLevel() { return m_current_level; }
 	EnemySpawner* GetChildSpawner() { return m_child_spawner; }
 	const Vector2& GetPlayerPosition() { return m_scene->GetPlayerPosition(); }
-
-	void ReadCommandInfo();
 };

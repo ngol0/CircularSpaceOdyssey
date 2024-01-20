@@ -13,23 +13,23 @@ void EnemySpawner::SetUp(EnemyPool& pool)
 	m_transform = &Component::object->GetComponent<Transform>();
 }
 
-void EnemySpawner::SpawnEnemy()
+Object::Ref EnemySpawner::SpawnEnemy()
 {
-	m_pool->Spawn(m_transform->position);
+	return m_pool->Spawn(m_transform->position);
 }
 
-void EnemySpawner::SpawnEnemyToPos(Waypoint& destination)
+Object::Ref EnemySpawner::SpawnEnemyToPos(Waypoint& destination)
 {
-	m_pool->Spawn(m_transform->position, destination);
 	destination.is_available = false;
+	return m_pool->Spawn(m_transform->position, destination);
 }
 
-void EnemySpawner::SpawnEnemyToPos(const Vector2& destination)
+Object::Ref EnemySpawner::SpawnEnemyToPos(const Vector2& destination)
 {
-	m_pool->Spawn(m_transform->position, destination);
+	return m_pool->Spawn(m_transform->position, destination);
 }
 
-void EnemySpawner::SpawnEnemyAtPos(const Vector2& spawn_pos, const Vector2& destination)
+Object::Ref EnemySpawner::SpawnEnemyAtPos(const Vector2& spawn_pos, const Vector2& destination)
 {
-	m_pool->Spawn(spawn_pos, destination);
+	return m_pool->Spawn(spawn_pos, destination);
 }

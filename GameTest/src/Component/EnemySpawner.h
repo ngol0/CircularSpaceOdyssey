@@ -1,6 +1,7 @@
 #pragma once
 #include "Math/Vector2.h"
 #include "Component.h"
+#include "GameObject/GameObject.h"
 
 class Scene;
 class EnemyPool;
@@ -19,8 +20,8 @@ public:
 	void Init() override {};
 	void SetUp(EnemyPool& pool);
 
-	void SpawnEnemy();
-	void SpawnEnemyToPos(Waypoint& destination);
-	void SpawnEnemyToPos(const Vector2& destination);
-	void SpawnEnemyAtPos(const Vector2& spawn_pos, const Vector2& destination);
+	Object::Ref SpawnEnemy();
+	Object::Ref SpawnEnemyToPos(Waypoint& destination);
+	Object::Ref SpawnEnemyToPos(const Vector2& destination);
+	Object::Ref SpawnEnemyAtPos(const Vector2& spawn_pos, const Vector2& destination);
 };
