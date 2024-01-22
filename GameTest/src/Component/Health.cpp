@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Health.h"
 #include "GameObject/GameObject.h"
-#include "Component/EnemyMovement.h"
-#include "Component/EnemySplit.h"
-#include "Component/Transform.h"
+#include "EnemyMovement.h"
+#include "EnemySplit.h"
+#include "Transform.h"
 
 Health::Health(int health) : health_amount(health)
 {

@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "WindowManager.h"
 #include "TitleWindow.h"
-#include "LoseWindow.h"
-
+//
 #include "Global/Utils.h"
 
 WindowManager::WindowManager() : m_current_window(nullptr), m_scene(nullptr) {}
@@ -29,7 +28,7 @@ void WindowManager::SetWindow(Window& window)
 		m_current_window->OnExit();
 	}
 	m_current_window = &window;  //pointing to the new one
-	m_current_window->OnEnter(); //do something after switching
+	m_current_window->OnEnter(); //do something right after switching
 }
 
 void WindowManager::HandleInput(float deltaTime)

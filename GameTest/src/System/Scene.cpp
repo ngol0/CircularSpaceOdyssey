@@ -63,7 +63,7 @@ void Scene::SetUp()
 	m_player->GetComponent<MovementInput>().SetUp(); //setting up movement based on starting position
 	m_player->GetComponent<Health>().ResetHealth();
 
-	m_score = 54; 
+	m_score = 0; 
 }
 
 //callback for when player collides with others
@@ -85,7 +85,7 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 		//vfx
 		ParticleEmitter::EmitHealing(m_healing_particle_pool, GetPlayerPosition());
 	}
-	//when enemy hits player, it self destroys, player still gets 1 point but also large takes damage
+	//when enemy hits player, it self destroys, player still gets 1 point but also takes large damage
 	if (other.tag == "enemy")
 	{
 		m_score++;

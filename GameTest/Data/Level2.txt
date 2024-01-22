@@ -1,7 +1,7 @@
 Spawn 10 3
 Wait
-Spawn 20 1
-Spawn 30 1
+Spawn 25 1
+Spawn 35 1
 Spawn 40 1
 Spawn 50 1
 Spawn 55 0

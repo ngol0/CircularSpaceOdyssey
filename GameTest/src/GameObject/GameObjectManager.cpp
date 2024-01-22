@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
-#include "Component/BoxCollider.h"
 
 
 Object::Ref GameObjectManager::AddToManager(Transform& transform)

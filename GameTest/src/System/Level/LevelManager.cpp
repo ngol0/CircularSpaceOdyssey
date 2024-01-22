@@ -2,7 +2,6 @@
 #include "LevelManager.h"
 #include "GameObject/GameObjectFactory.h"
 #include "Global/EnemyType.h"
-#include "Global/Utils.h"
 #include "Global/WaypointGenerator.h"
 //
 #include <sstream>
@@ -165,26 +164,26 @@ bool LevelManager::SpawnEnemy(const Vector2& player_pos)
 	if (m_current_enemy_type == (int)EnemyType::SlowChaseType)
 	{
 		//spawn enemy
-		m_active_enemies.push_back(m_chase_spawner->SpawnEnemyToPos(player_pos));
+		m_active_enemies.emplace_back(m_chase_spawner->SpawnEnemyToPos(player_pos));
 	}
 	//enemy that can be on defense and stays at waypoint
 	else if (m_current_enemy_type == (int)EnemyType::TwoModeType)
 	{
 		Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
 		if (destination == nullptr) return false;
-		m_active_enemies.push_back(m_defense_spawner->SpawnEnemyToPos(*destination));
+		m_active_enemies.emplace_back(m_defense_spawner->SpawnEnemyToPos(*destination));
 	}
 	//shoot moves to and stays at outer waypoint
 	else if (m_current_enemy_type == (int)EnemyType::ShootType)
 	{
 		Waypoint* destination = WaypointGenerator::GetRandomlyAvailableWaypoint(m_outer_waypoints);
 		if (destination == nullptr) return false;
-		m_active_enemies.push_back(m_shoot_spawner->SpawnEnemyToPos(*destination));
+		m_active_enemies.emplace_back(m_shoot_spawner->SpawnEnemyToPos(*destination));
 	}
 	//split type moves to random inner waypoints
 	else if (m_current_enemy_type == (int)EnemyType::SplitType)
 	{
-		m_active_enemies.push_back(m_split_spawner->SpawnEnemy());
+		m_active_enemies.emplace_back(m_split_spawner->SpawnEnemy());
 	}
 	return true;
 }

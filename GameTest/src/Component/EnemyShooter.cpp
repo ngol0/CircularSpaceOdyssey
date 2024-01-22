@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "EnemyShooter.h"
-#include "Component/Transform.h"
+#include "Transform.h"
 #include "Global/Utils.h"
 #include "System/AudioManager.h"
 

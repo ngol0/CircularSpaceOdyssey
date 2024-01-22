@@ -2,7 +2,6 @@
 #include "PauseWindow.h"
 #include "VitalsWindow.h"
 #include "WindowManager.h"
-#include "System/Scene.h"
 
 PauseWindow::PauseWindow(){}
 
@@ -34,5 +33,5 @@ void PauseWindow::Render()
 	App::Print(300.f, 450.f, "A or D to move", 1.f, 1.f, 1.f, m_FONT);
 	App::Print(300.f, 400.f, "LEFT CLICK to shoot", 1.f, 1.f, 1.f, m_FONT);
 	App::Print(300.f, 350.f, "R to restart", 1.f, 1.f, 1.f, m_FONT);
-	App::Print(300.f, 200.f, "Press P to continue", 0.467, 0.831, 0.961, m_FONT);
+	App::Print(300.f, 250.f, "Press P to continue", 0.467, 0.831, 0.961, m_FONT);
 }
