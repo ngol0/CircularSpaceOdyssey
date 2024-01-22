@@ -85,9 +85,11 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 		//vfx
 		ParticleEmitter::EmitHealing(m_healing_particle_pool, GetPlayerPosition());
 	}
+	//when enemy hits player, it self destroys, player still gets 1 point but also large takes damage
 	if (other.tag == "enemy")
 	{
-		m_player->GetComponent<Health>().TakeDamage(5);
+		m_score++;
+		m_player->GetComponent<Health>().TakeDamage(8);
 		other.object->Deactivate();
 		
 		//vfx
@@ -99,7 +101,7 @@ void Scene::OnPlayerCollisionEnter(BoxCollider& other)
 	}
 	if (other.tag == "enemy_bullet")
 	{
-		m_player->GetComponent<Health>().TakeDamage(1);
+		m_player->GetComponent<Health>().TakeDamage(2);
 		m_player->GetComponent<HitEffect>().Play();
 		other.object->Deactivate();
 
@@ -171,8 +173,8 @@ void Scene::OnEnemyDie(const Vector2& pos)
 	//explosion particle effect
 	ParticleEmitter::EmitExplosion(m_explosion_particle_pool, pos);
 
-	//health pickup every 10 points
-	if (m_score % 10 == 0)
+	//health pickup every 20 points
+	if (m_score % 20 == 0)
 	{
 		m_health_powerup_pool.Spawn(*WaypointGenerator::GetRandomlyAvailableWaypoint(m_powerup_positions));
 	}

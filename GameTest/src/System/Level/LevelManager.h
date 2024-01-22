@@ -2,19 +2,13 @@
 * The responsibility of this class is to:
 ** Initialize all the memory needed for all the enemy pools
 ** Read a txt file and parse the information into a vector of commands structure
-** Loop through the commands and starts spawning enemies based on the commands
+** Loop through the commands and starts spawning enemies based on the commands (i.e: Spawn/Wait)
 */
 #pragma once
 #include "Component/EnemySpawner.h"
 #include "GameObject/EnemyPool.h"
 #include "System/Scene.h"
 #include <fstream>
-
-struct Enemy
-{
-	float timer;
-	int id;
-};
 
 enum CommandType { SPAWN, WAIT };
 
@@ -74,12 +68,12 @@ public:
 	void LoadFile(const char* filename);
 	void Init(Scene& scene);
 	void Update(float deltaTime, const Vector2& player_pos);
-	void Complete() {};
 	void Restart();
 
 	void ReadCommandInfo();
 	void SetUpTimer();
 	void SetUpEnemy(Scene& scene);
+
 	bool SpawnEnemy(const Vector2& player_pos);
 	bool AreAllEnemiesDead();
 

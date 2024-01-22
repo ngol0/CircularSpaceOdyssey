@@ -8,7 +8,7 @@ MovementInput::MovementInput(const Vector2& center, float distance) : m_speed(0.
 void MovementInput::Init()
 {
 	transform = &Component::object->GetComponent<Transform>();
-	m_speed = 0.07f;
+	m_speed = 0.05f;
 }
 
 void MovementInput::SetUp()
