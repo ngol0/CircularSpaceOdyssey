@@ -44,6 +44,8 @@ Spawn 290 2
 Spawn 295 0
 Spawn 300 1
 Spawn 305 2
-Spawn 310 1
+Spawn 310 2
 Spawn 315 0
 Spawn 320 1
+Spawn 325 2
+Spawn 330 2
