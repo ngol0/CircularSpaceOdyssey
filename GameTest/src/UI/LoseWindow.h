@@ -1,3 +1,4 @@
+/* Player die window */
 #pragma once
 #include "Window.h"
 

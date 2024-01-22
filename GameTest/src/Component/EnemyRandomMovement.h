@@ -1,3 +1,4 @@
+/* Get randomly destination and use the enemy movement component to move the enemy there */
 #pragma once
 #include "Component.h"
 #include "Math/Vector2.h"

@@ -1,3 +1,4 @@
+/* Create bullet pool for player shooting and spawn the bullets when VK_LEFT is pressed */
 #pragma once
 #include "GameObject/BulletPool.h"
 

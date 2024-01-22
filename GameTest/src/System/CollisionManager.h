@@ -1,4 +1,4 @@
-/* This class's main responsibility is to detect collision between two box colliders
+/* Detect collision between two box colliders
 * Once there's collision detected, it will send an event to notify listerners
 */
 #pragma once

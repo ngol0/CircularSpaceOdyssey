@@ -1,3 +1,4 @@
+/* Spawn enemy to or at position */
 #pragma once
 #include "Math/Vector2.h"
 #include "Component.h"

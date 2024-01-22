@@ -1,3 +1,4 @@
+/* a namespace that include emitter for different type of particles */
 #pragma once
 #include "Math/Vector2.h"
 

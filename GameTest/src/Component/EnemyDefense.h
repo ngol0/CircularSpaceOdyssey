@@ -1,3 +1,4 @@
+/* Toggle defense mode for enemy by switching color and on defense boolean */
 #pragma once
 #include "Component.h"
 

@@ -44,7 +44,8 @@ void LevelManager::ReadCommandInfo()
 			iss >> cmd->timer >> cmd->id;
 			
 		}
-		else if (commandType == "Wait") {
+		else if (commandType == "Wait") 
+		{
 			cmd->command = CommandType::WAIT;
 		}
 
@@ -219,6 +220,9 @@ void LevelManager::Restart()
 	{
 		wp.is_available = true;
 	}
+
+	//clear active enemies
+	m_active_enemies.clear();
 }
 
 void LevelManager::SetUpTimer()

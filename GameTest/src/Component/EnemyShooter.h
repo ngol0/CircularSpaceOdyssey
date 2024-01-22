@@ -1,3 +1,4 @@
+/* Create bullet pool and spawn the bullets every shoot_time */
 #pragma once
 #include "GameObject/BulletPool.h"
 

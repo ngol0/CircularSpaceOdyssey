@@ -1,3 +1,6 @@
+/* Movement input component for controlling player movement
+* It calculates the position degree and rotation angle for player when it moves around the circle
+*/
 #pragma once
 #include "Component.h"
 #include "Transform.h"

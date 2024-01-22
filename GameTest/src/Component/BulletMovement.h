@@ -1,3 +1,4 @@
+/* Bullet moves toward player */
 #pragma once
 #include "Component.h"
 #include "Math/Vector2.h"

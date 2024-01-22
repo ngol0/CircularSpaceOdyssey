@@ -1,3 +1,4 @@
+/*Object pool for all enemies type by passing in the specific type when creating*/
 #pragma once
 #include "GameObject.h"
 

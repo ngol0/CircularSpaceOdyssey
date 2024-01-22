@@ -1,3 +1,6 @@
+/* Generic event class to create an event in the game
+* It uses function pointer for observers
+*/
 #pragma once
 
 #include <map>

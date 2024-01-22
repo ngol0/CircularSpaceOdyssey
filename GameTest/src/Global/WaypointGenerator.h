@@ -1,3 +1,6 @@
+/* Global methods for generating vertices as waypoints around a circle
+* also for getting certain waypoints from a waypoint list
+*/
 #pragma once
 #include "Math/Vector2.h"
 

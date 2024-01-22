@@ -1,3 +1,4 @@
+/*This struct is to be inherited by all the specific components*/
 #pragma once
 class GameObject;
 

@@ -1,3 +1,4 @@
+/* Box collider using AABB check */
 #pragma once
 #include "Component.h"
 #include "Math/Vector2.h"

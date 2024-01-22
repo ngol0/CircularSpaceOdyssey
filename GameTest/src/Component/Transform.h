@@ -1,3 +1,4 @@
+/* Manages the position, scale, rotation and forward vector of the object */
 #pragma once
 #include "Math/Vector2.h"
 #include "Component.h"

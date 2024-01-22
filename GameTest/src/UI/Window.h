@@ -1,3 +1,4 @@
+/* Inherits by all the specific windows in game */
 #pragma once
 #include "Global/Event.h"
 
@@ -26,6 +27,7 @@ protected:
 	static float m_timer;
 };
 
+/* Creates all the static windows object to use when needs to set window */
 class WindowState
 {
 public:

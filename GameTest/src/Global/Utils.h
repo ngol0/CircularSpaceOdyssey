@@ -1,6 +1,8 @@
+/* includes global methods to create dot/rectangle 
+and generate circle vertices/random pos on screen/random int and float
+*/
 #pragma once
 #include "Math/Vector2.h"
-#include "EnemyType.h"
 
 namespace Utils
 {
@@ -12,11 +14,4 @@ namespace Utils
 	Vector2& RandomPosition();
 	int RandomInt(int min, int max);
 	float RandomFloat(float min, float max);
-	float RandomColor();
-
-	EnemyType ConvertToEnemyType(const std::string& str);
-
-	//waypoint generator
-	//void GenerateOuterWaypoints(float distance, const Vector2& center);
-	//void GenerateInnerWaypoints(float distance, const Vector2& center);
 };
