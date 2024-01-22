@@ -1,4 +1,4 @@
-/* This class's responsibility is to manage all the game objects' update/rendering process in the game
+/* Manage all the game objects' update/rendering in the game
 * Once the game object is created through the factory, it will be added to the manager
 * Then in every update and rendering call it will loop through all the game objects 
 * and check if they are currently activated, if no, skip those, if yes call their update/rendering functions

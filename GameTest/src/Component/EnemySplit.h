@@ -1,3 +1,4 @@
+/* When enemy dies -> split it into child_number enemies */
 #pragma once
 #include "Component.h"
 

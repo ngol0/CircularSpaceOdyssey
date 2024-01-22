@@ -1,5 +1,7 @@
+/* Set moving direction for particles using direction of radian angle of a unit circle
+* Moves the particle for an amount of frame and then deactivate it
+*/
 #pragma once
-
 #include "Component.h"
 #include "Math/Vector2.h"
 

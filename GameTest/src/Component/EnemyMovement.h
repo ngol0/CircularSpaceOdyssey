@@ -1,3 +1,6 @@
+/* Generic enemy movement component that sets a destination (waypoint or vector2)
+* and moves the enemy there
+*/
 #pragma once
 #include "Component.h"
 #include "Math/Vector2.h"

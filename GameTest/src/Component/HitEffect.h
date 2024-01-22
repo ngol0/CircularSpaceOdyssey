@@ -1,3 +1,4 @@
+/* Hit effect component for both player and enemy */
 #pragma once
 #include "Component.h"
 

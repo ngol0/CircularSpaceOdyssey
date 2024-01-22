@@ -1,5 +1,7 @@
 /* This class's main responsibility is to manage all the UI windows in the game using State Pattern
 * It has a pointer to the current window that needs to be updated and rendered
+* When there's input, set window function is called to "point" to the wanted ui 
+* then update and render it
 */
 #pragma once
 #include "Math/Vector2.h"

@@ -1,3 +1,4 @@
+/* Includes health and resources bar */
 #pragma once
 #include "Window.h"
 #include "Math/Vector2.h"

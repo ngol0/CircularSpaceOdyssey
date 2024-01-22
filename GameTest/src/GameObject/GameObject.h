@@ -1,3 +1,6 @@
+/* A generic game object class
+* 
+*/
 #pragma once
 #include "Component/Component.h"
 #include "Math/Vector2.h"
@@ -87,6 +90,8 @@ inline ComponentID GetUniqueComponentID()
 	return lastID++;
 }
 
+/* Returns a unique ID the first time it's called with a new component
+then returns the same ID for the same component */
 template <class T>
 inline ComponentID GetComponentId()
 {

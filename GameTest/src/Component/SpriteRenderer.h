@@ -1,3 +1,6 @@
+/* Manages the sprite of the object (create, update and render)
+* Calling the API for animation/frame/color/scale
+*/
 #pragma once
 #include "Component.h"
 

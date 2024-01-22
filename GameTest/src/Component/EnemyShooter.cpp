@@ -4,7 +4,7 @@
 #include "Global/Utils.h"
 #include "System/AudioManager.h"
 
-EnemyShooter::EnemyShooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shooter_transform(nullptr), m_target_transform(nullptr)
+EnemyShooter::EnemyShooter(float offset) : m_timer(0.f), m_spawn_offset(offset), m_shoot_time(0.f), m_shooter_transform(nullptr), m_target_transform(nullptr)
 {
 	bullet_pool.Init();
 }
@@ -12,7 +12,7 @@ EnemyShooter::EnemyShooter(float offset) : m_timer(0.f), m_spawn_offset(offset),
 void EnemyShooter::Init()
 {
 	m_shooter_transform = &Component::object->GetComponent<Transform>();
-	m_shoot_time = Utils::RandomFloat(20.f, 100.f);
+	m_shoot_time = Utils::RandomFloat(10.f, 50.f);
 }
 
 void EnemyShooter::Update(float deltaTime)
