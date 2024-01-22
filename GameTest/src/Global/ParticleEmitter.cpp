@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ParticleEmitter.h"
 #include "GameObject/ParticlePool.h"
-#include "Global/Utils.h"
 
 namespace ParticleEmitter
 {

@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "VitalsWindow.h"
 #include "PauseWindow.h"
-#include "System/Scene.h"
 #include "WindowManager.h"
+//
 #include "Global/Utils.h"
-#include "Global/GameGlobal.h"
 #include "System/AudioManager.h"
 
 VitalsWindow::VitalsWindow() {}

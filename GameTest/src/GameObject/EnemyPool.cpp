@@ -2,12 +2,12 @@
 #include "EnemyPool.h"
 #include "Component/EnemyMovement.h"
 #include "Component/EnemyRandomMovement.h"
+#include "Component/EnemyShooter.h"
 #include "Component/Transform.h"
 #include "Component/BoxCollider.h"
 //
 #include "GameObjectFactory.h"
 #include "System/Scene.h"
-#include "Component/EnemyShooter.h"
 
 EnemyPool::EnemyPool() {}
 

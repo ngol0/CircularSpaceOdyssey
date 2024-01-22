@@ -2,7 +2,6 @@
 #include "LevelManager.h"
 #include "GameObject/GameObjectFactory.h"
 #include "Global/EnemyType.h"
-#include "Global/Utils.h"
 #include "Global/WaypointGenerator.h"
 //
 #include <sstream>

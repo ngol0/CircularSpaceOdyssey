@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "EnemyRandomMovement.h"
-#include "Global/Utils.h"
 #include "Global/WaypointGenerator.h"
 #include "GameObject/GameObject.h"
 //
