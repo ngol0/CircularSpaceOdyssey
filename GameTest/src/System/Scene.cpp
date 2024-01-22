@@ -165,7 +165,7 @@ void Scene::Restart()
 	}
 }
 
-//enemy die -- if score % 10 = 0, spawn a health power up; also check if win
+//enemy die, increases score; if score % 20 = 0, spawn a health power up; also check if win
 void Scene::OnEnemyDie(const Vector2& pos)
 {
 	m_score++;
