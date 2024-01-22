@@ -63,7 +63,7 @@ void Scene::SetUp()
 	m_player->GetComponent<MovementInput>().SetUp(); //setting up movement based on starting position
 	m_player->GetComponent<Health>().ResetHealth();
 
-	m_score = 54; 
+	m_score = 0; 
 }
 
 //callback for when player collides with others
