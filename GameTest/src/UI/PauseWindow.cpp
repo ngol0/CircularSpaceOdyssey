@@ -18,10 +18,11 @@ void PauseWindow::HandleInput(float deltaTime)
 		WindowManager::GetInstance().SetWindow(WindowState::vitals);
 		m_timer = 0.f;
 	}
-	if (App::IsKeyPressed('R'))
+	if (App::IsKeyPressed('R') && m_timer > 2.f)
 	{
 		WindowManager::GetInstance().SetWindow(WindowState::vitals);
 		WindowManager::GetInstance().Restart();
+		m_timer = 0.f;
 	}
 	m_timer += deltaTime / 100.f;
 }

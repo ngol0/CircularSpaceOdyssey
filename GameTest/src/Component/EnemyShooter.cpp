@@ -12,7 +12,7 @@ EnemyShooter::EnemyShooter(float offset) : m_timer(0.f), m_spawn_offset(offset),
 void EnemyShooter::Init()
 {
 	m_shooter_transform = &Component::object->GetComponent<Transform>();
-	m_shoot_time = Utils::RandomFloat(10.f, 50.f);
+	m_shoot_time = Utils::RandomFloat(10.f, 80.f);
 }
 
 void EnemyShooter::Update(float deltaTime)

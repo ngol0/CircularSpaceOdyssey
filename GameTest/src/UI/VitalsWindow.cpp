@@ -22,9 +22,10 @@ void VitalsWindow::HandleInput(float deltaTime)
 		WindowManager::GetInstance().SetWindow(WindowState::pause);
 		m_timer = 0.f;
 	}
-	if (App::IsKeyPressed('R'))
+	if (App::IsKeyPressed('R') && m_timer > 2.f)
 	{
 		WindowManager::GetInstance().Restart();
+		m_timer = 0.f;
 	}
 
 	m_timer += deltaTime / 100.f;

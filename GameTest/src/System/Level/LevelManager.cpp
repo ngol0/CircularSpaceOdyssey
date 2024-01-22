@@ -12,6 +12,7 @@ LevelManager::LevelManager() {}
 void LevelManager::SetLevel(int current_level)
 {
 	m_current_level = current_level;
+	SetUpTimer();
 }
 
 void LevelManager::LoadFile(const char* filename)
@@ -210,10 +211,10 @@ void LevelManager::Restart()
 	m_defense_pool.SetUp();
 	m_child_pool.SetUp();
 
-	//reset timers and flags
-	SetUpTimer();
+	//reset timer & flags
 	m_is_complete = false;
 	m_is_waiting = false;
+	SetUpTimer();
 
 	//reset waypoints
 	for (auto& wp : m_outer_waypoints)

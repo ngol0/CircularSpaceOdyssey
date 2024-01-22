@@ -12,10 +12,8 @@ VictoryWindow::VictoryWindow() {}
 
 void VictoryWindow::HandleInput(float deltaTime)
 {
-	if (App::IsKeyPressed(VK_SPACE))
+	if (App::IsKeyPressed(VK_SPACE) && m_timer > 2.f)
 	{
-		window_mgr.SetWindow(WindowState::level);
-
 		int current_level = level_mgr.GetCurrentLevel();
 		switch (current_level)
 		{
@@ -37,7 +35,9 @@ void VictoryWindow::HandleInput(float deltaTime)
 		}
 
 		window_mgr.GetScene()->Restart();
+		m_timer = 0.f;
 	}
+	m_timer += deltaTime / 100.f;
 }
 
 void VictoryWindow::Render()
