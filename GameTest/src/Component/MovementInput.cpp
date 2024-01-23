@@ -19,18 +19,34 @@ void MovementInput::SetUp()
 
 void MovementInput::Update(float deltaTime)
 {
-	if (!App::GetController().GetLeftThumbStickX()) return;
+	float prev_degree = m_degree;
+
+	if (!App::GetController().GetLeftThumbStickX())
+	{
+		m_is_moving = false;
+		return;
+	}
+	//counter-clockwise
 	if (App::GetController().GetLeftThumbStickX() > 0.5f)
 	{
 		m_degree += m_speed * deltaTime;
-
+		m_is_clockwise = false;
 	}
+	//clockwise
 	if (App::GetController().GetLeftThumbStickX() < -0.5f)
 	{
 		m_degree -= m_speed * deltaTime;
+		m_is_clockwise = true;
 	}
 
+	float delta_angle = abs(m_degree - prev_degree);
+	float delta_radian = delta_angle * (PI / 180.f);
+
+	// Calculate angular speed (radians per second)
+	m_angular_speed = delta_radian / deltaTime;
+
 	UpdateTransform();
+	m_is_moving = true;
 }
 
 void MovementInput::UpdateTransform()

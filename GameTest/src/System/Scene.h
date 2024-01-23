@@ -26,6 +26,7 @@ public:
 	int GetScore() const { return m_score; }
 	const Vector2& GetPlayerPosition() const { return m_player->GetComponent<Transform>().position; }
 	const Vector2& GetPlanetPosition() const { return m_circle_center; }
+	const Object::Ref GetPlayer() const { return m_player; }
 
 	//event callbacks
 	void OnPlayerCollisionEnter(BoxCollider& other);

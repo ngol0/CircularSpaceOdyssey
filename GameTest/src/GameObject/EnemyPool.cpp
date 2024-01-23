@@ -22,7 +22,8 @@ void EnemyPool::Init(Transform& transform, EnemyType enemy_type, Scene& scene)
 
 		if (enemies[i]->HasComponent<EnemyShooter>())
 		{
-			enemies[i]->GetComponent<EnemyShooter>().SetTarget(scene.GetPlayerPosition());
+			//enemies[i]->GetComponent<EnemyShooter>().SetTarget(scene.GetPlayerPosition());
+			enemies[i]->GetComponent<EnemyShooter>().SetTarget(scene.GetPlayer(), scene.GetPlanetPosition());
 		}	
 	}
 }

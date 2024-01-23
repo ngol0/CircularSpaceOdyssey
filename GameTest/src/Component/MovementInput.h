@@ -16,6 +16,13 @@ public:
 
 	void UpdateTransform();
 
+	//getter
+	float GetAngle() { return m_degree * (PI / 180.f); }
+	float GetAngularVelocity() { return m_angular_speed; }
+	bool IsClockWise() { return m_is_clockwise; }
+	float GetDistanceToCenter() { return m_distance; }
+	bool IsMoving() { return m_is_moving; }
+
 private:
 	float m_speed;
 	Transform* transform;
@@ -25,4 +32,7 @@ private:
 	float m_degree;
 	float m_distance;
 	float m_rotation_angle;
+	bool m_is_clockwise{false};
+	float m_angular_speed{ 0.f };
+	bool m_is_moving{ false };
 };
