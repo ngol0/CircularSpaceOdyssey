@@ -61,22 +61,18 @@ void EnemyShooter::Shoot(float deltaTime)
 
 float EnemyShooter::PredictTargetNextPosition()
 {
-	//getting player's angle & direction
-	m_is_target_clockwise = m_target_input->IsClockWise();
-	m_target_angle = m_target_input->GetAngle();
-	m_target_angular_speed = m_target_input->GetAngularVelocity();
-
-	//calculate delta t and angular displacement
-	m_distance_to_target = Utils::Distance(*m_target_position, m_shooter_transform->position);
-	float delta_t = m_distance_to_target / 0.3f;
+	//calculate the time for bullet to hit the target
+	float distance_to_target = Utils::Distance(*m_target_position, m_shooter_transform->position);
+	float delta_t = distance_to_target / m_bullet_speed; //0.3f is bullet speed
 
 	//predicting the amount of distance player will move in delta_t seconds
-	float angular_displacement = m_target_angular_speed * delta_t;
+	float angular_displacement = m_target_input->GetAngularVelocity() * delta_t;
 
-	if (m_is_target_clockwise) angular_displacement = -angular_displacement;
+	//setting direction for future position
+	if (m_target_input->IsClockWise()) angular_displacement = -angular_displacement;
 
-	//calculate future angle to shoot at
-	return (m_target_angle + angular_displacement);
+	//calculate future angle to shoot at based on the amount of distance predicted
+	return (m_target_input->GetAngle() + angular_displacement);
 }
 
 void EnemyShooter::SetBulletPool()
