@@ -8,7 +8,7 @@ class Transform;
 class BulletMovement : public Component
 {
 public:
-	BulletMovement(int lifespan);
+	BulletMovement(int lifespan, float speed);
 
 	void Init() override;
 	void SetDirection(const Vector2& direction);

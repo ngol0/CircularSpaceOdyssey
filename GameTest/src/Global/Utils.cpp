@@ -33,7 +33,7 @@ namespace Utils
 		App::DrawLine(position.x + size.x, position.y, position.x + size.x, position.y + size.y, r, g, b);
 	}
 
-	Vector2& RandomPosition()
+	Vector2& RandomPositionOnScreen()
 	{
 		float x = Utils::RandomFloat(0.f, 1000.f);
 		float y = Utils::RandomFloat(0.f, 1000.f);
@@ -55,5 +55,10 @@ namespace Utils
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<float> dis(min, max);
 		return dis(gen);
+	}
+
+	float Distance(const Vector2& vector1, const Vector2& vector2)
+	{
+		return std::sqrt((vector2.x - vector1.x) * (vector2.x - vector1.x) + (vector2.y - vector1.y) * (vector2.y - vector1.y));
 	}
 }

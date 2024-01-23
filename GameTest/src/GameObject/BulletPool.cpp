@@ -4,13 +4,14 @@
 //
 #include "GameObjectFactory.h"
 
-BulletPool::BulletPool(float r, float b, float g, float size, int lifespan, std::string tag) : m_r(r), m_b(b), m_g(g), m_size(size), m_lifespan(lifespan), m_tag(tag) {}
+BulletPool::BulletPool(float r, float b, float g, float size, int lifespan, float speed, std::string tag) : 
+	m_r(r), m_b(b), m_g(g), m_size(size), m_lifespan(lifespan), m_speed(speed), m_tag(tag) {}
 
 void BulletPool::Init()
 {
 	for (int i = 0; i < POOL_SIZE; i++)
 	{
-		bullets[i] = GameObjectFactory::CreateBullet(m_r, m_b, m_g, m_size, m_lifespan, m_tag);
+		bullets[i] = GameObjectFactory::CreateBullet(m_r, m_b, m_g, m_size, m_lifespan, m_speed, m_tag);
 		bullets[i]->Deactivate();
 	}
 }

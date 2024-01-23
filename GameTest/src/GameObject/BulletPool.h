@@ -5,7 +5,7 @@
 class BulletPool
 {
 public:
-	BulletPool(float r, float b, float g, float size, int lifespan, std::string tag);
+	BulletPool(float r, float b, float g, float size, int lifespan, float speed, std::string tag);
 
 	void Init();
 	void Spawn(const Vector2& spawn_pos, const Vector2& direction, float rotation_angle);
@@ -21,5 +21,6 @@ private:
 	float m_g;
 	float m_size;
 	int m_lifespan;
+	float m_speed;
 	std::string m_tag;
 };

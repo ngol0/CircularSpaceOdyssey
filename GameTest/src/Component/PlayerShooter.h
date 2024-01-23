@@ -6,7 +6,7 @@
 class PlayerShooter : public Component
 {
 public:
-	BulletPool bullet_pool{1.f, 0.5, .2f, .2f, 75, "player_bullet"};
+	BulletPool bullet_pool{1.f, 0.5, .2f, .2f, 75, 0.2f, "player_bullet"};
 
 	PlayerShooter(float offset);
 

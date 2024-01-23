@@ -11,7 +11,9 @@ namespace Utils
 	void DrawRectangle(const Vector2& position, float r, float g, float b, const Vector2& size);
 
 	//random generator
-	Vector2& RandomPosition();
+	Vector2& RandomPositionOnScreen();
 	int RandomInt(int min, int max);
 	float RandomFloat(float min, float max);
+
+	float Distance(const Vector2& vector1, const Vector2& vector2);
 };

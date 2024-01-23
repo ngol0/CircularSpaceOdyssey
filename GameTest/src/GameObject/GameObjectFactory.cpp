@@ -129,7 +129,7 @@ namespace GameObjectFactory
 		return enemy;
 	}
 
-	Object::Ref CreateBullet(float r, float g, float b, float size, int lifespan, std::string tag)
+	Object::Ref CreateBullet(float r, float g, float b, float size, int lifespan, float speed, std::string tag)
 	{
 		Object::Ref bullet = GameObjectManager::GetInstance().AddToManager();
 		bullet->GetComponent<Transform>().scale = size;
@@ -140,7 +140,7 @@ namespace GameObjectFactory
 		Vector2 collider_size{ bullet_sprite.width(), bullet_sprite.height() };
 		bullet->AddComponent<BoxCollider>(tag, collider_size);
 		//bullet auto movement
-		bullet->AddComponent<BulletMovement>(lifespan);
+		bullet->AddComponent<BulletMovement>(lifespan, speed);
 
 		return bullet;
 	}
