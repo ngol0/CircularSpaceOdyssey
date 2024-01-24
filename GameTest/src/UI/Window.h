@@ -1,4 +1,5 @@
-/* Inherits by all the specific windows in game */
+/* An interface for all windows
+Inherits by all the specific windows in game */
 #pragma once
 #include "Global/Event.h"
 

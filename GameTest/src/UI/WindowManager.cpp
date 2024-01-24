@@ -16,7 +16,8 @@ void WindowManager::Init(Scene& scene)
 	// create random positions on screen for twinkling star on background
 	for (int i = 0; i < MAX_STAR_NUMBER; i++)
 	{
-		m_random_pos[i] = Utils::RandomPositionOnScreen();
+		m_random_pos[i].x = Utils::RandomFloat(0, 1000.f);
+		m_random_pos[i].y = Utils::RandomFloat(0, 1000.f);
 	}
 }
 

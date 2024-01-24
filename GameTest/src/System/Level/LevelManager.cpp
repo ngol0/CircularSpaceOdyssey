@@ -97,7 +97,7 @@ void LevelManager::SetUpEnemy(Scene& scene)
 	m_defense_spawner->SetUp(m_defense_pool);
 
 	//init waypoints
-	WaypointGenerator::InitWaypoints(150.f, m_scene->GetPlanetPosition(), 10, m_outer_waypoints);
+	WaypointGenerator::InitWaypoints(150.f, m_scene->GetPlanetPosition(), 8, m_outer_waypoints);
 }
 
 void LevelManager::Update(float deltaTime, const Vector2& player_pos)

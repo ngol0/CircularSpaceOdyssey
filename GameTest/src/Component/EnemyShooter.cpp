@@ -32,7 +32,7 @@ void EnemyShooter::Shoot(float deltaTime)
 		if (m_target_input->IsMoving())
 		{
 			//calculate future position
-			float angle_to_shoot = PredictTargetNextPosition();
+			float angle_to_shoot = PredictTargetNextAngle();
 
 			//shoot towards the predicted pos
 			Vector2 shoot_pos;
@@ -59,11 +59,11 @@ void EnemyShooter::Shoot(float deltaTime)
 	m_timer += deltaTime / 100.f;
 }
 
-float EnemyShooter::PredictTargetNextPosition()
+float EnemyShooter::PredictTargetNextAngle()
 {
 	//calculate the time for bullet to hit the target
 	float distance_to_target = Utils::Distance(*m_target_position, m_shooter_transform->position);
-	float delta_t = distance_to_target / m_bullet_speed; //0.3f is bullet speed
+	float delta_t = distance_to_target / m_bullet_speed;
 
 	//predicting the amount of distance player will move in delta_t seconds
 	float angular_displacement = m_target_input->GetAngularVelocity() * delta_t;

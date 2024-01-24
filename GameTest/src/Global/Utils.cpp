@@ -33,14 +33,6 @@ namespace Utils
 		App::DrawLine(position.x + size.x, position.y, position.x + size.x, position.y + size.y, r, g, b);
 	}
 
-	Vector2& RandomPositionOnScreen()
-	{
-		float x = Utils::RandomFloat(0.f, 1000.f);
-		float y = Utils::RandomFloat(0.f, 1000.f);
-
-		return Vector2{ x,y };
-	}
-
 	int RandomInt(int min, int max)
 	{
 		std::random_device rd;

@@ -1,5 +1,7 @@
 /* A generic game object class
-* 
+* Acts as a collection of components
+* With methods to add/get components (max components is 32)
+* and update/render all of them
 */
 #pragma once
 #include "Component/Component.h"
@@ -43,24 +45,29 @@ public:
 	void SetScale(const float& scale);
 	void SetForwardVector(const Vector2& forward_vector);
 
-	//template functions
+	//check if the object has a certain component
 	template<typename T>
 	bool HasComponent() const
 	{
 		return m_component_bitmask.test(GetComponentId<T>());
 	}
 
+	//method to add component to the game object
+	//T is the component type, TArgs is a parameter used to construct the component
 	template<typename T, typename... TArgs>
 	T& AddComponent(TArgs&&...m_args)
 	{
 		//make sure the component has not been added before
 		assert(!HasComponent<T>());
 
-		//add to component list
+		//allocating the component type T on the heap
+		//and forward the passed arguments to its constructor
 		T* component = new T(std::forward<TArgs>(m_args)...);
 		
-		//use unique pointer so that it manages the obj's lifetime
+		//set the object that holds the component
 		component->object = this;
+
+		//use unique pointer so that it manages the obj's lifetime
 		std::unique_ptr<Component> comp_uPtr{ component };
 		m_component_list.emplace_back(std::move(comp_uPtr));
 
@@ -68,12 +75,13 @@ public:
 		m_component_bitmask.set(GetComponentId<T>());
 		m_component_arr[GetComponentId<T>()] = component;
 
-		//call component init in which each component will get the other component it needs
+		//call component init in which each component will get the other component or data it needs
 		component->Init();
 
 		return *component;
 	}
 
+	//method to get the wanted component
 	template<typename T>
 	T& GetComponent()
 	{

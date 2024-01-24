@@ -23,7 +23,7 @@ private:
 	float m_radius{ 0.f };
 	const Vector2* m_center{ nullptr };
 
-	float PredictTargetNextPosition();
+	float PredictTargetNextAngle();
 	void Shoot(float deltaTime);
 
 public:
