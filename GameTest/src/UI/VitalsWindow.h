@@ -19,4 +19,7 @@ public:
 private:
 	std::string m_score_string;
 	std::string m_health_string;
+	std::string m_level_string;
+
+	int m_current_level{1};
 };
