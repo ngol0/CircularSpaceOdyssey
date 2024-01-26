@@ -8,4 +8,5 @@ public:
 
 	virtual void HandleInput(float deltaTime) override;
 	virtual void Render() override;
+	virtual bool IsInGame() override { return false; }
 };

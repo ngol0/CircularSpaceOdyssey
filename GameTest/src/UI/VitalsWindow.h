@@ -12,6 +12,7 @@ public:
 	virtual void HandleInput(float deltaTime) override;
 	virtual void OnExit() override;
 	virtual void Render() override;
+	virtual bool IsInGame() override { return true; }
 
 	void UpdateScoreText(int score);
 	void UpdateHealthText(int health);
