@@ -145,7 +145,7 @@ void LevelManager::Update(float deltaTime, const Vector2& player_pos)
 		{
 			m_active_enemies.clear();
 			m_index++;
-			//if not ends - moves to next enemy
+			//if not reach last index - moves to command
 			if (m_index < m_commands.size())
 			{
 				m_current_command = m_commands[m_index]->command;
