@@ -1,8 +1,5 @@
 # Circular Space Odyssey
 
-## Running the game
-Open **GameTest.sln** in Visual Studio 2022 and hit **F5**.
-
 ## Short description
 Shoot all enemies to collect enough resources and go to next level. Be careful - the enemy can predict where you are when you move and shoot there. 
 
@@ -27,4 +24,7 @@ There are 3 levels. First one introduces 2 basic enemy types. Second and third l
 - Data-driven method to control enemy spawning behaviors with commands
 
 - Enemy AI that predicts player's movement
+
+## Running the game
+Open **GameTest.sln** in Visual Studio 2022 and hit **F5**.
 
