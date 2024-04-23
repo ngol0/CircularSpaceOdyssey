@@ -6,6 +6,7 @@ Shoot all enemies to collect enough resources and go to next level. Be careful -
 Try to get the health power-up to prevent being killed when your health are low!
 
 There are 3 levels. First one introduces 2 basic enemy types. Second and third level will introduce a new one for each. Pay attention to each enemy's behaviors so that you can move and shoot at the right position and time!
+<img src="https://github.com/ngol0/CircularSpaceOdyssey/blob/main/gif1.gif" width="900" title="build">
 
 ## Controls:
 - Move: A to move left and D to move right.
