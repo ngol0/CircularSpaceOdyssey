@@ -9,7 +9,7 @@ There are 3 levels. First one introduces 2 basic enemy types. Second and third l
 <img src="https://github.com/ngol0/CircularSpaceOdyssey/blob/main/gif2.gif" width="900" title="build">
 
 ## Technical features
-- Entity-Component architecture
+# Entity-Component architecture
 
 - Design patterns: state, object pooling, observer, factory, observer
 - Game systems built from scratch: collision, particle effects, UI, power-ups
