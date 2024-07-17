@@ -12,7 +12,7 @@ There are 3 levels. First one introduces 2 basic enemy types. Second and third l
 - Entity-Component architecture
 
 - Design patterns: state, object pooling, observer, factory, observer
-- Game systems built from scratch: collision, particle effects, UI
+- Game systems built from scratch: collision, particle effects, UI, power-ups
 
 - Data-driven method to control enemy spawning behaviors with commands
 
